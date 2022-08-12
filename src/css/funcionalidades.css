@@ -1,0 +1,50 @@
+/*Diseño de la bienvenida y la descripción general*/
+.container {
+    margin-bottom: 2em;
+}
+
+.container .row #bienvenida,
+.container .row #funcionalidades-titulo {
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+}
+
+.container .row #bienvenida {
+    font-size: 3em;
+}
+
+.container .row #funcionalidades-titulo {
+    margin-top: 1rem;
+    font-size: 1.8em;
+}
+
+/*Diseño de la sección de funcionalidades*/
+#funcionalidades {
+    background-color: #FFFFFF;
+    margin: 0px auto;
+    padding: 2rem;
+    border-radius: 3rem;
+    text-align: center;
+}
+
+#funcionalidades a {
+    display: inline-block;
+    margin: 2em 5em;
+    color: #000000;
+    text-decoration: none;
+}
+
+#funcionalidades .card {
+    border: none;
+}
+
+#funcionalidades .card-body {
+    padding: 0px;
+    margin-top: 1rem;
+}
+
+#funcionalidades .card-title {
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+}

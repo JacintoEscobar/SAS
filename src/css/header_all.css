@@ -1,0 +1,27 @@
+/*Diseño del nombre del sistema*/
+#SAS-Titulo {
+	margin: 0.6rem 1.4rem;
+	padding: 0px;
+	font-family: 'Righteous', cursive;
+	color: #FFFFFF;
+	font-size: 3.5em;
+}
+
+/*Diseño de la lista de herramientas*/
+#lista-herramientas {
+	margin-right: 3.4em;
+	font-family: 'Chakra Petch', sans-serif;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+#lista-herramientas .nav-link {
+	margin: 0.2rem;
+	color: #FFFFFF;
+	font-size: 1.5em;
+}
+
+/*Diseño del menú despegable*/
+#salir:hover {
+	cursor: pointer;
+}

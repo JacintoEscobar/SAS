@@ -1,0 +1,71 @@
+/*Diseño del título de la página*/
+.container {
+    margin: 0px auto;
+}
+
+.container .row #titulo,
+.container .row #descripcion {
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+}
+
+.container .row #titulo {
+    font-size: 2.2em;
+}
+
+.container .row #descripcion {
+    margin-top: 1rem;
+    font-size: 1.4em;
+}
+
+/*Diseño de las clases*/
+#clases .card {
+    display: inline-block;
+    margin: 2rem 1.2em;
+}
+
+#clases .card h5,
+#clases .card h6,
+#clases .card p,
+#clases .card a,
+#crearClase a {
+    font-family: 'Dosis', sans-serif;
+}
+
+.card .card-title a,
+#crearClase a {
+    text-decoration: none;
+}
+
+.card .card-title,
+.card .card-title a,
+.card .card-subtitle {
+    margin-bottom: 1em;
+    color: #EF0605;
+}
+
+
+.card-subtitle span {
+    color: #000000;
+}
+
+.card-body button {
+    margin: 0.5em;
+}
+
+/*Diseño de la opción de crear clase y unirse clase*/
+#crearClase {
+    width: 8rem;
+    text-align: center;
+}
+
+#crearClase .card-title {
+    margin: 0px;
+}
+
+#crearClase img {
+    height: 4rem;
+    width: 4rem;
+    margin-bottom: 0.5rem;
+}

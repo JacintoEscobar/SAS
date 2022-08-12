@@ -1,0 +1,34 @@
+/*Diseño del título de la página*/
+.container {
+    margin: 0px auto;
+}
+
+.container .row #titulo,
+.container .row #descripcion {
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+}
+
+.container .row #titulo {
+    font-size: 2.2em;
+}
+
+.container .row #descripcion {
+    margin-top: 1rem;
+    font-size: 1.4em;
+}
+
+/*Diseño del formulario*/
+form {
+    background-color: #FFFFFF;
+    margin: 1.8rem;
+    padding: 1.2rem;
+    border-radius: 0.4rem;
+}
+
+form label,
+form input {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.4em;
+}
