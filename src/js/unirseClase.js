@@ -52,6 +52,9 @@ const unirseClase = () => {
             const cerrarModal = document.getElementById('cerrarModal');
             cerrarModal.click();
 
+            // Eliminamos los elementos HTML de las clases previamente obtenidas
+            limpiarClases();
+
             // Actualizamos las clases del alumno
             obtenerClases();
         }
@@ -64,3 +67,14 @@ const unirseClase = () => {
     // Enviamos la información del formulario a la api
     peticion.send(`c=${codigo.value}`);
 }
+
+const limpiarClases = () => {
+    // Obtenemos la colección de elementos HTML de las clases del alumno
+    let clases = document.getElementsByClassName('card');
+
+    // Convertimos la colección en un arreglo
+    clases = Array.from(clases);
+
+    // Eliminamos cada elemento HTML clase del div de clases
+    for (const clase of clases) { divClases.removeChild(clase); }
+};

@@ -41,7 +41,7 @@ const crearElementosClase = clases => {
         const cardTitle = document.createElement('h5');
         cardTitle.setAttribute('class', 'card-title');
         const tituloClase = document.createElement('a');
-        tituloClase.setAttribute('href', '');
+        tituloClase.setAttribute('href', '#');
         tituloClase.appendChild(document.createTextNode(clase.nombre));
         cardTitle.appendChild(tituloClase);
 
