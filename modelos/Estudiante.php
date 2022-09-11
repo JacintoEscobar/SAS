@@ -71,4 +71,23 @@ class Estudiante
             return array('ERROR_DE_CONEXION' => 'Ocurrió un error al intentar conectar con la base de datos.');
         }
     }
+
+    public function solicitarBaja($idC)
+    {
+        /* Creamos una conexión a la base de datos */
+        $conexion = new mysqli("localhost", "root", "", "sas");
+
+        if (!$conexion->connect_errno) {
+            $sql = $conexion->prepare('DELETE FROM inscripcion WHERE idClase = ? AND idUsuario = ?');
+            $sql->bind_param('ii', $idC, $this->id);
+            
+            $respuesta = $sql->execute();
+
+            if ($respuesta) {
+                return array('EXITO' => 'Hecho.');
+            }
+
+            return array('ERROR' => $conexion->error);
+        }
+    }
 }

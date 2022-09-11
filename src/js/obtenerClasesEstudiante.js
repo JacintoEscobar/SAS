@@ -35,6 +35,13 @@ const crearElementosClase = clases => {
         const cardBody = document.createElement('div');
         cardBody.setAttribute('class', 'card-body');
 
+        /* Definimos el botón que permite darse de baja de una clase */
+        const buttonBaja = document.createElement('button');
+        buttonBaja.setAttribute('id', 'buttonBaja');
+        buttonBaja.setAttribute('type', 'button');
+        buttonBaja.appendChild(document.createTextNode('Solicitar baja'));
+        buttonBaja.addEventListener('click', () => { solicitarBaja(clase.idClase) });
+
         /* <h5 class="card-title">
             <a href="">Seguridad informática</a>
         </h5> */
@@ -55,7 +62,7 @@ const crearElementosClase = clases => {
         spanCodigo.appendChild(document.createTextNode(clase.descripcion));
         cardSubtitle.appendChild(spanCodigo);
 
-        cardBody.append(cardTitle, cardSubtitle);
+        cardBody.append(cardTitle, cardSubtitle, buttonBaja);
         divClase.appendChild(cardBody);
         divClases.appendChild(divClase);
     });

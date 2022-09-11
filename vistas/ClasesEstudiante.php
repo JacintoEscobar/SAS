@@ -66,6 +66,8 @@
     </div>
 
     <script src="../src/js/obtenerClasesEstudiante.js"></script>
+    <script src="../src/js/bajaAlumno.js"></script>
+    <script src="../src/js/notificarProfesorBaja.js"></script>
     <script src="../src/js/unirseClase.js"></script>
     <script src="../src/js/salir.js"></script>
 </body>
