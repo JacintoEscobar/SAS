@@ -40,7 +40,7 @@ const crearElementosClase = clases => {
         buttonBaja.setAttribute('id', 'buttonBaja');
         buttonBaja.setAttribute('type', 'button');
         buttonBaja.appendChild(document.createTextNode('Solicitar baja'));
-        buttonBaja.addEventListener('click', () => { solicitarBaja(clase.idClase) });
+        buttonBaja.addEventListener('click', () => { solicitarBaja(clase.idClase, clase.nombre) });
 
         /* <h5 class="card-title">
             <a href="">Seguridad informática</a>

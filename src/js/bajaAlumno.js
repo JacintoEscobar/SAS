@@ -1,4 +1,4 @@
-const solicitarBaja = idClase => {
+const solicitarBaja = (idClase, nombreClase) => {
 
     // Creamos el objeto que permite enviar la solicitud al servidor
     const peticion = new XMLHttpRequest();
@@ -16,7 +16,7 @@ const solicitarBaja = idClase => {
                 obtenerClases();
 
                 // Enviamos el correo para notificar al profesor de la baja del alumno
-                notificarProfesorBaja(idClase);
+                notificarProfesorBaja(idClase, nombreClase);
             } else {
                 alert(respuesta['ERROR']);
             }

@@ -1,11 +1,10 @@
 const respuestasEsperadas = {
-    ERROR_GET_NOMBRE_ALUMNO: 'Ocurrió un error al obtener tu nombre. Favor de reportar la falla.',
-    ERROR_GET_NOMBRE_CLASE_PROFESOR: 'Ocurrió un error al obtener el nombre de la clase y del profesor. Favor de reportar la falla.',
-    CORREO_ENVIADO: 'Hemos notificado a tu profesor sobre tu baja.',
-    CORREO_NO_ENVIADO: 'Ocurrió un error al notificar a tu profesor. Favor de reportar la falla.'
+    ERROR_GET_DATA_ALUMNO: 'Ocurrió un error al obtener tu nombre. Favor de reportar la falla.',
+    ERROR_GET_DATA_PROFESOR: 'Ocurrió un error al obtener la información del profesor. Favor de reportar la falla.',
+    ERROR_GET_DATA_CLASE: 'Ocurrió un error al obtener la información de la clase. Favor de reportar la falla.'
 };
 
-const notificarProfesorBaja = idClase => {
+const notificarProfesorBaja = (idClase, nombreClase) => {
     // Creamos el objeto que permite enviar la solicitud al servidor
     const peticion = new XMLHttpRequest();
 
@@ -14,6 +13,7 @@ const notificarProfesorBaja = idClase => {
         if (peticion.readyState == 4 && peticion.status == 200) {
             try {
                 const respuesta = JSON.parse(peticion.response);
+                alert(respuestasEsperadas[respuesta]);
             } catch (error) {
                 alert('Hemos notificado a tu profesor sobre tu baja.');
             }
@@ -26,5 +26,5 @@ const notificarProfesorBaja = idClase => {
     peticion.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     // Enviamos la información del formulario a la api
-    peticion.send(`idc=${idClase}`);
+    peticion.send(`idc=${idClase}&nombreClase=${nombreClase}`);
 };

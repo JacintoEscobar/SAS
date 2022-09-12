@@ -9,9 +9,27 @@ class Profesor
         $this->id = $id;
     }
 
-    public function getID($idClase)
+    /**
+     * Función que permite obtener el id, nombre y correo del profesor que imparte una clase específica
+     * Recibe el id de la clase impartida por el profesor
+     */
+    public function getId_Nombre_Correo($idClase)
     {
-        
+        $conexion = new mysqli('localhost', 'root', '', 'sas');
+
+        if (!$conexion->connect_errno) {
+            $consulta = $conexion->prepare('SELECT usuario.idUsuario AS idProfesor, usuario.nombre as profesor, correo FROM usuario
+                                            INNER JOIN clase ON clase.idUsuario = usuario.idUsuario
+                                            WHERE clase.idClase = ?');
+            $consulta->bind_param('i', $idClase);
+            $consultaRealizada = $consulta->execute();
+
+            if ($consultaRealizada) {
+                return $consulta->get_result()->fetch_row();
+            }
+
+            return false;
+        }
     }
 
     public function getClases()
