@@ -45,6 +45,14 @@
                 </div>
             </div>
         </a>
+        <a href="./RegistroIndividual.php">
+            <div class="card" style="width: 8rem;">
+                <img src="../src/img/homeProfesor/psicologico-icon.png" class="card-img-top" alt="clases">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Registro individual</strong></h5>
+                </div>
+            </div>
+        </a>
         <a href="./PerfilesPsicologicos.php">
             <div class="card" style="width: 8rem;">
                 <img src="../src/img/homeProfesor/psicologico-icon.png" class="card-img-top" alt="clases">

@@ -35,6 +35,9 @@
                     <a class="nav-link" href="./Cuestionarios.php">Cuestionarios</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="./RegistroIndividual.php">Registro individual</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="./PerfilesPsicologicos.php">Perfiles psicológicos</a>
                 </li>
 
