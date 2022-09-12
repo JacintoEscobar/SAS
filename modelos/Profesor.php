@@ -9,6 +9,11 @@ class Profesor
         $this->id = $id;
     }
 
+    public function getID($idClase)
+    {
+        
+    }
+
     public function getClases()
     {
         // Creamos la conexión con la base de datos

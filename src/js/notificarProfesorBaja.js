@@ -1,3 +1,10 @@
+const respuestasEsperadas = {
+    ERROR_GET_NOMBRE_ALUMNO: 'Ocurrió un error al obtener tu nombre. Favor de reportar la falla.',
+    ERROR_GET_NOMBRE_CLASE_PROFESOR: 'Ocurrió un error al obtener el nombre de la clase y del profesor. Favor de reportar la falla.',
+    CORREO_ENVIADO: 'Hemos notificado a tu profesor sobre tu baja.',
+    CORREO_NO_ENVIADO: 'Ocurrió un error al notificar a tu profesor. Favor de reportar la falla.'
+};
+
 const notificarProfesorBaja = idClase => {
     // Creamos el objeto que permite enviar la solicitud al servidor
     const peticion = new XMLHttpRequest();
@@ -8,7 +15,7 @@ const notificarProfesorBaja = idClase => {
             try {
                 const respuesta = JSON.parse(peticion.response);
             } catch (error) {
-                alert('Se notificó al profesor sobre tu baja de la clase.');
+                alert('Hemos notificado a tu profesor sobre tu baja.');
             }
         }
     };

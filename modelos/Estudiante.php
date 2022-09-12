@@ -9,6 +9,23 @@ class Estudiante
         $this->id = $id;
     }
 
+    public function getNombre()
+    {
+        $conexion = new mysqli("localhost", "root", "", "sas");
+
+        if (!$conexion->connect_errno) {
+            $sql = $conexion->prepare('SELECT nombre FROM usuario WHERE idUsuario = ?');
+            $sql->bind_param('i', $this->id);
+            $respuesta = $sql->execute();
+
+            if ($respuesta) {
+                return $sql->get_result()->fetch_row();
+            }
+
+            return false;
+        }
+    }
+
     public function getClases()
     {
         // Creamos la conexión con la base de datos

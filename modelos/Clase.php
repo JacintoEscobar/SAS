@@ -14,6 +14,27 @@ class Clase
         $this->codigo = $codigo;
     }
 
+    public function getNombreCorreoProfesor($idProfesor)
+    {
+        $conexion = new mysqli("localhost", "root", "", "sas");
+
+        if (!$conexion->connect_errno) {
+            $sql = $conexion->prepare('
+                SELECT usuario.nombre AS profesor, usuario.correo AS correo FROM usuario
+                INNER JOIN clase ON usuario.idUsuario = clase.idClase
+                WHERE usuario.idUsuario = ?'
+            );
+            $sql->bind_param('i', $idProfesor);
+            $respuesta = $sql->execute();
+
+            if ($respuesta) {
+                return $sql->get_result()->fetch_row();
+            }
+
+            return false;
+        }
+    }
+
     public function getDatos()
     {
         // Creamos la conexión con la base de datos

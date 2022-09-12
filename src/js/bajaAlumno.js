@@ -1,8 +1,6 @@
 const solicitarBaja = idClase => {
 
-    notificarProfesorBaja(idClase);
-    
-    /* // Creamos el objeto que permite enviar la solicitud al servidor
+    // Creamos el objeto que permite enviar la solicitud al servidor
     const peticion = new XMLHttpRequest();
 
     // Definimos las función que se ejecuta cuando se recibe una respuesta del servidor
@@ -23,13 +21,13 @@ const solicitarBaja = idClase => {
                 alert(respuesta['ERROR']);
             }
         }
-    }; */
+    };
 
-    /* // Establecemos la conexión
+    // Establecemos la conexión
     peticion.open('POST', '../controladores/solicitarBaja.php', true);
 
     peticion.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     // Enviamos la información del formulario a la api
-    peticion.send(`idc=${idClase}`); */
+    peticion.send(`idc=${idClase}`);
 };

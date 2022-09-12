@@ -40,15 +40,34 @@ class BD
 
         system($dump, $output);
 
-        $zip = new ZipArchive();
-        $nombreArchivoZIP = $this->database . '_' . $fecha . '.zip';
+        /* $zip = new ZipArchive();
+        $nombreArchivoZIP = $this->database . '' . $fecha . '.zip';
 
-        if (!$zip->open($nombreArchivoSQL, ZipArchive::CREATE)) { return "Ocurrió un error al crear el respaldo de la base de datos."; }
+        if (!$zip->open($nombreArchivoSQL, ZIPARCHIVE::CREATE)) {
+            return 0;
+        }
 
         $zip->addFile($nombreArchivoSQL);
         $zip->close();
         unlink($nombreArchivoSQL);
 
-        header("Location: $nombreArchivoZIP");
+        header("Location: $nombreArchivoZIP"); */
+    }
+
+    public function getHost()
+    {
+        return $this->host;
+    }
+    public function getUser()
+    {
+        return $this->user;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    public function getDatabase()
+    {
+        return $this->database;
     }
 }
