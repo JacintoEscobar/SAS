@@ -27,7 +27,7 @@ try {
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'sistanalisoci@gmail.com';                     //SMTP username
-    $mail->Password   = 'dvkbdyfxnowrwkvq';                               //SMTP password
+    $mail->Password   = 'gordjzpiknhrzlto';                               //SMTP password wccgqmrzivkoshwo
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -43,9 +43,10 @@ try {
                             usuario: <strong>{$usuario}</strong> <br>
                             contraseña: <strong>{$contraseña}</strong>
                         </p>";
-    $mail->AltBody = "Estimado {$nombreProfesor}:\r\nSe te notifica que el alumno {$nombreAlumno} se ha dado de baja de tu clase {$nombreClase}.";
+    $mail->AltBody = "Se te dio de alta en SAS.";
 
     $mail->CharSet = 'UTF-8';
     $mail->send();
 } catch (Exception $e) {
+    return $e->errorMessage();
 }

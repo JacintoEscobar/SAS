@@ -1,15 +1,15 @@
-const notificarAlumnoRegistro = (nombre, paterno, correo, usuario, contraseña) => {
+const notificarUsuarioRegistro = (nombre, paterno, correo, usuario, contraseña) => {
     const peticion = new XMLHttpRequest();
 
     // Definimos las función que se ejecuta cuando se recibe una respuesta del servidor
     peticion.onreadystatechange = () => {
         if (peticion.readyState == 4 && peticion.status == 200) {
-
+            console.log(JSON.parse(peticion.response));
         }
     };
 
     // Establecemos la conexión
-    peticion.open('POST', '../controladores/notificarAlumnoRegistro.php', true);
+    peticion.open('POST', '../controladores/notificarUsuarioRegistro.php', true);
 
     peticion.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 

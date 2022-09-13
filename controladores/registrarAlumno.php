@@ -14,7 +14,7 @@ $profesor = new Profesor(null);
 $respuesta = $profesor->registrarAlumno($nombre, $paterno, $materno, $correo, $usuario, $contraseña);
 
 if (!$respuesta) {
-    echo json_encode('ERROR_DE_REGISTRO');
+    echo json_encode('ERROR_DE_REGISTRO_ALUMNO');
 }
 
-echo json_encode('REGISTRO_EXITOSO');
+echo json_encode('REGISTRO_EXITOSO_ALUMNO');
