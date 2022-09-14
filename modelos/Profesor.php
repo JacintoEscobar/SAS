@@ -10,24 +10,6 @@ class Profesor
     }
 
     /**
-     * Función que inserta en la base de datos un nuevo registro de alumno
-     * Recibe los campos del alumno
-     */
-    public function registrarAlumno(String $nombre, String $paterno, String $materno, String $correo, String $usuario, String $contraseña)
-    {
-        $conexion = new mysqli('localhost', 'root', '', 'sas');
-
-        if (!$conexion->connect_errno) {
-            $consulta = $conexion->prepare('INSERT INTO usuario(nombre, paterno, materno, correo, usuario, contraseña, tipo) VALUES(?, ?, ?, ?, ?, ?, ?)');
-
-            $tipo = 'alumno';
-
-            $consulta->bind_param('sssssss', $nombre, $paterno, $materno, $correo, $usuario, $contraseña, $tipo);
-            return $consulta->execute();
-        }
-    }
-
-    /**
      * Función que permite obtener el id, nombre y correo del profesor que imparte una clase específica
      * Recibe el id de la clase impartida por el profesor
      */

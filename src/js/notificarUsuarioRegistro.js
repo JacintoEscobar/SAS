@@ -4,7 +4,7 @@ const notificarUsuarioRegistro = (nombre, paterno, correo, usuario, contraseña)
     // Definimos las función que se ejecuta cuando se recibe una respuesta del servidor
     peticion.onreadystatechange = () => {
         if (peticion.readyState == 4 && peticion.status == 200) {
-            console.log(JSON.parse(peticion.response));
+
         }
     };
 
