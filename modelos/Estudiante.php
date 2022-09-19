@@ -9,6 +9,11 @@ class Estudiante
         $this->id = $id;
     }
 
+    public function getID()
+    {
+        return $this->id;
+    }
+
     public function getNombre()
     {
         $conexion = new mysqli("localhost", "root", "", "sas");
@@ -33,11 +38,13 @@ class Estudiante
 
         if (!$conexion->connect_errno) {
             // Definimos la consulta para obtener las clases en las que el alumno está registrado
-            $consulta = $conexion->prepare('SELECT clase.idClase, clase.nombre, descripcion FROM clase
+            $consulta = $conexion->prepare('SELECT clase.idClase, clase.nombre, codigo, estado FROM clase
                                             INNER JOIN inscripcion ON inscripcion.idClase = clase.idClase
                                             INNER JOIN usuario ON inscripcion.idUsuario = usuario.idUsuario
-                                            WHERE inscripcion.idUsuario = ?');
-            $consulta->bind_param('i', $this->id);
+                                            WHERE inscripcion.idUsuario = ? AND estado IN(?, ?)');
+            $estado1 = 'Activo';
+            $estado2 = 'Pendiente';
+            $consulta->bind_param('iss', $this->id, $estado1, $estado2);
             $respuesta = $consulta->execute();
 
             if ($respuesta) {
@@ -95,9 +102,10 @@ class Estudiante
         $conexion = new mysqli("localhost", "root", "", "sas");
 
         if (!$conexion->connect_errno) {
-            $sql = $conexion->prepare('DELETE FROM inscripcion WHERE idClase = ? AND idUsuario = ?');
-            $sql->bind_param('ii', $idC, $this->id);
-            
+            $sql = $conexion->prepare('UPDATE inscripcion SET estado = ? WHERE idClase = ? AND idUsuario = ?');
+            $estado = 'Pendiente';
+            $sql->bind_param('sii', $estado, $idC, $this->id);
+
             $respuesta = $sql->execute();
 
             if ($respuesta) {

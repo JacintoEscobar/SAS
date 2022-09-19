@@ -13,9 +13,9 @@ const notificarProfesorBaja = (idClase, nombreClase) => {
         if (peticion.readyState == 4 && peticion.status == 200) {
             try {
                 const respuesta = JSON.parse(peticion.response);
-                alert(respuestasEsperadas[respuesta]);
             } catch (error) {
-                alert('Hemos notificado a tu profesor sobre tu baja.');
+                alert('Hemos notificado a tu profesor sobre tu petición. Espera a que la acepte para poder hacer los cambios en la base de datos.');
+                console.log(respuestasEsperadas[respuesta]);
             }
         }
     };

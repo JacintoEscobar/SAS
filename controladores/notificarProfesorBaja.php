@@ -2,7 +2,6 @@
 
 include '../modelos/Estudiante.php';
 include '../modelos/Profesor.php';
-include '../modelos/Inscripcion.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -50,7 +49,7 @@ try {
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'sistanalisoci@gmail.com';                     //SMTP username
-    $mail->Password   = 'dvkbdyfxnowrwkvq';                               //SMTP password
+    $mail->Password   = 'ufkemmqdikeqggvs';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -61,7 +60,13 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Notificación de baja.';
-    $mail->Body    = "<h1>Estimado {$nombreProfesor}:\r\nSe te notifica que el alumno {$nombreAlumno} se ha dado de baja de tu clase {$nombreClase}.</h1>";
+
+    $mail->Body    = "<html lang='es'><body>";
+    $mail->Body   .= "<h1>Estimado {$nombreProfesor}: Se te notifica que el alumno {$nombreAlumno} se ha dado de baja de tu clase {$nombreClase}.</h1>";
+    $mail->Body   .= "<p>Para aceptar la baja de {$nombreAlumno} da clic en el siguiente enlace: <a href='http://localhost/sas/controladores/aceptarBaja.php?i={$alumno->getID()}&c={$nombreClase}'> Aceptar baja.";
+    $mail->Body   .= "</a></p>";
+    $mail->Body   .= "</body></html>";
+                      
     $mail->AltBody = "Estimado {$nombreProfesor}:\r\nSe te notifica que el alumno {$nombreAlumno} se ha dado de baja de tu clase {$nombreClase}.";
 
     $mail->CharSet = 'UTF-8';
@@ -69,6 +74,5 @@ try {
 
     echo json_encode('CORREO_ENVIADO');
 } catch (Exception $e) {
-    echo json_encode('CORREO_NO_ENVIADO');
+    echo json_encode($e->errorMessage());
 }
-

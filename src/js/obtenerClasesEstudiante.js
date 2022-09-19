@@ -35,20 +35,41 @@ const crearElementosClase = clases => {
         const cardBody = document.createElement('div');
         cardBody.setAttribute('class', 'card-body');
 
-        /* Definimos el botón que permite darse de baja de una clase */
-        const buttonBaja = document.createElement('button');
-        buttonBaja.setAttribute('id', 'buttonBaja');
-        buttonBaja.setAttribute('type', 'button');
-        buttonBaja.appendChild(document.createTextNode('Solicitar baja'));
-        buttonBaja.addEventListener('click', () => { solicitarBaja(clase.idClase, clase.nombre) });
-
-        /* <h5 class="card-title">
-            <a href="">Seguridad informática</a>
-        </h5> */
+        let span_button_baja;
         const cardTitle = document.createElement('h5');
         cardTitle.setAttribute('class', 'card-title');
-        const tituloClase = document.createElement('a');
-        tituloClase.setAttribute('href', '#');
+        let tituloClase;
+        if (clase.estado == 'Activo') {
+            /* Definimos el botón que permite darse de baja de una clase */
+            span_button_baja = document.createElement('button');
+            span_button_baja.setAttribute('id', 'buttonBaja');
+            span_button_baja.setAttribute('type', 'button');
+            span_button_baja.appendChild(document.createTextNode('Solicitar baja'));
+            span_button_baja.addEventListener('click', () => { solicitarBaja(clase.idClase, clase.nombre) });
+
+            /* <h5 class="card-title">
+                <a href="">Seguridad informática</a>
+            </h5> */
+            tituloClase = document.createElement('a');
+            tituloClase.setAttribute('href', '#');
+        } else {
+            /*  <span id="labelBajaPendiente">
+                    <strong> Esta clase está en proceso de baja. </strong>
+                </span>
+             */
+            /* Definimos un label que informe que la clase se encuentra en proceso de baja */
+            span_button_baja = document.createElement('span');
+            span_button_baja.setAttribute('id', 'labelBajaPendiente');
+            const strongMensaje = document.createElement('strong');
+            strongMensaje.appendChild(document.createTextNode('Esta clase está en proceso de baja.'));
+            strongMensaje.style.fontSize = '0.9em';
+            span_button_baja.appendChild(strongMensaje);
+
+            /* <h5 class="card-title">
+                <span>Seguridad informática</span>
+            </h5> */
+            tituloClase = document.createElement('span');
+        }
         tituloClase.appendChild(document.createTextNode(clase.nombre));
         cardTitle.appendChild(tituloClase);
 
@@ -59,10 +80,10 @@ const crearElementosClase = clases => {
         cardSubtitle.setAttribute('class', 'card-subtitle mb-2');
         cardSubtitle.appendChild(document.createTextNode('Código de clase: '));
         const spanCodigo = document.createElement('span');
-        spanCodigo.appendChild(document.createTextNode(clase.descripcion));
+        spanCodigo.appendChild(document.createTextNode(clase.codigo));
         cardSubtitle.appendChild(spanCodigo);
 
-        cardBody.append(cardTitle, cardSubtitle, buttonBaja);
+        cardBody.append(cardTitle, cardSubtitle, span_button_baja);
         divClase.appendChild(cardBody);
         divClases.appendChild(divClase);
     });
