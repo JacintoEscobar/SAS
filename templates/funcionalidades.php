@@ -18,14 +18,6 @@
                 </div>
             </div>
         </a>
-        <a href="./RegistroIndividualProfesor.php">
-            <div class="card" style="width: 8rem;">
-                <img src="../src/img/homeAdministrador/registroIndividual.png" class="card-img-top" alt="clases">
-                <div class="card-body">
-                    <h5 class="card-title"><strong>Registro individual</strong></h5>
-                </div>
-            </div>
-        </a>
         <a href="./GestionBD.php">
             <div class="card" style="width: 8rem;">
                 <img src="../src/img/homeAdministrador/gestion_bd-icon.png" class="card-img-top" alt="clases">
@@ -50,14 +42,6 @@
                 <img src="../src/img/homeProfesor/cuestionarios-icon.png" class="card-img-top" alt="clases">
                 <div class="card-body">
                     <h5 class="card-title"><strong>Cuestionarios</strong></h5>
-                </div>
-            </div>
-        </a>
-        <a href="./RegistroIndividualAlumno.php">
-            <div class="card" style="width: 8rem;">
-                <img src="../src/img/homeProfesor/registroIndividual.png" class="card-img-top" alt="clases">
-                <div class="card-body">
-                    <h5 class="card-title"><strong>Registro individual</strong></h5>
                 </div>
             </div>
         </a>

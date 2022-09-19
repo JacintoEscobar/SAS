@@ -23,9 +23,6 @@
                     <a class="nav-link" href="./ConsultaUsuarios.php">Consulta de usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./RegistroIndividualProfesor.php">Registro individual</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="./GestionBD.php">Gestión de base de datos</a>
                 </li>
 
@@ -36,9 +33,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./Cuestionarios.php">Cuestionarios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./RegistroIndividualAlumno.php">Registro individual</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./PerfilesPsicologicos.php">Perfiles psicológicos</a>

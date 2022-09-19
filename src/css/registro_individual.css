@@ -1,4 +1,4 @@
-/*Diseño del título de la página*/
+/* -------------------- Diseño del container del formulario general -------------------- */
 .container {
     margin: 0px auto;
 }
@@ -19,10 +19,18 @@
     font-size: 1.4em;
 }
 
-/* Diseño del container del formulario */
-#registro-individual-form {
+#tipo-registro-form, #registro-individual-form, #registro-masivo-form {
     margin-top: 1.5rem;
+}
+
+/* -------------------- Diseño del container del formulario del registro individual -------------------- */
+#registro-individual-form {
     padding: 1.4rem;
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
+}
+
+/* Diseño del botón de registro de usuarios*/
+#registrarUsuario {
+    margin-top: 1rem;
 }

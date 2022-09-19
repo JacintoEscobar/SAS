@@ -13,16 +13,32 @@ class Administrador
      * Función que inserta en la base de datos un nuevo registro de profesor
      * Recibe los campos del profesor
      */
-    public function registrarProfesor($nombre, $paterno, $materno, $correo, $usuario, $contraseña)
+    public function registrarProfesor(String $nombre, String $paterno, String $materno, String $correo, String $usuario, String $contraseña, String $tipoUsuario)
     {
         $conexion = new mysqli('localhost', 'root', '', 'sas');
 
         if (!$conexion->connect_errno) {
             $consulta = $conexion->prepare('INSERT INTO usuario(nombre, paterno, materno, correo, usuario, contraseña, tipo) VALUES(?, ?, ?, ?, ?, ?, ?)');
 
-            $tipo = 'profesor';
+            $consulta->bind_param('sssssss', $nombre, $paterno, $materno, $correo, $usuario, $contraseña, $tipoUsuario);
 
-            $consulta->bind_param('sssssss', $nombre, $paterno, $materno, $correo, $usuario, $contraseña, $tipo);
+            return $consulta->execute();
+        }
+    }
+
+    /**
+     * Función que inserta en la base de datos un nuevo registro de alumno
+     * Recibe los campos del alumno
+     */
+    public function registrarAlumno(String $nombre, String $paterno, String $materno, String $correo, String $usuario, String $contraseña, String $tipoUsuario)
+    {
+        $conexion = new mysqli('localhost', 'root', '', 'sas');
+
+        if (!$conexion->connect_errno) {
+            $consulta = $conexion->prepare('INSERT INTO usuario(nombre, paterno, materno, correo, usuario, contraseña, tipo) VALUES(?, ?, ?, ?, ?, ?, ?)');
+
+            $consulta->bind_param('sssssss', $nombre, $paterno, $materno, $correo, $usuario, $contraseña, $tipoUsuario);
+
             return $consulta->execute();
         }
     }
