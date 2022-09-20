@@ -2,6 +2,7 @@
 
 class Clase
 {
+    private $id;
     private $nombre;
     private $descripcion;
     private $cuatrimestre;
@@ -9,9 +10,10 @@ class Clase
     private $carrera;
     private $codigo;
 
-    function __construct($codigo)
+    function __construct($codigo, $id = null)
     {
         $this->codigo = $codigo;
+        $this->id = $id;
     }
 
     public function getNombreCorreoProfesor($idProfesor)
@@ -19,7 +21,8 @@ class Clase
         $conexion = new mysqli("localhost", "root", "", "sas");
 
         if (!$conexion->connect_errno) {
-            $sql = $conexion->prepare('
+            $sql = $conexion->prepare(
+                '
                 SELECT usuario.nombre AS profesor, usuario.correo AS correo FROM usuario
                 INNER JOIN clase ON usuario.idUsuario = clase.idClase
                 WHERE usuario.idUsuario = ?'
@@ -35,18 +38,30 @@ class Clase
         }
     }
 
-    public function getDatos()
+    /**
+     * Función que obtiene los datos de una clase y los asigna al objeto.
+     * Recibe true o false para realizar la consulta con el código de clase o con el id encriptado
+     */
+    public function getDatos($idEncriptado = false)
     {
         // Creamos la conexión con la base de datos
         $conexion = new mysqli("localhost", "root", "", "sas");
 
         // Verificamos que no haya ocurrido algún error de conexión
         if (!$conexion->connect_errno) {
-            // Preparamos la sentencia sql
-            $sentencia = $conexion->prepare('SELECT nombre, descripcion, cuatrimestre, grupo, carrera FROM clase WHERE codigo = ?');
+            if ($idEncriptado) {
+                // Preparamos la sentencia sql
+                $sentencia = $conexion->prepare('SELECT nombre, descripcion, cuatrimestre, grupo, carrera FROM clase WHERE md5(idClase) = ?');
 
-            // Asignamos los parámetros de consulta
-            $sentencia->bind_param('s', $this->codigo);
+                // Asignamos los parámetros de consulta
+                $sentencia->bind_param('s', $this->id);
+            } else {
+                // Preparamos la sentencia sql
+                $sentencia = $conexion->prepare('SELECT nombre, descripcion, cuatrimestre, grupo, carrera FROM clase WHERE codigo = ?');
+
+                // Asignamos los parámetros de consulta
+                $sentencia->bind_param('s', $this->codigo);
+            }
 
             // Ejecutamos la consulta
             $sentencia->execute();
@@ -104,6 +119,10 @@ class Clase
         }
     }
 
+    public function getID()
+    {
+        return $this->id;
+    }
     public function getNombre()
     {
         return $this->nombre;

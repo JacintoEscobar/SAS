@@ -14,7 +14,7 @@ const notificarProfesorBaja = (idClase, nombreClase) => {
             try {
                 const respuesta = JSON.parse(peticion.response);
             } catch (error) {
-                alert('Hemos notificado a tu profesor sobre tu petición. Espera a que la acepte para poder hacer los cambios en la base de datos.');
+                alert('Hemos notificado a tu profesor sobre tu petición.');
                 console.log(respuestasEsperadas[respuesta]);
             }
         }

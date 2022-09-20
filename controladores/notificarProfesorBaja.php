@@ -16,6 +16,7 @@ session_start();
 
 /* --------------------------- Obtenemos el nombre del estudiante que se dio de baja --------------------------- */
 $alumno = new Estudiante($_SESSION['i']);
+$idAlumno = md5($alumno->getID());
 $datosAlumno = $alumno->getNombre();
 
 if (!$datosAlumno) {
@@ -37,6 +38,7 @@ $nombreProfesor = $datosProfesor[1];
 $correoProfesor = $datosProfesor[2];
 
 /* --------------------------- Obtenemos el nombre de la clase --------------------------- */
+$idClase = md5(htmlentities($_POST['idc']));
 $nombreClase = htmlentities($_POST['nombreClase']);
 
 // Notificamos por correo al profesor sobre la baja
@@ -59,11 +61,11 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Notificación de baja.';
+    $mail->Subject = 'Notificación de petición de baja.';
 
     $mail->Body    = "<html lang='es'><body>";
     $mail->Body   .= "<h1>Estimado {$nombreProfesor}: Se te notifica que el alumno {$nombreAlumno} se ha dado de baja de tu clase {$nombreClase}.</h1>";
-    $mail->Body   .= "<p>Para aceptar la baja de {$nombreAlumno} da clic en el siguiente enlace: <a href='http://localhost/sas/controladores/aceptarBaja.php?i={$alumno->getID()}&c={$nombreClase}'> Aceptar baja.";
+    $mail->Body   .= "<p>Para aceptar la baja de {$nombreAlumno} da clic en el siguiente enlace: <a href='http://localhost/sas/controladores/aceptarBaja.php?ia={$idAlumno}&ic={$idClase}'> Aceptar baja.";
     $mail->Body   .= "</a></p>";
     $mail->Body   .= "</body></html>";
                       

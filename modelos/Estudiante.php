@@ -14,13 +14,58 @@ class Estudiante
         return $this->id;
     }
 
-    public function getNombre()
+    /**
+     * Función que devuelve el nombre del estudiante.
+     * Recibe un valor booleano para verificar si el id se encriptó previamente con md5.
+     */
+    public function getNombre($encriptado = false)
     {
         $conexion = new mysqli("localhost", "root", "", "sas");
 
         if (!$conexion->connect_errno) {
-            $sql = $conexion->prepare('SELECT nombre FROM usuario WHERE idUsuario = ?');
-            $sql->bind_param('i', $this->id);
+
+            /**
+             * Verificamos si el id está encriptado.
+             * Preparamos la consulta sql y asignamos los atributos de esta.
+             */
+            if ($encriptado) {
+                $sql = $conexion->prepare('SELECT nombre FROM usuario WHERE md5(idUsuario) = ?');
+                $sql->bind_param('s', $this->id);
+            } else {
+                $sql = $conexion->prepare('SELECT nombre FROM usuario WHERE idUsuario = ?');
+                $sql->bind_param('i', $this->id);
+            }
+            $respuesta = $sql->execute();
+
+            if ($respuesta) {
+                return $sql->get_result()->fetch_row();
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Función que devuelve el correo del estudiante.
+     * Recibe un valor booleano para verificar si el id se encriptó previamente con md5.
+     */
+    public function getCorreo($encriptado = true)
+    {
+        $conexion = new mysqli("localhost", "root", "", "sas");
+
+        if (!$conexion->connect_errno) {
+
+            /**
+             * Verificamos si el id está encriptado.
+             * Preparamos la consulta sql y asignamos los atributos de esta.
+             */
+            if ($encriptado) {
+                $sql = $conexion->prepare('SELECT correo FROM usuario WHERE md5(idUsuario) = ?');
+                $sql->bind_param('s', $this->id);
+            } else {
+                $sql = $conexion->prepare('SELECT nombre FROM usuario WHERE idUsuario = ?');
+                $sql->bind_param('i', $this->id);
+            }
             $respuesta = $sql->execute();
 
             if ($respuesta) {
