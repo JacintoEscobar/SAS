@@ -1,12 +1,6 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-require '../modelos/PHPMailer-master/src/Exception.php';
-require '../modelos/PHPMailer-master/src/PHPMailer.php';
-require '../modelos/PHPMailer-master/src/SMTP.php';
+include '../modelos/Notificacion.php';
 
 /**
  * Obtenemos los datos del estudiante para notificarle de su alta en el sistema
@@ -17,7 +11,18 @@ $correo = htmlentities($_POST['co']);
 $usuario = htmlentities($_POST['u']);
 $contraseña = htmlentities($_POST['con']);
 
-// Notificamos por correo al profesor sobre la baja
+/**
+ * Creamos una notificación para enviar el correo al nuevo usuario
+ */
+$notificacion = new Notificacion('Notificación de registro en SAS.');
+
+/**
+ * Enviamos la notificación
+ */
+echo json_encode($notificacion->usuarioRegistrado($correo, $nombre, $paterno, $usuario, $contraseña));
+
+/**
+ * // Notificamos por correo al profesor sobre la baja
 $mail = new PHPMailer(true);
 
 try {
@@ -50,3 +55,4 @@ try {
 } catch (Exception $e) {
     return $e->errorMessage();
 }
+ */
