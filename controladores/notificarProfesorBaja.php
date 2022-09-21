@@ -2,14 +2,8 @@
 
 include '../modelos/Estudiante.php';
 include '../modelos/Profesor.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-require '../modelos/PHPMailer-master/src/Exception.php';
-require '../modelos/PHPMailer-master/src/PHPMailer.php';
-require '../modelos/PHPMailer-master/src/SMTP.php';
+include '../modelos/Clase.php';
+include '../modelos/Notificacion.php';
 
 // Iniciamos $_SESSION para obtener el id del alumno
 session_start();
@@ -41,40 +35,12 @@ $correoProfesor = $datosProfesor[2];
 $idClase = md5(htmlentities($_POST['idc']));
 $nombreClase = htmlentities($_POST['nombreClase']);
 
-// Notificamos por correo al profesor sobre la baja
-$mail = new PHPMailer(true);
+/**
+ * Creamos una notificación para enviar el correo.
+ */
+$notificacion = new Notificacion('Notificación de solicitud de baja.');
 
-try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'sistanalisoci@gmail.com';                     //SMTP username
-    $mail->Password   = 'ufkemmqdikeqggvs';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-    //Recipients
-    $mail->setFrom('sistanalisoci@gmail.com', 'SAS');
-    $mail->addAddress($correoProfesor, $nombreProfesor);     //Add a recipient
-
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Notificación de petición de baja.';
-
-    $mail->Body    = "<html lang='es'><body>";
-    $mail->Body   .= "<h1>Estimado {$nombreProfesor}: Se te notifica que el alumno {$nombreAlumno} se ha dado de baja de tu clase {$nombreClase}.</h1>";
-    $mail->Body   .= "<p>Para aceptar la baja de {$nombreAlumno} da clic en el siguiente enlace: <a href='http://localhost/sas/controladores/aceptarBaja.php?ia={$idAlumno}&ic={$idClase}'> Aceptar baja.";
-    $mail->Body   .= "</a></p>";
-    $mail->Body   .= "</body></html>";
-                      
-    $mail->AltBody = "Estimado {$nombreProfesor}:\r\nSe te notifica que el alumno {$nombreAlumno} se ha dado de baja de tu clase {$nombreClase}.";
-
-    $mail->CharSet = 'UTF-8';
-    $mail->send();
-
-    echo json_encode('CORREO_ENVIADO');
-} catch (Exception $e) {
-    echo json_encode($e->errorMessage());
-}
+/**
+ * Enviamos la notificación al profesor.
+ */
+echo json_encode($notificacion->solicitudBaja($correoProfesor, $nombreProfesor, $nombreAlumno, $nombreClase, $idClase, $idAlumno));

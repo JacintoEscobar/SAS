@@ -12,14 +12,14 @@ const solicitarBaja = (idClase, nombreClase) => {
                 const respuesta = JSON.parse(peticion.response);
 
                 if (respuesta['EXITO']) {
+                    // Enviamos el correo para notificar al profesor de la baja del alumno
+                    notificarProfesorBaja(idClase, nombreClase);
+
                     // Eliminamos los elementos HTML de las clases previamente obtenidas
                     limpiarClases();
 
                     // Actualizamos las clases del alumno
                     obtenerClases();
-
-                    // Enviamos el correo para notificar al profesor de la baja del alumno
-                    notificarProfesorBaja(idClase, nombreClase);
                 } else {
                     alert(respuesta['ERROR']);
                 }
