@@ -1,6 +1,8 @@
 <?php
 
-class Clase
+include '../modelos/BD.php';
+
+class Clase extends BD
 {
     private $id;
     private $nombre;
@@ -10,10 +12,48 @@ class Clase
     private $carrera;
     private $codigo;
 
-    function __construct($codigo, $id = null)
+    function __construct($codigo = null, $id = null)
     {
         $this->codigo = $codigo;
         $this->id = $id;
+    }
+
+    /**
+     * Obtiene de la bd las unidades de aprendizaje.
+     * @return String|mixed Retorna el mensaje del error que haya ocurrido o las ua como un arreglo asociativo
+     */
+    public function getUA()
+    {
+        // Realizamos la conexión con la base de datos.
+        if ($this->conectar()) {
+            try {
+                // Preparamos la consulta sql.
+                $sql = 'SELECT * FROM unidadaprendizaje WHERE idClase = ? ORDER BY idUnidadAprendizaje DESC';
+                $consulta = $this->conexion->prepare($sql);
+
+                // Asignamos los parámetros de consulta.
+                $consulta->bind_param('i', $this->id);
+
+                /**
+                 * Ejecutamos la consulta sql y verificamos que esta
+                 * se haya realizado correctamente para obtener
+                 * los registros de las ua.
+                 */
+                if ($consulta->execute()) {
+                    // Obtenemos los registros de la base de datos.
+                    $registros = $consulta->get_result();
+
+                    // Devolvemos los registros.
+                    return $registros->fetch_all(MYSQLI_ASSOC);
+                }
+
+                return 'ERROR_SQL';
+            } catch (Exception $ex) {
+                return $ex->getMessage();
+            }
+        }
+
+        return 'ERROR_DE_CONEXION';
     }
 
     public function getNombreCorreoProfesor($idProfesor)

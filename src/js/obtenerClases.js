@@ -38,7 +38,7 @@ const crearClases = (clases) => {
         const cardTitle = document.createElement('h5');
         cardTitle.setAttribute('class', 'card-title');
         const tituloClase = document.createElement('a');
-        tituloClase.setAttribute('href', '');
+        tituloClase.setAttribute('href', `http://localhost/sas/vistas/Clase.php?i=${clases[i].id}&t=${clases[i].titulo}`);
         tituloClase.appendChild(document.createTextNode(clases[i].titulo));
         cardTitle.appendChild(tituloClase);
 

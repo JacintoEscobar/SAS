@@ -1,0 +1,86 @@
+/*Diseño general de los container del título y de las unidades de aprendizaje*/
+#container-titulo,
+#container-unidad-aprendizaje {
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+}
+
+/*Diseño del título*/
+#container-titulo #h1-titulo {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 3.5em;
+    text-align: center;
+    color: rgba(239, 6, 5, 0.8);
+}
+
+/*Diseño de las unidades de aprendizaje*/
+#container-unidad-aprendizaje {
+    border-radius: 10px;
+    padding-top: 0px;
+    height: '248.744px';
+    background-color: #fff;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/*Diseño del título de las unidades de aprendizaje*/
+#row-unidad-aprendizaje {
+    background-color: #D6D5D5;
+    border-radius: 10px;
+}
+
+#unidad-aprendizaje {
+    padding: 0.6rem 0.6rem 0.6rem 2rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+}
+
+#unidad-aprendizaje:hover {
+    cursor: pointer;
+}
+
+/*Diseño de los tópicos*/
+#container-topicos {
+    margin: 0.5rem 0px;
+}
+
+#container-topicos a {
+    display: block;
+    margin-left: 3rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #000;
+    ;
+}
+
+#container-topicos a:hover {
+    cursor: pointer;
+}
+
+/*Diseño del botón de agregar tópicos*/
+#container-topicos span strong,
+#span-add-unidad {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#container-topicos button {
+    padding: 0px;
+    border: none;
+    background: none;
+    margin-left: 3rem;
+}
+
+/*Diseño del botón de agregar unidad*/
+#agregar-unidad {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #D6D5D5;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.2rem;
+}
