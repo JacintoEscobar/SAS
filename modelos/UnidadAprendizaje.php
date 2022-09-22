@@ -1,13 +1,13 @@
 <?php
 
-include '../modelos/BD.php';
+include_once '../modelos/BD.php';
 
 class UnidadAprendizaje extends BD
 {
     private $id;
-    private $titulo;
-    private $descripcion;
-    private $idC;
+    private String $titulo;
+    private String $descripcion;
+    private String $idC;
 
     function __construct($id)
     {
@@ -39,6 +39,9 @@ class UnidadAprendizaje extends BD
                     // Obtenemos los registros de la base de datos.
                     $registros = $consulta->get_result();
 
+                    // Cerramos la conexión con la bd.
+                    $this->desconectar();
+
                     // Devolvemos los registros.
                     return $registros->fetch_all(MYSQLI_ASSOC);
                 }
@@ -50,5 +53,27 @@ class UnidadAprendizaje extends BD
         }
 
         return 'ERROR_DE_CONEXION';
+    }
+
+    // Métodos set.
+    public function setTitulo(String $titulo)
+    {
+        $this->titulo = $titulo;
+    }
+
+    public function setDescripcion(String $descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
+
+    // Métodos get
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }

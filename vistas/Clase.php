@@ -46,50 +46,38 @@
 
         <!--Sección de las unidades de aprendizaje-->
         <div id="container-unidades-aprendizaje" class="container">
-            <!--Sección de una unidad de aprendizaje en específico-->
-            <div id="container-unidad-aprendizaje" class="container">
-                <!--Sección del título de la unidad de aprendizaje-->
-                <div id="row-unidad-aprendizaje" class="row">
-                    <span id="unidad-aprendizaje">Unidad de aprendizaje</span>
-                </div>
-                <!--Sección de los tópicos-->
-                <div id="container-topicos" class="container">
-                    <a href="">Colota1</a>
-                    <a href="">Colita1</a>
-                    <a href="">Cola1</a>
-                    <button id="agregar-topico">
-                        <span>
-                            <strong>+</strong>
-                        </span>Agregar tópico
-                    </button>
-                </div>
-            </div>
 
-            <div id="container-unidad-aprendizaje" class="container">
-                <!--Sección del título de la unidad de aprendizaje-->
-                <div id="row-unidad-aprendizaje" class="row">
-                    <span id="unidad-aprendizaje">Unidad de aprendizaje</span>
-                </div>
-                <!--Sección de los tópicos-->
-                <div id="container-topicos" class="container">
-                    <a href="">Colota2</a>
-                    <a href="">Colita2</a>
-                    <a href="">Cola2</a>
-                    <button id="agregar-topico">
-                        <span>
-                            <strong>+</strong>
-                        </span>Agregar tópico
-                    </button>
-                </div>
-            </div>
         </div>
 
         <button id="agregar-unidad">Agregar unidad de aprendizaje</button>
+
+        <!--Sección del formulario para crear una ua.-->
+        <section id="section-addUA" style="visibility: hidden;">
+
+            <!--Sección para el encabezado del formulario.-->
+            <header id="section-addUA__header">
+                <h2 id="section-addUA__header__titulo">Creación de unidad de aprendizaje</h2>
+                <p id="section-addUA__header__p">Llena el formulario para dar de alta la nueva unidad de aprendizaje.</p>
+            </header>
+
+            <!--Formulario para crear una ua.-->
+            <form id="section-addUA__form" action="">
+                <label for="titulo">Título:</label>
+                <input type="text" id="input-titulo">
+
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" id="input-descripcion">
+
+                <button id="input-addUA" type="button">Agregar</button>
+            </form>
+        </section>
     </div>
 
     <script src="../src/js/obtenerUnidadesAprendizaje.js"></script>
     <script src="../src/js/obtenerTopicos.js"></script>
     <script src="../src/js/crearUATopicos.js"></script>
+    <script src="../src/js/agregarUA.js"></script>
+    <script src="../src/js/limpiarUA.js"></script>
     <script src="../src/js/salir.js"></script>
 </body>
 

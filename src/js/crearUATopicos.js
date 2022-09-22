@@ -16,11 +16,17 @@ const crearUATopicos = (ua, topicos) => {
     // <div id="row-unidad-aprendizaje" class="row">
     //   <span id="unidad-aprendizaje">Unidad de aprendizaje</span>
     const rowUA = document.createElement('div');
-    const spanTituloUA = document.createElement('span');
     rowUA.setAttribute('id', 'row-unidad-aprendizaje');
     rowUA.setAttribute('class', 'row');
+    rowUA.setAttribute('idUA', ua.idUnidadAprendizaje);
+
+    const spanTituloUA = document.createElement('span');
     spanTituloUA.setAttribute('id', 'unidad-aprendizaje');
-    spanTituloUA.appendChild(document.createTextNode('Unidad de aprendizaje'));
+    spanTituloUA.appendChild(document.createTextNode(ua.titulo));
+
+    rowUA.appendChild(spanTituloUA);
+    containerUAT.appendChild(rowUA);
+    containerUsAT.appendChild(containerUAT);
 
     // Sección de los tópicos
     // <div id="container-topicos" class="container">
@@ -29,5 +35,23 @@ const crearUATopicos = (ua, topicos) => {
     //   <span>
     //    <strong>+</strong>
     //   Agregar tópico
-    
+    const containerT = document.createElement('div');
+    for (const topico of topicos) {
+        const aTopico = document.createElement('a');
+        containerT.setAttribute('id', 'container-topicos');
+        containerT.setAttribute('class', 'container');
+        aTopico.setAttribute('href', '');
+        aTopico.appendChild(document.createTextNode(`${topico.titulo}: ${topico.descripcion}`));
+        containerT.append(aTopico);
+    }
+    const buttonAgregarT = document.createElement('button');
+    const spanAdd = document.createElement('span');
+    const strongAdd = document.createElement('strong');
+
+    buttonAgregarT.setAttribute('id', 'agregar-topico');
+    strongAdd.appendChild(document.createTextNode('+'));
+    spanAdd.append(strongAdd, document.createTextNode('Agregar tópico'));
+    buttonAgregarT.appendChild(spanAdd);
+    containerT.append(buttonAgregarT);
+    containerUAT.appendChild(containerT)
 };

@@ -1,6 +1,6 @@
 <?php
 
-include '../modelos/BD.php';
+include_once '../modelos/BD.php';
 
 class Clase extends BD
 {
@@ -16,6 +16,43 @@ class Clase extends BD
     {
         $this->codigo = $codigo;
         $this->id = $id;
+    }
+
+    /**
+     * Realiza la consulta de inserción a la bd para dar de al una nueva ua.
+     * @param $ua Unidad de aprendizaje que se dará de alta en el sistema.
+     * @return string|number Devuelve el mensaje del error ocurrido o el número de filas afectas en la bd. 
+     */
+    public function addUA(UnidadAprendizaje $ua)
+    {
+        // Realizamos la conexión con la base de datos.
+        if ($this->conectar()) {
+            try {
+                // Preparamos la consulta sql.
+                $sql = 'INSERT INTO unidadaprendizaje(titulo, descripcion, idClase) VALUES(?, ?, ?)';
+                $consulta = $this->conexion->prepare($sql);
+
+                // Asignamos los parámetros de consulta.
+                $titulo = $ua->getTitulo();
+                $descripcion = $ua->getDescripcion();
+                $idClase = $this->id;
+                $consulta->bind_param('ssi', $titulo, $descripcion, $idClase);
+
+                /**
+                 * Ejecutamos la consulta sql y verificamos
+                 * que estase haya realizado correctamente
+                 */
+                if ($consulta->execute()) {
+                    return $consulta->affected_rows;
+                }
+
+                return 'ERROR_SQL';
+            } catch (Exception $ex) {
+                return $ex->getMessage();
+            }
+        }
+
+        return 'ERROR_DE_CONEXIÓN';
     }
 
     /**

@@ -10,6 +10,7 @@ class BD
 
     function __construct()
     {
+        $this->conexion = null;
     }
 
     /**
