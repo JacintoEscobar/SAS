@@ -71,10 +71,31 @@
                 <button id="input-addUA" type="button">Agregar</button>
             </form>
         </section>
+
+        <!--Sección para el formulario para crear un tópico.-->
+        <!-- Modal -->
+        <div class="modal fade" id="div-form-addT" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="titulo-addT" class="modal-title" id="exampleModalLabel"></h5>
+                        <button id="buttonCancelarAdd" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="buttonAddT" type="button" class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="../src/js/obtenerUnidadesAprendizaje.js"></script>
     <script src="../src/js/obtenerTopicos.js"></script>
+    <script src="../src/js/agregarTopico.js"></script>
     <script src="../src/js/crearUATopicos.js"></script>
     <script src="../src/js/agregarUA.js"></script>
     <script src="../src/js/limpiarUA.js"></script>

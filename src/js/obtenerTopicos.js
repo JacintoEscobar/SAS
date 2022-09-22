@@ -5,22 +5,19 @@
 const obtenerTopicos = unidadesAprendizaje => {
     /* console.log(`Unidades de aprendizaje: ${unidadesAprendizaje}`); */
     // Por cada unidad de aprendizaje obtenemos sus tópicos.
-    for (const ua of unidadesAprendizaje) {
+    unidadesAprendizaje.forEach(ua => {
         const peticion = new XMLHttpRequest();
-
         peticion.onreadystatechange = () => {
             if (peticion.readyState == 4 && peticion.status == 200) {
                 const respuesta = JSON.parse(peticion.response);
-
                 typeof respuesta['topicos'] === 'undefined' ?
                     typeof respuestas[respuesta] === 'undefined' ?
-                        alert(respuesta['ERROR']) : alert(respuestas[respuesta])
-                    : crearUATopicos(ua, respuesta['topicos']);
+                        alert(respuesta['ERROR']) : alert(respuestas[respuesta]) : crearUATopicos(ua, respuesta['topicos']);
             }
         };
 
-        peticion.open('GET', `../controladores/obtenerTopicos.php?iau=${ua.idUnidadAprendizaje}`, true);
+        peticion.open('GET', `../controladores/obtenerTopicos.php?iau=${ua.idUnidadAprendizaje}`, false);
 
         peticion.send();
-    }
+    });
 };

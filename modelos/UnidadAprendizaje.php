@@ -24,7 +24,7 @@ class UnidadAprendizaje extends BD
         if ($this->conectar()) {
             try {
                 // Preparamos la consulta sql.
-                $sql = 'SELECT * FROM topico WHERE idUnidadAprendizaje = ? ORDER BY idTopico DESC';
+                $sql = 'SELECT * FROM topico WHERE idUnidadAprendizaje = ?';
                 $consulta = $this->conexion->prepare($sql);
 
                 // Asignamos los parámetros de consulta.
