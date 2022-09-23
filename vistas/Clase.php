@@ -82,7 +82,22 @@
                         <button id="buttonCancelarAdd" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <section>
+                            <header>
+                                <span>Llene el formulario para registrar un nuevo tópico.</span>
+                            </header>
+
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="input-titulo-topico">Título</label>
+                                    <input type="text" class="form-control" id="input-titulo-topico">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-descripcion-topico">Descripción</label>
+                                    <input type="text" class="form-control" id="input-descripcion-topico">
+                                </div>
+                            </form>
+                        </section>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

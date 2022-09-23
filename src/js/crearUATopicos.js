@@ -43,6 +43,7 @@ const crearUATopicos = (ua, topicos/* UsA */) => {
     buttonAgregarT.onclick = () => {
         // Cambiamos el título del modal con cada ua.
         const tituloModal = document.getElementById('titulo-addT');
+        tituloModal.setAttribute('id-data-ua', ua.idUnidadAprendizaje);
         if (tituloModal.hasChildNodes()) tituloModal.removeChild(tituloModal.firstChild);
         tituloModal.appendChild(document.createTextNode(`Nuevo tópico para ${ua.titulo}`));
     };
