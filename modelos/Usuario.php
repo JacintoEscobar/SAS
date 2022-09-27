@@ -1,16 +1,88 @@
 <?php
 
-class Usuario
+include_once '../modelos/BD.php';
+
+class Usuario extends BD
 {
     private $id;
     private $usuario;
     private $contraseña;
     private $tipo;
 
-    function __construct($usuario, $contraseña)
+    function __construct($usuario = null, $contraseña = null)
     {
         $this->usuario = $usuario;
         $this->contraseña = $contraseña;
+    }
+
+    /**
+     * Realiza una actualización a la bd. con el nuevo valor de una credencial del usuario.
+     * @param String $tipo La credencial que se actualizará: usuario o contraseña.
+     * @param String $credencial Nuevo valor de la credencial.
+     * @param String $id id del usuario.
+     */
+    public function actualizarCredencial(String $tipo, String $credencial, String $id)
+    {
+        // Realizamos la conexión a la bd y verificamos
+        // que no haya ocurrido ningún error.
+        if ($this->conectar()) {
+            // Preparamos la consulta.
+            $sql = "UPDATE usuario SET " . $tipo . " = ? WHERE idUsuario = ?";
+            $consulta = $this->conexion->prepare($sql);
+
+            // Asignamos los parámetros de consulta.
+            $consulta->bind_param('si', $credencial, $id);
+
+            // Ejecutamos la consulta.
+            // Verificamos que no haya ocurrido algún error.
+            if ($consulta->execute()) {
+
+                if ($consulta->affected_rows > 0) {
+                    return 'Se actualizó correctamente tu ' . $tipo . '.';
+                }
+
+                return 'Ocurrió un error al actualizar la base de datos.';
+            }
+
+            return  'Ocurrió un error al ejecutar la consulta.';
+        }
+
+        return 'Ocurrió un error con la conexión a la base de datos.';
+    }
+
+    /**
+     * Realiza la consulta del registro que coincida con el correo proporcionado.
+     * @param String $correo Correo del usuario.
+     * @return String|int id del usuario. Mensaje de error ocurrido.
+     */
+    public function verificarCorreo(String $correo)
+    {
+        // Realizamos la conexión a la bd y verificamos
+        // que no haya ocurrido ningún error.
+        if ($this->conectar()) {
+            // Preparamos la consulta.
+            $sql = 'SELECT idUsuario FROM usuario WHERE correo IN(?)';
+            $consulta = $this->conexion->prepare($sql);
+
+            // Asignamos los parámetros de consulta.
+            $consulta->bind_param('s', $correo);
+
+            // Ejecutamos la consulta.
+            // Verificamos que no haya ocurrido algún error.
+            if ($consulta->execute()) {
+
+                $resultado = $consulta->get_result();
+                if ($resultado->num_rows == 1) {
+                    return $resultado->fetch_column(0);
+                }
+
+                return 'Ingrese un correo válido.';
+            }
+
+            return  'Ocurrió un error al ejecutar la consulta.';
+        }
+
+        return 'Ocurrió un error con la conexión a la base de datos.';
     }
 
     public function verificarUsuario()
