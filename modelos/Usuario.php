@@ -16,6 +16,74 @@ class Usuario extends BD
     }
 
     /**
+     * Actualiza el campo correo de la bd.
+     * @param String $correo Nuevo correo.
+     * @return String Mensaje de error o de éxito según el caso.
+     */
+    public function cambiarCorreo(String $correo)
+    {
+        // Realizamos la conexión a la bd y verificamos
+        // que no haya ocurrido ningún error.
+        if ($this->conectar()) {
+            // Preparamos la consulta.
+            $sql = "UPDATE usuario SET correo = ? WHERE idUsuario = ?";
+            $consulta = $this->conexion->prepare($sql);
+
+            // Asignamos los parámetros de consulta.
+            $consulta->bind_param('si', $correo, $this->id);
+
+            // Ejecutamos la consulta.
+            // Verificamos que no haya ocurrido algún error.
+            if ($consulta->execute()) {
+
+                if ($consulta->affected_rows > 0) {
+                    return 'Se actualizó correctamente tu correo.';
+                }
+
+                return 'Ocurrió un error al actualizar la base de datos.';
+            }
+
+            return  'Ocurrió un error al ejecutar la consulta.';
+        }
+
+        return 'Ocurrió un error con la conexión a la base de datos.';
+    }
+
+    /**
+     * Actualiza el campo usuario de la bd.
+     * @param String $usuario Nuevo usuario.
+     * @return String Mensaje de error o de éxito según el caso.
+     */
+    public function cambiarUsuario(String $usuario)
+    {
+        // Realizamos la conexión a la bd y verificamos
+        // que no haya ocurrido ningún error.
+        if ($this->conectar()) {
+            // Preparamos la consulta.
+            $sql = "UPDATE usuario SET usuario = ? WHERE idUsuario = ?";
+            $consulta = $this->conexion->prepare($sql);
+
+            // Asignamos los parámetros de consulta.
+            $consulta->bind_param('si', $usuario, $this->id);
+
+            // Ejecutamos la consulta.
+            // Verificamos que no haya ocurrido algún error.
+            if ($consulta->execute()) {
+
+                if ($consulta->affected_rows > 0) {
+                    return 'Se actualizó correctamente tu usuario.';
+                }
+
+                return 'Ocurrió un error al actualizar la base de datos.';
+            }
+
+            return  'Ocurrió un error al ejecutar la consulta.';
+        }
+
+        return 'Ocurrió un error con la conexión a la base de datos.';
+    }
+
+    /**
      * Realiza una actualización a la bd. con el nuevo valor de una credencial del usuario.
      * @param String $tipo La credencial que se actualizará: usuario o contraseña.
      * @param String $credencial Nuevo valor de la credencial.
@@ -152,5 +220,10 @@ class Usuario extends BD
         } else {
             return array('ERROR_DE_CONEXION' => 'Ocurrió un error al realizar la conexión con la base de datos.');
         }
+    }
+
+    public function setID($id)
+    {
+        $this->id = $id;
     }
 }

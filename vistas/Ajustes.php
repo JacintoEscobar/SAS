@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAS - Cambiar contraseña</title>
+    <title>SAS - Ajustes</title>
 
     <!--Incluimos los diseños que se aplican al header-->
     <?php include '../templates/header/header_head.php'; ?>
@@ -55,13 +55,40 @@
     <!--Incluimos el header de todas las páginas-->
     <?php include '../templates/header/header_herramientas.php'; ?>
 
-    <div class="container">
+    <div id="container-ajustes" class="container">
         <div class="row">
-            <div id="titulo" class="col-12">Cambio de contraseña</div>
-            <div id="descripcion" class="col">Llena el formulario para actualizar tu contraseña de acceso.</div>
+            <div id="titulo" class="col-12">Ajustes</div>
+            <div id="descripcion" class="col">Selecciona el dato que deseas modificar.</div>
         </div>
 
-        <form>
+        <!--Formulario para seleccionar el dato a actualizar-->
+        <select id="select-dato" class="form-select" aria-label="Default select example">
+            <option selected>Dato</option>
+            <option value="1">Correo</option>
+            <option value="2">Usuario</option>
+            <option value="3">Contraseña</option>
+        </select>
+
+        <!--Formulario para actualizar el correo-->
+        <form id="form-act-mail" style="visibility: hidden;">
+            <div class="mb-3">
+                <label for="nuevoCorreo" class="form-label">Nuevo correo</label>
+                <input type="email" class="form-control" id="nuevoCorreo">
+            </div>
+            <button type="button" id="cambiarCorreoButton" class="btn btn-primary">Actualizar correo</button>
+        </form>
+
+        <!--Formulario para actualizar el usuario-->
+        <form id="form-act-user" style="visibility: hidden;">
+            <div class="mb-3">
+                <label for="nuevoUsuario" class="form-label">Nuevo usuario</label>
+                <input type="text" class="form-control" id="nuevoUsuario">
+            </div>
+            <button type="button" id="cambiarUsuarioButton" class="btn btn-primary">Actualizar usuario</button>
+        </form>
+
+        <!---Formulario para actualizar la contraseña-->
+        <form id="form-act-pass" style="visibility: hidden;">
             <div class="mb-3">
                 <label for="contraseñaActual" class="form-label">Contraseña actual:</label>
                 <input type="password" class="form-control" id="contraseñaActual">
@@ -78,6 +105,9 @@
         </form>
     </div>
 
+    <script src="../src/js/seleccionarDato.js"></script>
+    <script src="../src/js/cambiarUsuario.js"></script>
+    <script src="../src//js//cambiarCorreo.js"></script>
     <script src="../src/js/cambiarContraseña.js"></script>
     <script src="../src/js/salir.js"></script>
 

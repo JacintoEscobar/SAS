@@ -54,7 +54,7 @@
                     <img src="../src/img/user_icon.png" alt="user">
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a id="cambiarContraseña" class="dropdown-item" href="./CambiarContraseña.php?t=<?php echo $_SESSION['t']; ?>">Cambiar contraseña</a></li>
+                    <li><a id="ajustes" class="dropdown-item" href="./Ajustes.php?t=<?php echo $_SESSION['t']; ?>">Ajustes</a></li>
                     <li><a id="salir" class="dropdown-item">Salir</a></li>
                 </ul>
             </li>
