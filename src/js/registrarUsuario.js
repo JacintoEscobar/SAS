@@ -25,7 +25,7 @@ let tipoUsuario = document.getElementById('tipo_usuario');
  * Devuélve false si algún dato falta o está erróneo o true de lo contrario
  */
 const validarDatos = () => {
-    if (nombre.value != '' && paterno.value != '' && materno.value != '' && correo.value != '' && usuario.value != '' && contraseña.value != '' && (tipoUsuario.value == 'profesor' || tipoUsuario.value == 'alumno')) {
+    if (nombre.value != '' && paterno.value != '' && materno.value != '' && correo.value != '' && usuario.value != '' && contraseña.value != '' && (tipoUsuario.value == 'administrador' || tipoUsuario.value == 'profesor' || tipoUsuario.value == 'alumno')) {
         registrarUsuario();
     } else {
         mostrarErrorFormulario();

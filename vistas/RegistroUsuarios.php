@@ -82,6 +82,7 @@
             <!--Tipo de usuario-->
             <select id="tipo_usuario" class="form-select" aria-label="Default select example">
                 <option value="0">Tipo de usuario</option>
+                <option value="administrador">Administrador</option>            
                 <option value="profesor">Profesor</option>
                 <option value="alumno">Alumno</option>
             </select>
