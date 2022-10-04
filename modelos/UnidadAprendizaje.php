@@ -15,6 +15,38 @@ class UnidadAprendizaje extends BD
     }
 
     /**
+     * Elimna una ua.
+     * @return String Mensaje de error o de éxito.
+     */
+    public function eliminar()
+    {
+        // Realizamos la conexión con la bd.
+        if ($this->conectar()) {
+            try {
+                // Preparamos la consulta sql de la eliminación.
+                $sql = 'DELETE FROM unidadaprendizaje WHERE idUnidadAprendizaje = ?';
+                $consulta = $this->conexion->prepare($sql);
+
+                // Asignamos los parámetros de consulta.
+                $consulta->bind_param('i', $this->id);
+
+                // Ejecutamos la consulta y verificamos que no haya ocurrido ningún error.
+                if ($consulta->execute()) {
+                    if ($consulta->affected_rows > 0) {
+                        return 'La unidad de aprendizaje se ha eliminado correctamente.';
+                    }
+                }
+
+                return $consulta->error;
+            } catch (Exception $ex) {
+                return $ex->getMessage();
+            }
+        }
+
+        return 'Ocurrió un error al conectarse con la base de datos.';
+    }
+
+    /**
      * Ejecuta la consulta sql para insertar un tópico en la bd.
      * @param Topico Topico a ser insertado
      * @return String|int Retorna el mensaje de error correspondiente o el número de filas afectadas en la tabla

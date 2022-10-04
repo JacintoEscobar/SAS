@@ -15,10 +15,18 @@ const crearUATopicos = (ua, topicos/* UsA */) => {
     const rowUA = document.createElement('div');
     rowUA.setAttribute('id', 'row-unidad-aprendizaje');
     rowUA.setAttribute('class', 'row');
+    const bEliminarUA = document.createElement('button');
+    bEliminarUA.setAttribute('type', 'button');
+    bEliminarUA.setAttribute('class', 'btn btn-danger');
+    bEliminarUA.setAttribute('id', 'eliminarUAButton');
+    bEliminarUA.appendChild(document.createTextNode('Eliminar UA.'));
+    bEliminarUA.addEventListener('click', () => { eliminarUA(ua.idUnidadAprendizaje); });
     const spanTituloUA = document.createElement('span');
     spanTituloUA.setAttribute('id', 'unidad-aprendizaje');
     spanTituloUA.appendChild(document.createTextNode(ua.titulo));
+    spanTituloUA.appendChild(bEliminarUA);
     rowUA.appendChild(spanTituloUA);
+
     containerUAT.appendChild(rowUA);
     containerUsAT.appendChild(containerUAT);
 
@@ -27,9 +35,16 @@ const crearUATopicos = (ua, topicos/* UsA */) => {
         const aTopico = document.createElement('a');
         containerT.setAttribute('id', 'container-topicos');
         containerT.setAttribute('class', 'container');
-        aTopico.setAttribute('href', '');
+        const bEliminarT = document.createElement('button');
+        bEliminarT.setAttribute('id', 'eliminarTButton');
+        bEliminarT.setAttribute('class', 'btn btn-danger');
+        bEliminarT.setAttribute('type', 'button');
+        bEliminarT.addEventListener('click', () => { eliminarTopico(ua.idUnidadAprendizaje, topico.titulo, topico.descripcion) });
+        bEliminarT.appendChild(document.createTextNode('Eliminar.'));
+        aTopico.setAttribute('href', 'cola');
         aTopico.appendChild(document.createTextNode(`${topico.titulo}: ${topico.descripcion}`));
         containerT.append(aTopico);
+        containerT.append(bEliminarT);
     });
 
     const buttonAgregarT = document.createElement('button');

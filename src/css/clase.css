@@ -48,13 +48,12 @@
 }
 
 #container-topicos a {
-    display: block;
+    display: inline-block;
     margin-left: 3rem;
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
     text-decoration: none;
     color: #000;
-    ;
 }
 
 #container-topicos a:hover {
@@ -62,6 +61,7 @@
 }
 
 #agregar-topico {
+    display: block;
     padding: 0.5rem;
     border: none;
     margin-left: 3rem;
@@ -80,4 +80,9 @@
 
 #agregar-unidad:hover {
     cursor: pointer;
+}
+
+/* Diseño del botón de eliminar UA */
+#eliminarUAButton {
+    margin-left: 50vw;
 }

@@ -108,12 +108,14 @@
         </div>
     </div>
 
+    <script src="../src/js/limpiarUA.js"></script>
     <script src="../src/js/obtenerUnidadesAprendizaje.js"></script>
     <script src="../src/js/obtenerTopicos.js"></script>
     <script src="../src/js/agregarTopico.js"></script>
+    <script src="../src/js/eliminarTopico.js"></script>
+    <script src="../src/js/eliminarUA.js"></script>
     <script src="../src/js/crearUATopicos.js"></script>
     <script src="../src/js/agregarUA.js"></script>
-    <script src="../src/js/limpiarUA.js"></script>
     <script src="../src/js/salir.js"></script>
 </body>
 
