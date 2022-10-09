@@ -1,0 +1,50 @@
+/* Diseño del título de la página */
+#tituloH1 {
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+}
+
+/* Diseño del formulario */
+#container-formulario {
+    background-color: #FFFFFF;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 1rem;
+    padding: 1.2rem;
+}
+
+/* Diseño de los botones de editar y registrar */
+.button-registrar-editar {
+    display: inline-block;
+    position: absolute;
+    top: 60%;
+    right: 2rem;
+    height:100px;
+    width:100px;
+    -moz-border-radius:50px;
+    -webkit-border-radius:50px;
+    border-radius:50px;
+    background-color: #EF0605;
+    padding: 2rem;
+}
+
+.button-registrar-editar button {
+    padding: 0rem;
+    border: none;
+    background-color: transparent;
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+}
+
+.button-registrar-editar #registrar {
+    position: relative;
+    right: 1rem;
+    top: 0.4rem;
+}
+
+.button-registrar-editar #editar {
+    position: relative;
+    right: 0.3rem;
+    top: 0.4rem;
+}

@@ -12,6 +12,33 @@ class Profesor extends BD
     }
 
     /**
+     * Se intenta insertar un nuevo registro de cuestionario en la base de datos.
+     * @param Cuestionario $cuestionario Cuestionario a insertar.
+     * @return String Mensaje de error o de exito segun sea el caso.
+     */
+    public function crearCuestionario(Cuestionario $cuestionario)
+    {
+        if ($this->conectar()) {
+            $sql = "INSERT INTO cuestionario(titulo, descripcion, tipo, idUsuario) VALUES(?, ?, ?, ?)";
+            $consulta = $this->conexion->prepare($sql);
+
+            $t = $cuestionario->getTitulo();
+            $d = $cuestionario->getDescripcion();
+            $tt = $cuestionario->getTipo();
+            $i = $cuestionario->getIdUsuario();
+            $consulta->bind_param('sssi', $t, $d, $tt, $i);
+
+            if ($consulta->execute()) {
+                return 'Cuestionario registrado con exito.';
+            }
+
+            return  'Ocurrió un error al ejecutar la consulta.';
+        }
+
+        return 'Ocurrió un error con la conexión a la base de datos.';
+    }
+
+    /**
      * Obtenemos los cuestionarios del profesor.
      * @return Array Cuestionarios.
      * @return String Mensaje de error.
@@ -25,10 +52,7 @@ class Profesor extends BD
             $consulta->bind_param('i', $this->id);
 
             if ($consulta->execute()) {
-
                 return $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
-
-                return 'Ocurrió un error al actualizar la base de datos.';
             }
 
             return  'Ocurrió un error al ejecutar la consulta.';

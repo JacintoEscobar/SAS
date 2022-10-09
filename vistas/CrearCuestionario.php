@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAS - Crear clase</title>
+    <title>SAS - Crear cuestionario</title>
 
     <!--Incluimos los diseños que se aplican al header-->
     <?php include '../templates/header/header_head.php'; ?>
 
     <!--CSS propio para el formulario de edición y creación de clase-->
-    <link rel="stylesheet" href="../src/css/crear_editarClase.css">
+    <link rel="stylesheet" href="../src/css/crear_editarCuestionario.css">
 
     <style>
         body {
@@ -31,20 +31,19 @@
     <main>
         <section>
             <header>
-                <h1 id="tituloH1">Creación de una nueva clase</h1>
+                <h1 id="tituloH1">Creación de un nuevo cuestionario</h1>
             </header>
 
             <!--Incluimos el formulario para crear o editar una clase-->
-            <?php include '../templates/forms/formularioCrearEditarClase.php' ?>
+            <?php include '../templates/forms/formularioCrearEditarCuestionario.php' ?>
 
             <div class="button-registrar-editar">
-                <button id="registrar">REGISTRAR</button>
+                <button id="registrar">CREAR</button>
             </div>
         </section>
     </main>
 
-    <script src="../src/js/verificarDatos_CrearEditarClase.js"></script>
-    <script src="../src/js/crearClase.js"></script>
+    <script src="../src/js/registrarCuestionario.js"></script>
     <script src="../src/js/salir.js"></script>
 </body>
 
