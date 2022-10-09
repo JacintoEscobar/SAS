@@ -1,12 +1,40 @@
 <?php
 
-class Profesor
+include_once '../modelos/BD.php';
+
+class Profesor extends BD
 {
     private $id;
 
     function __construct($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * Obtenemos los cuestionarios del profesor.
+     * @return Array Cuestionarios.
+     * @return String Mensaje de error.
+     */
+    public function getCuestionarios()
+    {
+        if ($this->conectar()) {
+            $sql = "SELECT * FROM cuestionario WHERE idUsuario = ?";
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('i', $this->id);
+
+            if ($consulta->execute()) {
+
+                return $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
+
+                return 'Ocurrió un error al actualizar la base de datos.';
+            }
+
+            return  'Ocurrió un error al ejecutar la consulta.';
+        }
+
+        return 'Ocurrió un error con la conexión a la base de datos.';
     }
 
     /**
