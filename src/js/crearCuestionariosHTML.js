@@ -26,6 +26,7 @@ const crearCuestionariosHTML = cuestionarios => {
         // Div card del cuestionario.
         const cardCuestionario = document.createElement('div');
         cardCuestionario.setAttribute('class', 'card');
+        cardCuestionario.setAttribute('id', 'cardCuestionario');
         cardCuestionario.style.width = '18rem';
 
         // Div del título del cuestionario.
@@ -61,6 +62,13 @@ const crearCuestionariosHTML = cuestionarios => {
         bElimCuestionario.setAttribute('id', 'button-eliminar-cuestionario');
         bElimCuestionario.setAttribute('type', 'button');
         bElimCuestionario.setAttribute('class', 'btn btn-outline-warning');
+        bElimCuestionario.addEventListener('click', () => {
+            const bmConfiElimi = document.getElementById('bm-confir-elimi');
+            bmConfiElimi.click();
+            // Asignamos el id como un atributo al boton del modal que confirma la eliminacion del cuestionario.
+            const bModalEliminar = document.getElementById('button-confir-elimi');
+            bModalEliminar.setAttribute('data-id', cuestionarios[i].idCuestionario);
+        });
 
         // Imagen del botón de eliminar información del cuestionario.
         const imgElimCuestionario = document.createElement('img');

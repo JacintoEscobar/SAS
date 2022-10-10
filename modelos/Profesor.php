@@ -12,6 +12,35 @@ class Profesor extends BD
     }
 
     /**
+     * Realiza la consulta sql para eliminar un cuestionario de la base de datos.
+     * @param Cuestionario $cuestionario cuestionario a ser eliminado de la bd.
+     */
+    public function eliminarCuestionario(Cuestionario $cuestionario)
+    {
+        // Realizamos la conexion con la bd y verificamos
+        // que no haya ocurrido algun error.
+        if ($this->conectar()) {
+            // Definimos la consulta a realizar.
+            $sql = 'DELETE FROM cuestionario WHERE idCuestionario = ? AND idUsuario = ?';
+
+            // Preparamos la consulta a ejecutar.
+            $consulta = $this->conexion->prepare($sql);
+
+            // Asignamos los parametros de la consulta.
+            $idC = $cuestionario->getID();
+            $consulta->bind_param('ii', $idC, $this->id);
+
+            // Ejecutamos la consulta.
+            if ($consulta->execute() && $consulta->affected_rows == 1)
+                return 'Cuestionario eliminado satisfactoriamente.';
+
+            return $this->conexion->error;
+        }
+
+        return 'Ocurrio un error al realizar la conexión con la base de datos. Favor de reportar la falla.';
+    }
+
+    /**
      * Se intenta insertar un nuevo registro de cuestionario en la base de datos.
      * @param Cuestionario $cuestionario Cuestionario a insertar.
      * @return String Mensaje de error o de exito segun sea el caso.

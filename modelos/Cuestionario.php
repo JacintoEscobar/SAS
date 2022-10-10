@@ -8,7 +8,7 @@ class Cuestionario
     private String $tipo;
     private String $idUsuario;
 
-    function __construct(String $id = '', String $titulo, String $descripcion, String $tipo, String $idUsuario)
+    function __construct(String $id = '', String $titulo = '', String $descripcion = '', String $tipo = '', String $idUsuario)
     {
         $this->id = $id;
         $this->titulo = $titulo;
@@ -18,16 +18,34 @@ class Cuestionario
     }
 
     // Metodos SET.
-    public function setID(String $id) { $this->id = $id; }
+    public function setID(String $id)
+    {
+        $this->id = $id;
+    }
 
     // Metodos GET.
-    public function getID() { return $this->id; }
+    public function getID()
+    {
+        return $this->id;
+    }
 
-    public function getTitulo() { return $this->titulo; }
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
 
-    public function getDescripcion() { return $this->descripcion; }
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
 
-    public function getTipo() { return $this->tipo; }
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
 
-    public function getIdUsuario() { return $this->idUsuario; }
+    public function getIdUsuario()
+    {
+        return $this->idUsuario;
+    }
 }

@@ -36,10 +36,37 @@
 
         <!--Sección de los cuestionarios-->
         <div id="cuestionarios" class="container">
-            
+
+        </div>
+
+        <!-- Button trigger modal -->
+        <button style="visibility: hidden;" id="bm-confir-elimi" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar cuestionario</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estas seguro de eliminar el cuestionario?</p>
+                        <span><strong>Esta accion no se puede deshacer.</strong></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="button-cerrar-md" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="button-confir-elimi" type="button" class="btn btn-primary">Eliminar</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="../src/js/crearCuestionariosHTML.js"></script>
+        <script src="../src/js/limpiarCuestionarios.js"></script>
+        <script src="../src/js/eliminarCuestionario.js"></script>
         <script src="../src/js/obtenerCuestionarios.js"></script>
         <script src="../src/js/salir.js"></script>
     </div>
