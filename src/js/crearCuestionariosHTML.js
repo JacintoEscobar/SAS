@@ -49,6 +49,16 @@ const crearCuestionariosHTML = cuestionarios => {
         bEditCuestionario.setAttribute('id', 'button-editar-cuestionario');
         bEditCuestionario.setAttribute('type', 'button');
         bEditCuestionario.setAttribute('class', 'btn btn-outline-success');
+        bEditCuestionario.addEventListener('click', () => {
+            // Pasamos a string el objeto del cuestionario.
+            let cuestString = JSON.stringify(cuestionarios[i]);
+
+            // Almacenamos el objeto en el almacenamiento local del navegador.
+            localStorage.setItem('cuestionario', cuestString);
+
+            // Redirigimos a la pagina de editar cuestionario.
+            window.location.href = 'http://localhost/sas/vistas/EditarCuestionario.php';
+        });
 
         // Imagen del botón de editar información del cuestionario.
         const imgEditCuestionario = document.createElement('img');

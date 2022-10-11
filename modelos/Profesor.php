@@ -12,6 +12,35 @@ class Profesor extends BD
     }
 
     /**
+     * Realiza la consulta de actualizacion de la informacion de un cuestionario.
+     * @param Cuestionario $cuestionario Cuestionario con la informacion actualizada.
+     * @return String Mensaje de error o de exito segun sea el caso.
+     */
+    public function editarCuestionario(Cuestionario $cuestionario)
+    {
+        if ($this->conectar()) {
+            $sql = 'UPDATE cuestionario SET titulo = ?, descripcion = ?, tipo = ? WHERE idCuestionario = ? AND idUsuario = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $i = $cuestionario->getID();
+            $t = $cuestionario->getTitulo();
+            $d = $cuestionario->getDescripcion();
+            $ti = $cuestionario->getTipo();
+            $consulta->bind_param('sssii', $t, $d, $ti, $i, $this->id);
+
+            if ($consulta->execute()) {
+                if ($consulta->affected_rows == 1) {
+                    return 'Cuestionario editado correctamente.';
+                }
+
+                return $this->conexion->error;
+            }
+        }
+
+        return 'Ocurrio un error al realizar la conexion con la base de datos.';
+    }
+
+    /**
      * Realiza la consulta sql para eliminar un cuestionario de la base de datos.
      * @param Cuestionario $cuestionario cuestionario a ser eliminado de la bd.
      */
