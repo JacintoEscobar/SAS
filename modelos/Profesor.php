@@ -11,6 +11,11 @@ class Profesor extends BD
         $this->id = $id;
     }
 
+    public function getID()
+    {
+        return $this->id;
+    }
+
     /**
      * Realiza la consulta de actualizacion de la informacion de un cuestionario.
      * @param Cuestionario $cuestionario Cuestionario con la informacion actualizada.

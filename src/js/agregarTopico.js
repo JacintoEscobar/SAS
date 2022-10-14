@@ -34,6 +34,12 @@ const agregarTopico = () => {
                     // Obtenemos nuevamente las ua y los tópicos.
                     obtenerUA();
 
+                    // Limpiamos los campos del modal.
+                    const inpTitulo = document.getElementById('input-titulo-topico');
+                    inpTitulo.value = '';
+                    const inpDesc = document.getElementById('input-descripcion-topico');
+                    inpDesc.value = '';
+
                     // Cerramos el modal del formulario para crear un tópico.
                     document.getElementById('buttonCancelarAdd').click();
                 } else {

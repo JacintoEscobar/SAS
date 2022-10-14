@@ -39,7 +39,11 @@ const crearCuestionariosHTML = cuestionarios => {
 
         // a para enviar a la página de edición de la información del cuestionario.
         const aCuestionario = document.createElement('a');
-        aCuestionario.setAttribute('href', '');
+        aCuestionario.setAttribute('href', `http://localhost/sas/vistas/CuestionarioContenido.php`);
+        aCuestionario.addEventListener('click', () => {
+            const cuestionario = JSON.stringify(cuestionarios[i]);
+            localStorage.setItem('cuestionario', cuestionario);
+        });
 
         aCuestionario.appendChild(document.createTextNode(cuestionarios[i].titulo));
         cardTitleCuestionario.appendChild(aCuestionario);
@@ -51,7 +55,7 @@ const crearCuestionariosHTML = cuestionarios => {
         bEditCuestionario.setAttribute('class', 'btn btn-outline-success');
         bEditCuestionario.addEventListener('click', () => {
             // Pasamos a string el objeto del cuestionario.
-            let cuestString = JSON.stringify(cuestionarios[i]);
+            const cuestString = JSON.stringify(cuestionarios[i]);
 
             // Almacenamos el objeto en el almacenamiento local del navegador.
             localStorage.setItem('cuestionario', cuestString);

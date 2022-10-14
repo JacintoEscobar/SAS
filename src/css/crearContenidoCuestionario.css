@@ -1,0 +1,91 @@
+/*Diseño general de los container del título y de las unidades de aprendizaje*/
+#container-titulo {
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+}
+
+/*Diseño del título y subtitulo*/
+#container-titulo #titulo-cuestionario {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 3.5em;
+    text-align: center;
+    color: rgba(239, 6, 5, 0.8);
+}
+
+#descripcion-cuestionario {
+    margin-top: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/*Diseño del boton de agregar pregunta y asignar cuestionario*/
+#addPregunta,
+#asignarCuestionario,
+#guardarCambios {
+    margin-bottom: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+}
+
+/*Diseño del container de preguntas*/
+#div-pregunta {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+/*Diseño de los parrafos de preguntas y respuestas*/
+#pPregunta {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2rem;
+}
+
+#pRespuesta {
+    display: inline;
+    margin-right: 4rem;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+#pRespuesta:hover {
+    cursor: pointer;
+    animation-name: hover-on-resp;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hover-on-resp {
+    0% {}
+
+    100% {
+        background-color: rgba(0, 153, 51, 0.7);
+        border-radius: 0.3rem;
+        padding: 0.4rem;
+    }
+}
+
+/*Diseño del boton del agregar respuesta*/
+#addRespuesta {
+    margin-top: 1rem;
+}
+
+/*Diseño del input de crear pregunta y crear respuesta*/
+#inpPregunta,
+#inpRespuesta {
+    width: 18rem;
+    border-radius: 0.3em;
+    border-color: rgba(239, 6, 5, 0.8);
+}
+
+#inpPregunta:focus,
+#inpRespuesta:focus {
+    background-color: rgba(239, 6, 5, 0.8);
+    color: #FFFFFF;
+    outline: none;
+}
