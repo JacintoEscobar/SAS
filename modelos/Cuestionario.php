@@ -21,6 +21,57 @@ class Cuestionario extends BD
     }
 
     /**
+     * Realiza una consulta de eliminacion de pregunta.
+     * @param string $idP
+     */
+    public function deletePregunta(String $idP)
+    {
+        try {
+            $pregunta = new Pregunta($idP, '', '', $this->id);
+            $pregunta->deleteRespuestas();
+
+            $this->conectar();
+
+            $sql = 'DELETE FROM pregunta WHERE idPregunta = ? AND idCuestionario = ?';
+            $consulta = $this->conexion->prepare($sql);
+            $consulta->bind_param('ii', $idP, $this->id);
+
+            $consulta->execute();
+
+            $this->conexion->close();
+
+            return;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
+     * Consulta todas las preguntas relacionadas al cuestionario.
+     * @return array preguntas
+     */
+    public function getPreguntas()
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'SELECT * FROM pregunta WHERE idCuestionario = ?';
+            $consulta = $this->conexion->prepare($sql);
+            $consulta->bind_param('i', $this->id);
+
+            $consulta->execute();
+
+            $preguntas = $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            $this->conexion->close();
+
+            return $preguntas;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
      * Inserta nuevas preguntas y sus respuestas en la bd.
      * @param array $preguntas
      * @param string $idC id del cuestionario al que pertenece la pregunta.
@@ -83,7 +134,7 @@ class Cuestionario extends BD
     private function getIdPregunta($pregunta, $idC)
     {
         try {
-            $preguntaObj = new Pregunta('', $pregunta);
+            $preguntaObj = new Pregunta('', $pregunta, '');
             return $preguntaObj->getIDPorConsulta($idC);
         } catch (Exception $ex) {
             throw $ex;

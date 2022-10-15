@@ -39,73 +39,33 @@
             </div>
 
             <div class="container">
-                <!--Seccion de preguntas individuales-->
                 <button type="button" id="addPregunta" class="btn btn-primary">Agregar pregunta</button>
 
-                <!--Seccion de asignar cuestionario-->
                 <button type="button" id="asignarCuestionario" class="btn btn-warning">Asignar cuestionario</button>
 
                 <button type="button" id="guardarCambios" class="btn btn-light">Guardar cambios.</button>
             </div>
 
-            <div id="container"></div>
-
             <!--Seccion de preguntas-->
             <div class="container" id="div-preguntas">
             </div>
 
-            <!-- Seccion del modal que permite crear las preguntas. -->
-            <button style="visibility: hidden;" id="mostrarFormCrearCuest" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
-            </button>
+            <!-- Seccion del modal que permite crear preguntas y respuestas, ademas de editar preguntas y respuestas -->
+            <button id="buttMostrModal" style="visibility: hidden;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div button-pressed="" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Creación de preguntas</h1>
-                            <button id="cerrarModalCrePX" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                            <button id="buttClosModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <!--Formulario de creacion de preguntas-->
-                            <form id="formCrearPregunta">
-                                <label for="inpPregunta">Ingresa la pregunta:</label>
-                                <input type="text" name="inpPregunta" id="inpPregunta">
-                            </form>
+                        <div id="form-modal" class="modal-body">
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalCreP">Cerrar</button>
-                            <button type="button" class="btn btn-primary" id="crearPregunta">Crear</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Seccion del modal que permite crear las preguntas. -->
-            <!-- Button trigger modal -->
-            <button style="visibility: hidden;" id="mostrarFormCrearResp" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Launch static backdrop modal
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Creación de respuestas</h1>
-                            <button id="cerrarModalCreRX" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!--Formulario de creacion de respuestas-->
-                            <form id="formCrearRespuesta">
-                                <label for="inpRespuesta">Ingresa la respuesta:</label>
-                                <input type="text" name="inpRespuesta" id="inpRespuesta">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalCreR">Cerrar</button>
-                            <button type="button" class="btn btn-primary" id="crearRespuesta">Crear</button>
+                            <button id="buttCancModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -113,34 +73,24 @@
         </section>
     </main>
 
-    <script src="../src/js/getCuestCreaContenido.js"></script>
-    <script src="../src/js/asignarCuestionario.js"></script>
-    <script src="../src/js/guardarCambios.js"></script>
-    <script src="../src/js/mostrarOcultarFormCrearPregunta.js"></script>
-    <script src="../src/js/verificarRespuesta.js"></script>
-    <script src="../src/js/verificarPregunta.js"></script>
-    <script src="../src/js/addRespuesta.js"></script>
+    <!--Script para obtener y mostrar los datos del formulario-->
+    <script src="../src/js/getCuestDatos.js"></script>
+
+    <!--Script para obtener de la bd las preguntas y respuestas del cuestionario-->
+    <script src="../src/js/getCuestConte.js"></script>
+
+    <!--Scripts para crear y mostrar los elementos html de las preguntas obtenidas de la bd-->
     <script src="../src/js/addPregunta.js"></script>
+    <script src="../src/js/addRespuesta.js"></script>
+
+    <!--Script para editar o eliminar una pregunta-->
+    <script src="../src/js/eliminarPregunta.js"></script>
+    <script src="../src/js/modificarPregunta.js"></script>
+
+    <!--Script para configurar el click de los botones addPRegunta, asignarCuestionario y guardarCambios-->
+    <script src="../src/js/confButtonAddPreg.js"></script>
+
     <script src="../src/js/salir.js"></script>
-    <script type="text/javascript">
-        document.getElementById('cerrarModalCreP').addEventListener('click', () => {
-            document.getElementById('inpPregunta').value = '';
-        });
-
-        document.getElementById('cerrarModalCrePX').addEventListener('click', () => {
-            document.getElementById('cerrarModalCreP').click();
-        });
-    </script>
-    <script type="text/javascript">
-        document.getElementById('cerrarModalCreR').addEventListener('click', () => {
-            document.getElementById('inpRespuesta').value = '';
-            document.getElementById('crearRespuesta').removeAttribute('data-pregunta-refer');
-        });
-
-        document.getElementById('cerrarModalCreRX').addEventListener('click', () => {
-            document.getElementById('cerrarModalCreR').click();
-        });
-    </script>
 </body>
 
 </html>

@@ -32,12 +32,16 @@
     font-size: 20px;
 }
 
-/*Diseño del container de preguntas*/
+/*Diseño del container de preguntas y del container de respuestas*/
 #div-pregunta {
     margin-bottom: 1rem;
     padding: 1rem;
     background-color: #fff;
     border-radius: 20px;
+}
+
+#div-respuestas {
+    margin-top: 1rem;
 }
 
 /*Diseño de los parrafos de preguntas y respuestas*/
@@ -48,7 +52,7 @@
 
 #pRespuesta {
     display: inline;
-    margin-right: 4rem;
+    margin-right: 2rem;
     margin-bottom: 2rem;
     font-size: 1.5rem;
 }
@@ -70,15 +74,19 @@
     }
 }
 
-/*Diseño del boton del agregar respuesta*/
-#addRespuesta {
-    margin-top: 1rem;
+/*Diseño del boton de editar pregunta*/
+#addRespuesta,
+#editPregunta,
+#elimPregunta {
+    margin: 1.5rem 0.5rem 0px 0.5rem;
+    font-family: 'Quicksand', sans-serif;
 }
 
 /*Diseño del input de crear pregunta y crear respuesta*/
 #inpPregunta,
 #inpRespuesta {
     width: 18rem;
+    margin-left: 0.5rem;
     border-radius: 0.3em;
     border-color: rgba(239, 6, 5, 0.8);
 }
