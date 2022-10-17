@@ -47,8 +47,7 @@
             </div>
 
             <!--Seccion de preguntas-->
-            <div class="container" id="div-preguntas">
-            </div>
+            <div class="container" id="div-preguntas"></div>
 
             <!-- Seccion del modal que permite crear preguntas y respuestas, ademas de editar preguntas y respuestas -->
             <button id="buttMostrModal" style="visibility: hidden;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
@@ -89,6 +88,9 @@
 
     <!--Script para configurar el click de los botones addPRegunta, asignarCuestionario y guardarCambios-->
     <script src="../src/js/confButtonAddPreg.js"></script>
+
+    <!--Script para guardar los cambios de las preguntas y respuestas en la base de datos-->
+    <script src="../src/js/guardarCambios.js"></script>
 
     <script src="../src/js/salir.js"></script>
 </body>

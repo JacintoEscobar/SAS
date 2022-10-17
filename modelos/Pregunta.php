@@ -70,7 +70,7 @@ class Pregunta extends BD
      * @param string $idC id del cuestionario al que pertenece la pregunta.
      * @return string id de la pregunta.
      */
-    public function getIDPorConsulta(string $idC)
+    public function getIDPorConsulta()
     {
         try {
             $this->conectar();
@@ -78,8 +78,7 @@ class Pregunta extends BD
             $sql = 'SELECT idPregunta FROM pregunta WHERE pregunta = ? AND idCuestionario = ?';
             $consulta = $this->conexion->prepare($sql);
 
-            $pregunta = $this->pregunta;
-            $consulta->bind_param('si', $pregunta, $idC);
+            $consulta->bind_param('si', $this->pregunta, $this->idCuestionario);
 
             $consulta->execute();
             $id = $consulta->get_result()->fetch_row()[0];

@@ -72,50 +72,17 @@ class Cuestionario extends BD
     }
 
     /**
-     * Inserta nuevas preguntas y sus respuestas en la bd.
-     * @param array $preguntas
-     * @param string $idC id del cuestionario al que pertenece la pregunta.
-     * @return boolean|string Verdadero en caso de que se hayan insertado de manera correcta los registros | mensaje de la excepcion atrapada.
+     * 
      */
-    public function guardarCambios(array $preguntas, string $idC)
-    {
-        $num_preguntas = sizeof($preguntas);
-        for ($i = 0; $i < $num_preguntas; $i++) {
-            try {
-                $pregunta = $preguntas[$i]['pregunta'];
-                $res_ins_preg = $this->addPregunta($pregunta);
-
-                $idPregunta = $this->getIdPregunta($pregunta, $idC);
-
-                $respuestas = $preguntas[$i]['respuestas'];
-                $num_respuestas = sizeof($respuestas);
-                for ($j = 0; $j < $num_respuestas; $j++) {
-                    $respuesta = $respuestas[$j];
-                    $res_ins_resp = $this->addRespuesta($respuestas[$j], $idPregunta);
-                }
-            } catch (Exception $ex) {
-                return $ex->getMessage();
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Inserta las respuestas de una pregunta.
-     * @return boolean verdadero en caso de que la consulta se haya realizado correctamente.
-     */
-    private function addRespuesta(array $respuesta, string $idP)
+    public function actualizarRespuesta($respuesta)
     {
         try {
             $this->conectar();
 
-            $sql = 'INSERT INTO respuestamultiple(contenido, tipo, idPregunta) VALUES(?, ?, ?)';
+            $sql = 'UPDATE respuestamultiple SET tipo = ? WHERE idrespuestamultiple = ?';
             $consulta = $this->conexion->prepare($sql);
 
-            $contenido = $respuesta['contenido'];
-            $tipo = $respuesta['tipo'];
-            $consulta->bind_param('ssi', $contenido, $tipo, $idP);
+            $consulta->bind_param('si', $respuesta->tipo, $respuesta->id);
 
             $consulta->execute();
 
@@ -128,14 +95,47 @@ class Cuestionario extends BD
     }
 
     /**
-     * Devuelve el id de una pregunta en especifico basandose en la pregunta y el id del cuestionario.
-     * @return string id de la pregunta.
+     * Inserta las respuestas de una pregunta.
+     * @return boolean verdadero en caso de que la consulta se haya realizado correctamente.
      */
-    private function getIdPregunta($pregunta, $idC)
+    public function addRespuesta($respuesta, string $idP)
     {
         try {
-            $preguntaObj = new Pregunta('', $pregunta, '');
-            return $preguntaObj->getIDPorConsulta($idC);
+            $this->conectar();
+
+            $sql = 'INSERT INTO respuestamultiple(contenido, tipo, idPregunta) VALUES(?, ?, ?)';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('ssi', $respuesta->contenido, $respuesta->tipo, $idP);
+
+            $consulta->execute();
+
+            $this->conexion->close();
+
+            return true;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
+     * 
+     */
+    public function actualizarPregunta($pregunta)
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'UPDATE pregunta SET pregunta = ? WHERE idPregunta = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('si', $pregunta->pregunta, $pregunta->id);
+
+            $consulta->execute();
+
+            $this->conexion->close();
+
+            return true;
         } catch (Exception $ex) {
             throw $ex;
         }
@@ -145,9 +145,8 @@ class Cuestionario extends BD
      * Inserta las nuevas preguntas en la bd.
      * @param string $pregunta Texto de la pregunta a insertar.
      * @return boolean verdadero en caso de que la consulta se haya realizado correctamente.
-     * 
      */
-    private function addPregunta(String $pregunta)
+    public function addPregunta(String $pregunta)
     {
         try {
             $this->conectar();
@@ -155,8 +154,7 @@ class Cuestionario extends BD
             $sql = 'INSERT INTO pregunta(pregunta, idCuestionario) VALUES(?, ?)';
             $consulta = $this->conexion->prepare($sql);
 
-            $idCuestionario = $this->getID();
-            $consulta->bind_param('si', $pregunta, $idCuestionario);
+            $consulta->bind_param('si', $pregunta, $this->id);
 
             $consulta->execute();
 
