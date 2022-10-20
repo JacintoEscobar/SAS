@@ -12,6 +12,7 @@ buttonRegistrarUsuario.addEventListener('click', () => { validarDatos(); });
 /**
  * Obtenemos los elementos html de los campos del formulario
  */
+let matricula = document.getElementById('matricula');
 let nombre = document.getElementById('nombre');
 let paterno = document.getElementById('paterno');
 let materno = document.getElementById('materno');
@@ -25,7 +26,7 @@ let tipoUsuario = document.getElementById('tipo_usuario');
  * Devuélve false si algún dato falta o está erróneo o true de lo contrario
  */
 const validarDatos = () => {
-    if (nombre.value != '' && paterno.value != '' && materno.value != '' && correo.value != '' && usuario.value != '' && contraseña.value != '' && (tipoUsuario.value == 'administrador' || tipoUsuario.value == 'profesor' || tipoUsuario.value == 'alumno')) {
+    if (matricula.value != '' && nombre.value != '' && paterno.value != '' && materno.value != '' && correo.value != '' && usuario.value != '' && contraseña.value != '' && (tipoUsuario.value == 'administrador' || tipoUsuario.value == 'profesor' || tipoUsuario.value == 'alumno')) {
         registrarUsuario();
     } else {
         mostrarErrorFormulario();
@@ -58,7 +59,7 @@ const registrarUsuario = () => {
     peticion.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     // Enviamos la información del formulario a la api
-    peticion.send(`n=${nombre.value}&p=${paterno.value}&m=${materno.value}&co=${correo.value}&u=${usuario.value}&con=${contraseña.value}&t=${tipoUsuario.value}`);
+    peticion.send(`ma=${matricula.value}&n=${nombre.value}&p=${paterno.value}&m=${materno.value}&co=${correo.value}&u=${usuario.value}&con=${contraseña.value}&t=${tipoUsuario.value}`);
 };
 
 /**

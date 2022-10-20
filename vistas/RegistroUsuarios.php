@@ -43,6 +43,12 @@
 
         <!--Sección del formulario para registro individual de usuarios-->
         <div id="registro-individual-form" class="container">
+            <!--Matrícula-->
+            <div class="mb-3 row">
+                <div class="col-sm-12">
+                    <input id="matricula" class="form-control" type="text" placeholder="Matricula" aria-label="default input example">
+                </div>
+            </div>
             <!--Nombre-->
             <div class="mb-3 row">
                 <div class="col-sm-12">
@@ -82,7 +88,7 @@
             <!--Tipo de usuario-->
             <select id="tipo_usuario" class="form-select" aria-label="Default select example">
                 <option value="0">Tipo de usuario</option>
-                <option value="administrador">Administrador</option>            
+                <option value="administrador">Administrador</option>
                 <option value="profesor">Profesor</option>
                 <option value="alumno">Alumno</option>
             </select>

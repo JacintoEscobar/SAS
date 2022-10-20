@@ -24,6 +24,19 @@
     margin-top: 1rem;
 }
 
+#select-filtro {
+    display: inline-block;
+    width: 20rem;
+    margin-right: 2rem;
+}
+
+/*Diseño de la barra de busqueda*/
+#busqueda {
+    display: inline-block;
+    width: 20rem;
+}
+
+/*Diseño de las filas de la tabla*/
 thead,
 tbody {
     font-family: 'Fira Code';
@@ -31,6 +44,10 @@ tbody {
 
 tr button {
     margin: 0.5rem;
+}
+
+#td-nombre:hover {
+    cursor: pointer;
 }
 
 /*Diseño de la tabla de usuarios*/

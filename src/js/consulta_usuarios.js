@@ -11,4 +11,4 @@ const consulta_usuarios = async () => {
         .catch(error => console.log(error.message));
 };
 
-const usuarios = consulta_usuarios();
+let usuarios = consulta_usuarios();

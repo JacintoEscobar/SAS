@@ -16,6 +16,52 @@ class Usuario extends BD
     }
 
     /**
+     * Realiza la consulta de actualización para un usuario.
+     */
+    public function actualizar($data)
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'UPDATE usuario SET matricula = ?, nombre = ?, paterno = ?, materno = ?, correo = ?, usuario = ?, contraseña = ?, tipo = ? WHERE idUsuario = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('ssssssssi', $data['matricula'], $data['nombre'], $data['paterno'], $data['materno'], $data['correo'], $this->usuario, $this->contraseña, $data['tipo'], $data['idUsuario']);
+
+            $consulta->execute();
+
+            return $consulta->affected_rows == 1;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
+     * Realiza la eliminacion de un usuario de la base de datos.
+     * @return boolean
+     */
+    public function eliminarUsuario()
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'DELETE FROM usuario WHERE idUsuario = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('i', $this->id);
+
+            $consulta->execute();
+
+            if ($consulta->affected_rows == 1) {
+                return true;
+            }
+            return false;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
      * Actualiza el campo correo de la bd.
      * @param String $correo Nuevo correo.
      * @return String Mensaje de error o de éxito según el caso.

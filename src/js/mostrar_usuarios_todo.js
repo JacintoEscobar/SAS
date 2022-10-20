@@ -22,6 +22,7 @@ const mostrar_usuarios_todo = () => {
             const thId = document.createElement('th');
             thId.setAttribute('scope', 'row');
 
+            const tdMatricula = document.createElement('td');
             const tdNombre = document.createElement('td');
             const tdPaterno = document.createElement('td');
             const tdMaterno = document.createElement('td');
@@ -32,6 +33,7 @@ const mostrar_usuarios_todo = () => {
             const bEliminarUsuario = document.createElement('button');
 
             thId.textContent = data[i].idUsuario;
+            tdMatricula.textContent = data[i].matricula;
             tdNombre.textContent = data[i].nombre;
             tdPaterno.textContent = data[i].paterno;
             tdMaterno.textContent = data[i].materno;
@@ -42,8 +44,14 @@ const mostrar_usuarios_todo = () => {
             bEliminarUsuario.setAttribute('type', 'button');
             bEliminarUsuario.setAttribute('class', 'btn btn-danger');
             bEliminarUsuario.appendChild(document.createTextNode('Eliminar'));
+            bEliminarUsuario.addEventListener('click', () => { eliminarUsuario(data[i]); });
 
-            tr.append(thId, tdNombre, tdPaterno, tdMaterno, tdCorreo, tdUsuario, tdContraseña, tdTipo, bEliminarUsuario);
+            tdNombre.setAttribute('id', 'td-nombre');
+            tdNombre.addEventListener('click', () => {
+                document.getElementById('bEditarUsuario').click();
+                cargarDatos(data[i]);
+            });
+            tr.append(thId, tdMatricula, tdNombre, tdPaterno, tdMaterno, tdCorreo, tdUsuario, tdContraseña, tdTipo, bEliminarUsuario);
             tabla_usuarios.appendChild(tr);
         }
     })
