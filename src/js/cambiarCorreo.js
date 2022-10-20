@@ -1,9 +1,11 @@
-const actuMailButton = document.getElementById('cambiarCorreoButton');
-actuMailButton.addEventListener('click', () => {
-    const nuevoMail = document.getElementById('nuevoCorreo');
+const setEventActCorreo = () => {
+    const actuMailButton = document.getElementById('cambiarCorreoButton');
+    actuMailButton.addEventListener('click', () => {
+        const nuevoMail = document.getElementById('nuevoCorreo');
 
-    verificarCampo(nuevoMail) ? cambiarCorreo(nuevoMail.value) : alert('Llene el formulario para continuar.');
-});
+        verificarCampo(nuevoMail) ? cambiarCorreo(nuevoMail.value) : alert('Llene el formulario para continuar.');
+    });
+};
 
 /**
  * 

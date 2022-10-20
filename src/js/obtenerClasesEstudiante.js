@@ -39,7 +39,7 @@ const crearElementosClase = clases => {
         const cardTitle = document.createElement('h5');
         cardTitle.setAttribute('class', 'card-title');
         let tituloClase;
-        if (clase.estado == 'Activo') {
+        if (clase.estado == 'activo') {
             /* Definimos el botón que permite darse de baja de una clase */
             span_button_baja = document.createElement('button');
             span_button_baja.setAttribute('id', 'buttonBaja');

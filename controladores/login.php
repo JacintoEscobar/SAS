@@ -3,8 +3,8 @@
 include_once '../modelos/Usuario.php';
 
 if (isset($_POST)) {
-    $username = htmlentities($_POST['usuario']);
-    $contraseña = htmlentities($_POST['contraseña']);
+    $username = htmlspecialchars($_POST['usuario'], ENT_QUOTES, 'UTF-8');
+    $contraseña = htmlspecialchars($_POST['contraseña'], ENT_QUOTES, 'UTF-8');
 
     $usuario = new Usuario($username, $contraseña);
     $usuarioRegistrado = $usuario->verificarUsuario();

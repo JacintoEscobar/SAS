@@ -3,7 +3,7 @@
 include '../modelos/UnidadAprendizaje.php';
 
 // Obtenemos el id de la ua.
-$idUA = htmlentities($_GET['iau']);
+$idUA = htmlspecialchars($_GET['iau'], ENT_QUOTES, 'UTF-8');
 
 // Creamos una ua para acceder a sus tópicos.
 $ua = new UnidadAprendizaje($idUA);

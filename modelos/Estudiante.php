@@ -87,8 +87,8 @@ class Estudiante
                                             INNER JOIN inscripcion ON inscripcion.idClase = clase.idClase
                                             INNER JOIN usuario ON inscripcion.idUsuario = usuario.idUsuario
                                             WHERE inscripcion.idUsuario = ? AND estado IN(?, ?)');
-            $estado1 = 'Activo';
-            $estado2 = 'Pendiente';
+            $estado1 = 'activo';
+            $estado2 = 'pendiente';
             $consulta->bind_param('iss', $this->id, $estado1, $estado2);
             $respuesta = $consulta->execute();
 

@@ -2,14 +2,14 @@
 
 include '../modelos/Administrador.php';
 
-$matricula = htmlentities($_POST['ma']);
-$nombre = htmlentities($_POST['n']);
-$paterno = htmlentities($_POST['p']);
-$materno = htmlentities($_POST['m']);
-$correo = htmlentities($_POST['co']);
-$usuario = htmlentities($_POST['u']);
-$contraseña = htmlentities($_POST['con']);
-$tipoUsuario = htmlentities($_POST['t']);
+$matricula = htmlspecialchars($_POST['ma'], ENT_QUOTES, 'UTF-8');
+$nombre = htmlspecialchars($_POST['n'], ENT_QUOTES, 'UTF-8');
+$paterno = htmlspecialchars($_POST['p'], ENT_QUOTES, 'UTF-8');
+$materno = htmlspecialchars($_POST['m'], ENT_QUOTES, 'UTF-8');
+$correo = htmlspecialchars($_POST['co'], ENT_QUOTES, 'UTF-8');
+$usuario = htmlspecialchars($_POST['u'], ENT_QUOTES, 'UTF-8');
+$contraseña = htmlspecialchars($_POST['con'], ENT_QUOTES, 'UTF-8');
+$tipoUsuario = htmlspecialchars($_POST['t'], ENT_QUOTES, 'UTF-8');
 
 $administrador = new Administrador(null);
 

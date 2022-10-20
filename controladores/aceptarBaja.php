@@ -8,8 +8,8 @@ include '../modelos/Notificacion.php';
 /**
  * Obtenemos el id de la clase y del alumno del registro de inscripción.
  */
-$idUsuario = htmlentities($_GET['ia']);
-$idClase = htmlentities($_GET['ic']);
+$idUsuario = htmlspecialchars($_GET['ia'], ENT_QUOTES, 'UTF-8');
+$idClase = htmlspecialchars($_GET['ic'], ENT_QUOTES, 'UTF-8');
 
 $inscripcion = new Inscripcion();
 

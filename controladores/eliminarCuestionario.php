@@ -4,7 +4,7 @@ include_once '../modelos/Cuestionario.php';
 include_once '../modelos/Profesor.php';
 
 // Obtenemos el id del cuestionario enviado por POST.
-$idC = htmlentities($_POST['i']);
+$idC = htmlspecialchars($_POST['i'], ENT_QUOTES, 'UTF-8');
 
 // Obtenemos el id del profesor
 session_start();

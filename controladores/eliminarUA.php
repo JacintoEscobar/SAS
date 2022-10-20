@@ -3,7 +3,7 @@
 include_once '../modelos/UnidadAprendizaje.php';
 
 // Obtenemos el id de la ua que se quiere eliminar.
-$idUA = htmlentities($_POST['i']);
+$idUA = htmlspecialchars($_POST['i'], ENT_QUOTES, 'UTF-8');
 
 // Creamos una ua con el id enviado.
 $ua = new UnidadAprendizaje($idUA);

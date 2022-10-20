@@ -141,7 +141,11 @@ class Usuario extends BD
         // que no haya ocurrido ningún error.
         if ($this->conectar()) {
             // Preparamos la consulta.
-            $sql = "UPDATE usuario SET " . $tipo . " = ? WHERE idUsuario = ?";
+            if ($tipo == 'contraseña') {
+                $sql = "UPDATE usuario SET " . $tipo . " = md5(?) WHERE idUsuario = ?";
+            } else {
+                $sql = "UPDATE usuario SET " . $tipo . " = ? WHERE idUsuario = ?";
+            }
             $consulta = $this->conexion->prepare($sql);
 
             // Asignamos los parámetros de consulta.
@@ -155,7 +159,7 @@ class Usuario extends BD
                     return 'Se actualizó correctamente tu ' . $tipo . '.';
                 }
 
-                return 'Ocurrió un error al actualizar la base de datos.';
+                return 'La contraseña ingresada es la misma a la registrada en la base de datos.';
             }
 
             return  'Ocurrió un error al ejecutar la consulta.';

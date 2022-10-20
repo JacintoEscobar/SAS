@@ -4,9 +4,9 @@ include_once '../modelos/UnidadAprendizaje.php';
 include_once '../modelos/Topico.php';
 
 // Obtenemos los datos del formulario.
-$idUA = htmlentities($_POST['idUA']);
-$tituloT = htmlentities($_POST['titulo']);
-$descripcionT = htmlentities($_POST['descripcion']);
+$idUA = htmlspecialchars($_POST['idUA'], ENT_QUOTES, 'UTF-8');
+$tituloT = htmlspecialchars($_POST['titulo'], ENT_QUOTES, 'UTF-8');
+$descripcionT = htmlspecialchars($_POST['descripcion'], ENT_QUOTES, 'UTF-8');
 
 // Creamos una unidad de aprendizaje.
 $ua = new UnidadAprendizaje($idUA);

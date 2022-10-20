@@ -2,7 +2,7 @@
 
 include_once '../modelos/Usuario.php';
 
-$idUsuario = htmlentities($_POST['idUsuario']);
+$idUsuario = htmlspecialchars($_POST['idUsuario'], ENT_QUOTES, 'UTF-8');
 
 $usuario = new Usuario(null, null);
 $usuario->setID($idUsuario);

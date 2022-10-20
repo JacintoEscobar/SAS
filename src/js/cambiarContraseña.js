@@ -1,5 +1,7 @@
-const cambiarConstraseñaButton = document.getElementById('cambiarContraseñaButton');
-cambiarConstraseñaButton.addEventListener('click', () => { cambiarContraseña(); });
+const setEventActContra = () => {
+    const cambiarConstraseñaButton = document.getElementById('cambiarContraseñaButton');
+    cambiarConstraseñaButton.addEventListener('click', () => { cambiarContraseña(); });
+};
 
 const verificarCampos = (ca, cn, cc) => { return ca == '' || cn == '' || cc == ''; };
 
@@ -22,7 +24,7 @@ const cambiarContraseña = () => {
             peticion.onreadystatechange = () => {
                 if (peticion.readyState == 4 && peticion.status == 200) {
                     let respuesta = JSON.parse(peticion.response);
-                    
+
                     if (respuesta['ERROR_POST']) { alert(respuesta['ERROR_POST']); }
                     else if (respuesta['ERROR_POST_DATOS']) { alert(respuesta['ERROR_POST_DATOS']); }
                     else if (respuesta['ERROR_DE_CONEXION']) { alert(respuesta['ERROR_DE_CONEXION']); }
@@ -30,13 +32,9 @@ const cambiarContraseña = () => {
                     else if (respuesta['CONTRASEÑA_ACTUAL_ERRONEA']) { alert(respuesta['CONTRASEÑA_ACTUAL_ERRONEA']); }
                     else {
                         alert('Contraseña actualizada correctamente.');
-                        if (respuesta['t'] == 'administrador') {
-                            window.location.href = './HomeAdministrador.php';
-                        } else if (respuesta['t'] == 'profesor') {
-                            window.location.href = './HomeProfesor.php';
-                        } else {
-                            window.location.href = './HomeAlumno.php';
-                        }
+                        alert('Ahora debes iniciar sesión nuevamente.');
+                        fetch('http://localhost/sas/controladores/salir.php');
+                        window.location.href = 'http://localhost/sas/vistas/Login.php';
                     }
 
                 }

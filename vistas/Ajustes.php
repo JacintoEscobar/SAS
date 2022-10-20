@@ -68,41 +68,6 @@
             <option value="2">Usuario</option>
             <option value="3">Contraseña</option>
         </select>
-
-        <!--Formulario para actualizar el correo-->
-        <form id="form-act-mail" style="visibility: hidden;">
-            <div class="mb-3">
-                <label for="nuevoCorreo" class="form-label">Nuevo correo</label>
-                <input type="email" class="form-control" id="nuevoCorreo">
-            </div>
-            <button type="button" id="cambiarCorreoButton" class="btn btn-primary">Actualizar correo</button>
-        </form>
-
-        <!--Formulario para actualizar el usuario-->
-        <form id="form-act-user" style="visibility: hidden;">
-            <div class="mb-3">
-                <label for="nuevoUsuario" class="form-label">Nuevo usuario</label>
-                <input type="text" class="form-control" id="nuevoUsuario">
-            </div>
-            <button type="button" id="cambiarUsuarioButton" class="btn btn-primary">Actualizar usuario</button>
-        </form>
-
-        <!---Formulario para actualizar la contraseña-->
-        <form id="form-act-pass" style="visibility: hidden;">
-            <div class="mb-3">
-                <label for="contraseñaActual" class="form-label">Contraseña actual:</label>
-                <input type="password" class="form-control" id="contraseñaActual">
-            </div>
-            <div class="mb-3">
-                <label for="contraseñaNueva" class="form-label">Contraseña nueva:</label>
-                <input type="password" class="form-control" id="contraseñaNueva">
-            </div>
-            <div class="mb-3">
-                <label for="confirmacionContraseña" class="form-label">Confirma nueva contraseña:</label>
-                <input type="password" class="form-control" id="confirmacionContraseña">
-            </div>
-            <button type="button" id="cambiarContraseñaButton" class="btn btn-primary">Actualizar contraseña</button>
-        </form>
     </div>
 
     <script src="../src/js/seleccionarDato.js"></script>

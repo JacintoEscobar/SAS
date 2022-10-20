@@ -4,7 +4,7 @@ use function PHPSTORM_META\type;
 
 include_once '../modelos/Usuario.php';
 
-$correo = htmlentities($_POST['c']);
+$correo = htmlspecialchars($_POST['c'], ENT_QUOTES, 'UTF-8');
 
 $usuario = new Usuario();
 

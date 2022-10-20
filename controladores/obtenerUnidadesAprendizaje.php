@@ -7,7 +7,7 @@ include '../modelos/Clase.php';
 session_start();
 
 // Obtenemos el id de la clase.
-$idC = htmlentities($_SESSION['idC']);
+$idC = htmlspecialchars($_SESSION['idC'], ENT_QUOTES, 'UTF-8');
 
 // Creamos una clase para poder acceder a sus unidades de aprendizaje.
 $clase = new Clase(null, $idC);

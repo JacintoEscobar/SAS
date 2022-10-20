@@ -4,10 +4,10 @@ include_once '../modelos/Cuestionario.php';
 include_once '../modelos/Profesor.php';
 
 // Obtenemos los datos del formulario.
-$idC = htmlentities($_POST['i']);
-$titulo = htmlentities($_POST['t']);
-$descripcion = htmlentities($_POST['d']);
-$tipo = htmlentities($_POST['ti']);
+$idC = htmlspecialchars($_POST['i'], ENT_QUOTES, 'UTF-8');
+$titulo = htmlspecialchars($_POST['t'], ENT_QUOTES, 'UTF-8');
+$descripcion = htmlspecialchars($_POST['d'], ENT_QUOTES, 'UTF-8');
+$tipo = htmlspecialchars($_POST['ti'], ENT_QUOTES, 'UTF-8');
 
 // Obtenemos el id del profesor.
 session_start();

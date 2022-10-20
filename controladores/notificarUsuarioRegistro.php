@@ -5,11 +5,11 @@ include '../modelos/Notificacion.php';
 /**
  * Obtenemos los datos del estudiante para notificarle de su alta en el sistema
  */
-$nombre = htmlentities($_POST['n']);
-$paterno = htmlentities($_POST['p']);
-$correo = htmlentities($_POST['co']);
-$usuario = htmlentities($_POST['u']);
-$contraseña = htmlentities($_POST['con']);
+$nombre = htmlspecialchars($_POST['n'], ENT_QUOTES, 'UTF-8');
+$paterno = htmlspecialchars($_POST['p'], ENT_QUOTES, 'UTF-8');
+$correo = htmlspecialchars($_POST['co'], ENT_QUOTES, 'UTF-8');
+$usuario = htmlspecialchars($_POST['u'], ENT_QUOTES, 'UTF-8');
+$contraseña = htmlspecialchars($_POST['con'], ENT_QUOTES, 'UTF-8');
 
 /**
  * Creamos una notificación para enviar el correo al nuevo usuario

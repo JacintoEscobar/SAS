@@ -27,6 +27,11 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `clase`
 --
 
+DROP DATABASE IF EXISTS sas;
+CREATE DATABASE sas;
+USE sas;
+
+
 CREATE TABLE `clase` (
   `idClase` int(11) NOT NULL,
   `nombre` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,

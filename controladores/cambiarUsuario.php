@@ -5,7 +5,7 @@ include_once '../modelos/Usuario.php';
 session_start();
 $idUsuario = $_SESSION['i'];
 
-$nuevoUsuario = htmlentities($_POST['u']);
+$nuevoUsuario = htmlspecialchars($_POST['u'], ENT_QUOTES, 'UTF-8');
 
 $usuario = new Usuario();
 $usuario->setID($idUsuario);

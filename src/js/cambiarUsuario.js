@@ -1,9 +1,11 @@
-const actuUserButton = document.getElementById('cambiarUsuarioButton');
-actuUserButton.addEventListener('click', () => {
-    const nuevoUser = document.getElementById('nuevoUsuario');
+const setEventActUsuario = () => {
+    const actuUserButton = document.getElementById('cambiarUsuarioButton');
+    actuUserButton.addEventListener('click', () => {
+        const nuevoUser = document.getElementById('nuevoUsuario');
 
-    verificarCampo(nuevoUser) ? cambiarUsuario(nuevoUser.value) : alert('Llene el formulario para continuar.');
-});
+        verificarCampo(nuevoUser) ? cambiarUsuario(nuevoUser.value) : alert('Llene el formulario para continuar.');
+    });
+};
 
 /**
  * Valida que el campo contenga información.
@@ -20,7 +22,9 @@ const cambiarUsuario = nuevoUsuario => {
     peticion.onreadystatechange = () => {
         if (peticion.readyState == 4 && peticion.status == 200) {
             alert(JSON.parse(peticion.response));
-            window.location.href = 'http://localhost/sas/vistas/Ajustes.php';
+            alert('Ahora debes iniciar sesión nuevamente.');
+            fetch('http://localhost/sas/controladores/salir.php');
+            window.location.href = 'http://localhost/sas/vistas/Login.php';
         }
     };
 

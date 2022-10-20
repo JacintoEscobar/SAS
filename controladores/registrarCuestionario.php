@@ -4,9 +4,9 @@ include_once '../modelos/Cuestionario.php';
 include_once '../modelos/Profesor.php';
 
 // Obtenemos los datos enviados del formulario.
-$titulo = htmlentities($_POST['titulo']);
-$descripcion = htmlentities($_POST['descripcion']);
-$tipo = htmlentities($_POST['tipo']);
+$titulo = htmlspecialchars($_POST['titulo'], ENT_QUOTES, 'UTF-8');
+$descripcion = htmlspecialchars($_POST['descripcion'], ENT_QUOTES, 'UTF-8');
+$tipo = htmlspecialchars($_POST['tipo'], ENT_QUOTES, 'UTF-8');
 
 // Iniciamos sesion para obtener el id del profesor.
 session_start();
