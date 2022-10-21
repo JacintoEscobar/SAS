@@ -5,8 +5,8 @@
     <?php header("Location: http://localhost/sas/vistas/HomeProfesor.php"); ?>
     <?php die(); ?>
 <?php else : ?>
-    <?php $_SESSION['idC'] = htmlentities($_GET['i']); ?>
-    <?php $_SESSION['titC'] = htmlentities($_GET['t']); ?>
+    <?php $_SESSION['idC'] = htmlspecialchars($_GET['i'], ENT_QUOTES, 'UTF-8'); ?>
+    <?php $_SESSION['titC'] = htmlspecialchars($_GET['t'], ENT_QUOTES, 'UTF-8'); ?>
 <?php endif; ?>
 
 <!DOCTYPE html>
@@ -37,6 +37,9 @@
     <?php include '../templates/header/header_herramientas.php'; ?>
 
     <div class="container">
+        <!--Obtenemos los cuestionarios del profesor-->
+        <?php include '../templates/obtenerCuestionarios.php'; ?>
+
         <!--Encabezado con el título de la clase-->
         <div id="container-titulo" class="container">
             <div class="row">
@@ -46,10 +49,31 @@
 
         <!--Sección de las unidades de aprendizaje-->
         <div id="container-unidades-aprendizaje" class="container">
+            <!-- Button trigger modal -->
+            <button id="asignarCuestionario" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Asignar cuestionario</button>
 
+            <!--Botón para mostrar el formulario de crear unidad de aprendizaje.-->
+            <button id="agregar-unidad" type="button" class="btn btn-warning">Agregar unidad de aprendizaje</button>
         </div>
 
-        <button id="agregar-unidad">Agregar unidad de aprendizaje</button>
+        <!-- Modal que permite asignar un cuestionario -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Elige un cuestionario para asignar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--Asignamos el html de los cuestionarios-->
+                        <?php include_once '../templates/mostrarCuestionarios.php'; ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="buttonCerrarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!--Sección del formulario para crear una ua.-->
         <section id="section-addUA" style="visibility: hidden;">
@@ -106,6 +130,20 @@
                 </div>
             </div>
         </div>
+
+        <!--Modal que permite al profesor seleccionar la fecha de cierre.-->
+        <div id="modal">
+            <div id="modal-content">
+                <span id="close-modal">
+                    <img src="../src/img/close.png" alt="close">
+                </span>
+                <h4 id="modal-title">Selecciona la fecha de cierre para el cuestionario</h4>
+                <form id="modal-form">
+                    <input id="input-date" name="input-date" type="date" value="" min="" max="2022-12-31">
+                    <button id="button-listo" type="button">Listo</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="../src/js/limpiarUA.js"></script>
@@ -116,6 +154,12 @@
     <script src="../src/js/eliminarUA.js"></script>
     <script src="../src/js/crearUATopicos.js"></script>
     <script src="../src/js/agregarUA.js"></script>
+    <script src="../src/js/asignarCuestionario.js"></script>
+    <script type="text/javascript">
+        document.getElementById('close-modal').addEventListener('click', () => {
+            document.getElementById('modal').style.display = 'none';
+        });
+    </script>
     <script src="../src/js/salir.js"></script>
 </body>
 

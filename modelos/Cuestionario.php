@@ -21,6 +21,26 @@ class Cuestionario extends BD
     }
 
     /**
+     * 
+     */
+    public function isAsignado()
+    {
+        try {
+            $this->conectar();
+
+            $consulta = $this->conexion->prepare('SELECT * FROM asignacion WHERE idCuestionario = ?');
+
+            $consulta->bind_param('i', $this->id);
+
+            $consulta->execute();
+
+            return sizeof($consulta->get_result()->fetch_all(MYSQLI_ASSOC)) > 0;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
      * Realiza una consulta de eliminacion de pregunta.
      * @param string $idP
      */

@@ -17,6 +17,28 @@ class Profesor extends BD
     }
 
     /**
+     * Consulta todos los cuestionarios creados por el profesor.
+     * @return mixed Arreglo asociativo de los cuestionarios.
+     */
+    public function obtenerCuestionarios()
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'SELECT * FROM cuestionario WHERE idUsuario = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('i', $this->id);
+
+            $consulta->execute();
+
+            return $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
      * Realiza la consulta de actualizacion de la informacion de un cuestionario.
      * @param Cuestionario $cuestionario Cuestionario con la informacion actualizada.
      * @return String Mensaje de error o de exito segun sea el caso.

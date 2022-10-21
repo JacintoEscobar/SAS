@@ -39,11 +39,9 @@
             </div>
 
             <div class="container">
-                <button type="button" id="addPregunta" class="btn btn-primary">Agregar pregunta</button>
+                <button type="button" id="addPregunta" class="btn btn-info">Agregar pregunta</button>
 
-                <button type="button" id="asignarCuestionario" class="btn btn-warning">Asignar cuestionario</button>
-
-                <button type="button" id="guardarCambios" class="btn btn-light">Guardar cambios.</button>
+                <button type="button" id="guardarCambios" class="btn btn-warning">Guardar cambios.</button>
             </div>
 
             <!--Seccion de preguntas-->
