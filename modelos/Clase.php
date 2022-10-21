@@ -19,6 +19,34 @@ class Clase extends BD
     }
 
     /**
+     * Consulta a todos los alumnos inscritos en una clase
+     * @return array usuarios.
+     */
+    public function getAlumnosInscritos()
+    {
+        try {
+            $this->conectar();
+
+            $consulta = $this->conexion->prepare(
+                '
+                SELECT usuario.idUsuario as idAlumno, usuario.nombre as alumno, usuario.paterno as paterno, usuario.correo as correo FROM usuario
+                INNER JOIN inscripcion ON inscripcion.idUsuario = usuario.idUsuario
+                INNER JOIN clase ON inscripcion.idClase = clase.idClase
+                WHERE inscripcion.idClase = ? AND inscripcion.estado IN(?)'
+            );
+
+            $estado = 'activo';
+            $consulta->bind_param('is', $this->id, $estado);
+
+            $consulta->execute();
+
+            return $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
      * Realiza la consulta de inserción a la bd para dar de al una nueva ua.
      * @param $ua Unidad de aprendizaje que se dará de alta en el sistema.
      * @return string|number Devuelve el mensaje del error ocurrido o el número de filas afectas en la bd. 

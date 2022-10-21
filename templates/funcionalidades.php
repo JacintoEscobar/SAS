@@ -27,7 +27,7 @@
             </div>
         </a>
 
-    <!--Funcionalidades para los usuarios de tipo profesor-->
+        <!--Funcionalidades para los usuarios de tipo profesor-->
     <?php elseif ($_SESSION['t'] == 'profesor') : ?>
         <a href="./Clases.php">
             <div class="card" style="width: 8rem;">
@@ -54,7 +54,7 @@
             </div>
         </a>
 
-    <!--Funcionalidades para los usuarios de tipo estudiante-->
+        <!--Funcionalidades para los usuarios de tipo estudiante-->
     <?php else : ?>
         <a href="./ClasesEstudiante.php">
             <div class="card" style="width: 8rem;">
@@ -69,6 +69,14 @@
                 <img src="../src/img/homeAlumno/cuestionarios-icon.png" class="card-img-top" alt="clases">
                 <div class="card-body">
                     <h5 class="card-title"><strong>Cuestionarios</strong></h5>
+                </div>
+            </div>
+        </a>
+        <a href="./Notificaciones.php">
+            <div class="card" style="width: 8rem;">
+                <img src="../src/img/homeAlumno/notificacion.png" class="card-img-top" alt="clases">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Notificaciones</strong></h5>
                 </div>
             </div>
         </a>

@@ -78,6 +78,39 @@ class Notificacion
     }
 
     /**
+     * Envía un correo para notificar sobre un nuevo cuestionario activo.
+     */
+    public function nuevoCuestionario(string $correo, string $nombre, string $paterno, string $cuestionario)
+    {
+        try {
+            $this->confEmailParams($correo, $nombre, $paterno);
+
+            $this->mail->IsHTML(true);
+            $this->mail->Body = "<!DOCTYPE html>
+                            <html lang='es'>
+                                <body>
+                                    <h1>Estimado {$nombre} {$paterno}: Este correo es para notificarte sobre un nuevo cuestionario activo en SAS.</h1> <br> 
+                                    <p>Cuestionario: {$cuestionario}<br>
+                                        <i>Visita
+                                            <a href='http://localhost/sas/vistas/Login.php'> SAS </a>
+                                            y responde tu cuestionario cuanto antes.
+                                        </i>
+                                    </p> <br>
+                                </body>
+                            </html>";
+
+            $this->mail->AltBody = "Estimado {$nombre} {$paterno}: Este correo es para notificarte sobre un nuevo cuestionario activo en SAS.\r\n Cuestionario: {$cuestionario}\nVisita http://localhost/sas/vistas/Login.php y responde tu cuestionario cuanto antes.";
+
+            //send the message, check for errors
+            if (!$this->mail->send()) {
+                return 'Mailer Error: ' . $this->mail->ErrorInfo;
+            }
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
      * Se notifica al usuario, mediante correo electrónico, de su alta en el sistema.
      * @param String $correo Correo electrónico del usuario
      * @param String $nombre Nombre del usuario
@@ -89,6 +122,7 @@ class Notificacion
     {
         $this->confEmailParams($correo, $nombre, $paterno);
 
+        $this->mail->IsHTML(true);
         $this->mail->Body = "<!DOCTYPE html>
                             <html lang='es'>
                                 <body>
@@ -183,15 +217,19 @@ class Notificacion
 
     private function save_mail($mail)
     {
-        //You can change 'Sent Mail' to any other folder or tag
-        $path = '{imap.gmail.com:993/imap/ssl}[Gmail]/Sent Mail';
+        try {
+            //You can change 'Sent Mail' to any other folder or tag
+            $path = '{imap.gmail.com:993/imap/ssl}[Gmail]/Sent Mail';
 
-        //Tell your server to open an IMAP connection using the same username and password as you used for SMTP
-        $imapStream = imap_open($path, $mail->Username, $mail->Password);
+            //Tell your server to open an IMAP connection using the same username and password as you used for SMTP
+            $imapStream = imap_open($path, $mail->Username, $mail->Password);
 
-        $result = imap_append($imapStream, $path, $mail->getSentMIMEMessage());
-        imap_close($imapStream);
+            $result = imap_append($imapStream, $path, $mail->getSentMIMEMessage());
+            imap_close($imapStream);
 
-        return $result;
+            return $result;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 }

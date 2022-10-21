@@ -46,6 +46,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./CuestionariosDisponibles.php">Cuestionarios</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./Notificaciones.php">Notificaciones</a>
+                </li>
             <?php endif; ?>
 
             <!--Lista de opciones de perfil-->

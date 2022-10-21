@@ -26,7 +26,7 @@ const asignarCuestionario = (idCuestionario, titulo, fechaCierre) => {
         .then(response => { return response.json(); })
         .then(data => {
             alert(data['EXITO']);
-            window.location.href = `http://localhost/sas/vistas/Clase.php?i=${idCuestionario}&t=${titulo}`;
+            notificarCuestAsignado(idCuestionario, titulo);
         })
         .catch(error => alert(error.message));
 };

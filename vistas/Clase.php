@@ -154,6 +154,7 @@
     <script src="../src/js/eliminarUA.js"></script>
     <script src="../src/js/crearUATopicos.js"></script>
     <script src="../src/js/agregarUA.js"></script>
+    <script src="../src/js/notificarCuestionarioAsignado.js"></script>
     <script src="../src/js/asignarCuestionario.js"></script>
     <script type="text/javascript">
         document.getElementById('close-modal').addEventListener('click', () => {

@@ -21,6 +21,30 @@ class Asignacion extends BD
     }
 
     /**
+     * Consulta el cuestionario de una asignación filtrado por un campo de la tabla asignación.
+     * @param string $campo campo de filtrado, puede ser idAsignacion, fechaAsignacion, fechaCierre, idCuestionario o idClase.
+     * @param string $valor valor del campo antes especificado.
+     * @return array cuestionario.
+     */
+    public function getAsignacion(string $campo, string $valor)
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'SELECT * FROM asignacion WHERE ' . $campo . ' = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('i', $valor);
+
+            $consulta->execute();
+
+            return $consulta->get_result()->fetch_assoc();
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
      * Realiza la consulta de inserción.
      */
     public function insertar()
