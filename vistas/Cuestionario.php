@@ -74,6 +74,8 @@
         </section>
     </main>
 
+    <script src="../src/js/seleccionar_respuesta.js"></script>
+    <script src="../src/js/contestar_cuestionario.js"></script>
     <script src="../src/js/salir.js"></script>
 </body>
 
