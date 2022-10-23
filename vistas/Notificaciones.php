@@ -42,16 +42,16 @@
             <?php for ($i = 0; $i < $num_notificaciones; $i++) : ?>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button id="buttonShowNoti" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button id="buttonShowNoti" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $notificaciones[$i]['idNotificacion']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $notificaciones[$i]['idNotificacion']; ?>">
                             <?php echo $notificaciones[$i]['mensaje']; ?>
                         </button>
                     </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div id="collapse<?php echo $notificaciones[$i]['idNotificacion']; ?>" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <strong>Título:</strong> <?php echo $cuestionarios[$i]['titulo']; ?> <br>
                             <strong>Descripción:</strong> <?php echo $cuestionarios[$i]['descripcion']; ?> <br>
                             <strong>Fecha de cierre:</strong> <?php echo $cuestionarios[$i]['fechaCierre']; ?> <br>
-                            <a id="buttonResponderCuest" data-id-cuest="<?php echo $cuestionarios[$i]['idCuestionario']; ?>" href="#" class="btn btn-primary">Responder</a>
+                            <a id="buttonResponderCuest" href="./Cuestionario.php?iC=<?php echo $cuestionarios[$i]['idCuestionario']; ?>" class="btn btn-primary">Responder</a>
                         </div>
                     </div>
                 </div>

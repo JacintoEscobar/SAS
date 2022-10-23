@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAS - </title>
+    <title>SAS - <?php echo $_GET['nom']; ?></title>
 
     <!--Incluimos los diseños que se aplican al header-->
     <?php include '../templates/header/header_head.php'; ?>
@@ -52,7 +52,7 @@
                         <div class="card-body">
                             <h5 class="card-title"> <?php echo $cuestionarios[$i]['descripcion']; ?> </h5>
                             <p class="card-text">Fecha de cierre: <strong><?php echo $cuestionarios[$i]['fechaCierre']; ?></strong></p>
-                            <a data-id-cuest="<?php echo $cuestionarios[$i]['idCuestionario']; ?>" href="#" class="btn btn-primary">Responder</a>
+                            <a href="./Cuestionario.php?iC=<?php echo $cuestionarios[$i]['idCuestionario']; ?>" class="btn btn-primary">Responder</a>
                         </div>
                     </div>
                 </div>

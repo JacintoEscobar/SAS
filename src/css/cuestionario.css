@@ -1,0 +1,72 @@
+/*Diseño general de los container del título y de las unidades de aprendizaje*/
+#container-titulo {
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+}
+
+/*Diseño del título y subtitulo*/
+#container-titulo #titulo-cuestionario {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 3.5em;
+    text-align: center;
+    color: rgba(239, 6, 5, 0.8);
+}
+
+#descripcion-cuestionario {
+    margin-top: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/*Diseño del container de preguntas y del container de respuestas*/
+#div-pregunta {
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+#div-respuestas {
+    margin-top: 1rem;
+}
+
+/*Diseño de los parrafos de preguntas y respuestas*/
+#pPregunta {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2rem;
+}
+
+#pRespuesta {
+    display: inline;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+#pRespuesta:hover {
+    cursor: pointer;
+    animation-name: hover-on-resp;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hover-on-resp {
+    0% {}
+
+    100% {
+        background-color: rgba(0, 153, 51, 0.7);
+        border-radius: 0.3rem;
+        padding: 0.4rem;
+    }
+}
+
+/*Diseño del botón de enviar cuestionario*/
+#enviar-cuestionario {
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 2rem;
+}
