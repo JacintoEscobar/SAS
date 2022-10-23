@@ -51,7 +51,7 @@ const crearElementosClase = clases => {
                 <a href="">Seguridad informática</a>
             </h5> */
             tituloClase = document.createElement('a');
-            tituloClase.setAttribute('href', '#');
+            tituloClase.setAttribute('href', `./ClaseEstudiante.php?idC=${clase.idClase}&nom=${clase.nombre}`);
         } else {
             /*  <span id="labelBajaPendiente">
                     <strong> Esta clase está en proceso de baja. </strong>

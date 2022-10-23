@@ -1,0 +1,42 @@
+/*Diseño del título de la página*/
+.container {
+    margin: 0px auto;
+}
+
+.container .row #titulo,
+.container .row #descripcion {
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+}
+
+.container .row #titulo {
+    font-size: 2.2em;
+}
+
+.container .row #descripcion {
+    margin-top: 1rem;
+    font-size: 1.4em;
+}
+
+/*Diseño de las notificaciones*/
+#accordionExample {
+    margin-top: 1rem;
+}
+
+/*Diseño del botón que muestra la información de la notificación*/
+#buttonShowNoti {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/*Diseño de la información de la notificación*/
+.accordion-body {
+    font-family: 'Fira Code', monospace;
+}
+
+/*Diseño del botón de responder cuestionario*/
+#buttonResponderCuest {
+    margin-top: 0.5rem;
+}

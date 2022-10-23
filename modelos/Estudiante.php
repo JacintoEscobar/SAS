@@ -15,6 +15,27 @@ class Estudiante
     }
 
     /**
+     * Consulta las notificaciones del alumno para mostrarlas
+     * y que pueda acceder a sus nuevos cuestionarios.
+     */
+    public function getNotificaciones()
+    {
+        try {
+            $conexion = new mysqli('localhost', 'root', '', 'sas');
+
+            $consulta = $conexion->prepare('SELECT * FROM notificacion WHERE idUsuario = ?');
+            $consulta->bind_param('i', $this->id);
+
+            $consulta->execute();
+
+            return $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+    /**
      * Función que devuelve el nombre del estudiante.
      * Recibe un valor booleano para verificar si el id se encriptó previamente con md5.
      */
