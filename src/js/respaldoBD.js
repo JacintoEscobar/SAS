@@ -2,5 +2,5 @@
 const buttonRespaldo = document.getElementById('button-respaldo');
 const buttonRestauracion = document.getElementById('button-restauracion');
 
-buttonRespaldo.addEventListener('click', () => window.location.href = 'http://localhost/sas/vistas/GestionBD.php?a=respaldo');
+buttonRespaldo.addEventListener('click', () => window.location.href = 'http://localhost/sas/controladores/respaldoBD.php');
 buttonRestauracion.addEventListener('click', () => window.location.href = 'http://localhost/sas/vistas/GestionBD.php?a=restauracion');
