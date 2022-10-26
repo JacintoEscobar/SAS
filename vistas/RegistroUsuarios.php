@@ -7,12 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAS - Registro individual</title>
+    <title>SAS - Registro de usuarios</title>
 
     <!--Incluimos los diseños que se aplican al header-->
     <?php include '../templates/header/header_head.php'; ?>
 
     <link rel="stylesheet" href="../src/css/registro_individual.css">
+    <link rel="stylesheet" href="../src/css/registro_masivo.css">
 
     <style>
         body {
@@ -36,7 +37,7 @@
 
         <!--Selector de registro: Masivo o individual-->
         <select id="tipo-registro-form" class="form-select" aria-label="Default select example">
-            <option selected>Selecciona un tipo de registro de usuarios</option>
+            <option value="0">Selecciona un tipo de registro de usuarios</option>
             <option value="1">Registro individual</option>
             <option value="2">Registro masivo</option>
         </select>
@@ -97,7 +98,14 @@
         </div>
 
         <!--Secciòn del formulario para registro masivo-->
-        <div id="registro-masivo-form" class="container"></div>
+        <div id="registro-masivo-form" class="container">
+            <p>Sube un archivo con extensión csv para hacer carga masiva de usuarios</p>
+            <br><br>
+            <form action="../controladores/registro-masivo.php" method="POST" enctype="multipart/form-data">
+            <input type="file" name="archivo">
+            <br><br><br>
+            <button id="registrarUsuario" class="btn btn-primary">Registrar</button>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -123,7 +131,10 @@
          * Función que muestra y oculta los formularios de registrgo dependiendo de la selección del usuario
          */
         const mostrarFormulario = () => {
-            if (tipoFormulario.value == 1) {
+            if (tipoFormulario.value == 0) {
+                document.getElementById('registro-individual-form').style.visibility = 'hidden';
+                document.getElementById('registro-masivo-form').style.visibility = 'hidden';
+            }else if (tipoFormulario.value == 1) {
                 document.getElementById('registro-individual-form').style.visibility = 'visible';
                 document.getElementById('registro-masivo-form').style.visibility = 'hidden';
             } else if (tipoFormulario.value == 2) {
