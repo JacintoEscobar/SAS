@@ -1,7 +1,7 @@
 <?php include '../templates/redirects/redirect_profesor.php'; ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -15,6 +15,7 @@
     <!--CSS propio para el formulario de edición y creación de clase-->
     <link rel="stylesheet" href="../src/css/crearContenidoCuestionario.css">
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         body {
@@ -73,12 +74,12 @@
     <!--Script para obtener y mostrar los datos del formulario-->
     <script src="../src/js/getCuestDatos.js"></script>
 
-    <!--Script para obtener de la bd las preguntas y respuestas del cuestionario-->
-    <script src="../src/js/getCuestConte.js"></script>
-
     <!--Scripts para crear y mostrar los elementos html de las preguntas obtenidas de la bd-->
     <script src="../src/js/addPregunta.js"></script>
     <script src="../src/js/addRespuesta.js"></script>
+
+    <!--Script para obtener de la bd las preguntas y respuestas del cuestionario-->
+    <script src="../src/js/getCuestConte.js"></script>
 
     <!--Script para editar o eliminar una pregunta-->
     <script src="../src/js/eliminarPregunta.js"></script>
@@ -89,6 +90,9 @@
 
     <!--Script para guardar los cambios de las preguntas y respuestas en la base de datos-->
     <script src="../src/js/guardarCambios.js"></script>
+
+    <!--Script para redirigir a la página de resultados en caso de que el cuestionario ya se encuentre asignado a los alumno-->
+    <script src="../src/js/verificarCuestiAsignado.js"></script>
 
     <script src="../src/js/salir.js"></script>
 </body>
