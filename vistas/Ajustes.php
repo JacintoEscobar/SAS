@@ -55,6 +55,7 @@
     <!--Incluimos el header de todas las páginas-->
     <?php include '../templates/header/header_herramientas.php'; ?>
 
+    <!--Sección para modificar el usuario, el correo o la contraseña-->
     <div id="container-ajustes" class="container">
         <div class="row">
             <div id="titulo" class="col-12">Ajustes</div>
@@ -62,12 +63,37 @@
         </div>
 
         <!--Formulario para seleccionar el dato a actualizar-->
-        <select id="select-dato" class="form-select" aria-label="Default select example">
+        <select style="margin-top: 0.4rem;" id="select-dato" class="form-select" aria-label="Default select example">
             <option selected>Dato</option>
             <option value="1">Correo</option>
             <option value="2">Usuario</option>
             <option value="3">Contraseña</option>
         </select>
+    </div>
+
+    <!--Sección para modificar la imagen de perfil-->
+    <div class="container">
+        <!--Sección para modificar la img de perfil-->
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div id="descripcion" class="col">¿Deseas cambiar tu imagen de perfil?</div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <!--Obtenemos la imagen que subió el usuario-->
+                    <?php include_once '../controladores/getImgPerfil.php'; ?>
+                    <img id="img-perfil" src="<?php echo $img; ?>" class="rounded float-start" alt="perfil">
+                </div>
+                <div class="col">
+                    <form id="form-img" action="../controladores/setImgPerfil.php" method="POST" enctype="multipart/form-data">
+                        <input class="form-control" type="file" id="img_perfil" name="img_perfil" required>
+                        <button type="submit" class="btn btn-primary mb-3">Cambiar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="../src/js/seleccionarDato.js"></script>

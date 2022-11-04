@@ -16,6 +16,59 @@ class Usuario extends BD
     }
 
     /**
+     * Consulta el nombre de la imagen de usuario.
+     * @return string $img nombre de la imagen de perfil.
+     */
+    public function getImg()
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'SELECT imagen FROM usuario WHERE idUsuario = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('i', $this->id);
+
+            $consulta->execute();
+
+            $nombreImg = $consulta->get_result()->fetch_object()->imagen;
+
+            $this->desconectar();
+
+            if ($nombreImg == '') {
+                return "../public/img/img_not_found.png";
+            }
+            return "../public/img/" . $nombreImg;
+        } catch (Exception $ex) {
+            return "../public/img/img_not_found.png";
+        }
+    }
+
+    /**
+     * Inserta el nombre de la imagen de usuario.
+     * @param string $img nombre de la imagen de perfil.
+     */
+    public function setImg(string $img)
+    {
+        try {
+            $this->conectar();
+
+            $sql = 'UPDATE usuario SET imagen = ? WHERE idUsuario = ?';
+            $consulta = $this->conexion->prepare($sql);
+
+            $consulta->bind_param('si', $img, $this->id);
+
+            $resultado = $consulta->execute();
+
+            $this->desconectar();
+
+            return $resultado;
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+
+    /**
      * Realiza la consulta de actualización para un usuario.
      */
     public function actualizar($data)

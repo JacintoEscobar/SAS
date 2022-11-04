@@ -445,7 +445,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador',NULL),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor',NULL),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno',NULL),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno',NULL),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno',NULL);
+INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador',NULL),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor',NULL),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno','perfil2.jpg'),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno','perfil.jpg'),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno',NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -473,4 +473,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-03 17:32:51
+-- Dump completed on 2022-11-03 22:12:12

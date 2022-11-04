@@ -54,7 +54,11 @@
             <!--Lista de opciones de perfil-->
             <li class="nav-item dropdown">
                 <a id="dropdown-menu-button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                    <img src="../src/img/user_icon.png" alt="user">
+                    <!--Obtenemos la imagen que subió el usuario-->
+                    <?php include_once '../controladores/getImgPerfil.php'; ?>
+
+                    <!--Sección de la imagen de perfil-->
+                    <img style="width: 4rem;" src="<?php echo $img; ?>" class="rounded float-start" alt="perfil">
                 </a>
                 <ul class="dropdown-menu">
                     <li><a id="ajustes" class="dropdown-item" href="./Ajustes.php?t=<?php echo $_SESSION['t']; ?>">Ajustes</a></li>

@@ -36,3 +36,19 @@ form input {
 #cambiarContraseñaButton {
     margin-top: 0.5rem;
 }
+
+/*Diseño del formulario para cambiar imagen de perfil y para la imagen de perfil en sí*/
+#form-img {
+    margin: 0.8rem 2.8rem;
+    padding: 0px;
+    background-color: transparent;
+}
+
+#form-img button {
+    margin-top: 0.5rem;
+}
+
+#img-perfil {
+    margin-top: 0.8rem;
+    width: 15rem;
+}
