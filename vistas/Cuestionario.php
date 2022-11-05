@@ -71,16 +71,27 @@
                                 <?php echo $preguntas[$i]['pregunta']; ?>
                             </p>
                             <div id="div-respuestas">
-                                <!--Mostramos las respuestas de la pregunta.-->
                                 <?php $num_respuestas_pregunta = sizeof($respuestas[$i]); ?>
-                                <?php for ($j = 0; $j < $num_respuestas_pregunta; $j++) : ?>
-                                    <p id="pRespuesta" data-idrespuesta="<?php echo $respuestas[$i][$j]['idRespuestaMultiple']; ?>"><?php echo $respuestas[$i][$j]['contenido']; ?></p>
-                                <?php endfor; ?>
+                                <!--Verificamos el tipo de preguntas que tiene el cuestionario-->
+                                <?php if ($cuestionario['tipo'] == 'abiertas') : ?>
+                                    <!--Mostramos el campo para que el alumno responda las preguntas.-->
+                                    <?php for ($j = 0; $j < $num_respuestas_pregunta; $j++) : ?>
+                                        <div class="form-floating">
+                                            <textarea data-idrespuesta="<?php echo $respuestas[$i][$j]['idRespuestaMultiple']; ?>" class="form-control" placeholder="Leave a comment here" id="respuestaAbierta"></textarea>
+                                            <label for="respuestaAbierta">Respuesta:</label>
+                                        </div>
+                                    <?php endfor; ?>
+                                <?php else : ?>
+                                    <!--Mostramos las respuestas de la pregunta.-->
+                                    <?php for ($j = 0; $j < $num_respuestas_pregunta; $j++) : ?>
+                                        <p id="pRespuesta" data-idrespuesta="<?php echo $respuestas[$i][$j]['idRespuestaMultiple']; ?>"><?php echo $respuestas[$i][$j]['contenido']; ?></p>
+                                    <?php endfor; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endfor; ?>
 
-                    <button id-cuest="<?php echo $cuestionario['idCuestionario']; ?>" type="button" id="enviar-cuestionario" class="btn btn-success">Enviar cuestionario</button>
+                    <button tipo_cuest="<?php echo $cuestionario['tipo']; ?>" id-cuest="<?php echo $cuestionario['idCuestionario']; ?>" type="button" id="enviar-cuestionario" class="btn btn-success">Enviar cuestionario</button>
                 <?php else : ?>
                     <div class="alert alert-info" role="alert">
                         Ya has respondido este cuestionario!
@@ -92,6 +103,7 @@
     </main>
 
     <?php if (!$haRespondido) : ?>
+        <script src="../src/js/getRespuestasAbiertas.js"></script>
         <script src="../src/js/seleccionar_respuesta.js"></script>
         <script src="../src/js/contestar_cuestionario.js"></script>
     <?php else : ?>
