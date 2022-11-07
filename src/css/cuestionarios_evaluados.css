@@ -1,0 +1,26 @@
+/*Diseño del título de la página*/
+.container {
+    margin: 0px auto;
+}
+
+section header #titulo,
+section header #descripcion {
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+}
+
+.container .row #titulo {
+    font-size: 2.2em;
+}
+
+.container .row #descripcion {
+    margin-top: 1rem;
+    font-size: 1.4em;
+}
+
+#resumen strong,
+#resumen span {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+}

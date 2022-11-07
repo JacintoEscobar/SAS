@@ -64,7 +64,7 @@
                 </div>
             </div>
         </a>
-        <a href="./CuestionariosDisponibles.php">
+        <a href="./CuestionariosEvaluados.php">
             <div class="card" style="width: 8rem;">
                 <img src="../src/img/homeAlumno/cuestionarios-icon.png" class="card-img-top" alt="clases">
                 <div class="card-body">

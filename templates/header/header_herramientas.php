@@ -44,7 +44,7 @@
                     <a class="nav-link active" aria-current="page" href="./ClasesEstudiante.php">Clases</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./CuestionariosDisponibles.php">Cuestionarios</a>
+                    <a class="nav-link" href="./CuestionariosEvaluados.php">Cuestionarios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./Notificaciones.php">Notificaciones</a>
