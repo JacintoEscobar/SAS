@@ -10,6 +10,9 @@
 <?php $idCuestionario = htmlspecialchars($_GET['i'], ENT_QUOTES, 'UTF-8'); ?>
 <?php $tituloCuestionario = htmlspecialchars($_GET['c'], ENT_QUOTES, 'UTF-8'); ?>
 
+<!--Obtenemos el tipo del cuestionario-->
+<?php include_once '../controladores/getTipoCuestionario.php'; ?>
+
 <!--Obtenemos las etiquetas creadas y el id máximo-->
 <?php include_once '../controladores/get_etiquetas.php'; ?>
 <?php $etiquetas = getEtiquetas(); ?>
@@ -117,78 +120,104 @@
                 <!----------------------------------------------------Obtenemos a los alumnos que respondieron el cuestionario------------------------------------------------------>
                 <?php include_once '../controladores/get_alumnos_respondieron.php'; ?>
                 <?php foreach ($alumnos as $alumno) : ?>
-                    <!--Definimos el contador de puntos obtenidos por el alumno-->
-                    <?php $puntaje = 0; ?>
-                    <div style="margin: 0.5rem;" class="accordion-item">
-                        <h2 class="accordion-header" id="heading<?php echo $alumno['idU']; ?>">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $alumno['idU']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $alumno['idU']; ?>">
-                                <?php echo $alumno['alumno'] . ' ' . $alumno['paterno']; ?>
-                                <strong style="margin-left: 2rem; color: rgb(41, 123, 171);"><span>Ver resultados</span></strong>
-                            </button>
-                        </h2>
-                        <div id="collapse<?php echo $alumno['idU']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $alumno['idU']; ?>">
-                            <div class="accordion-body">
-                                <div id="preguntas" class="container">
-                                    <!------------------------------------------------------Obtenemos las preguntas del cuestionario------------------------------------------------------>
-                                    <?php include_once '../controladores/get_preguntas_cuestionario.php'; ?>
-                                    <?php foreach ($preguntas as $pregunta) : ?>
-                                        <div class="container" id="div-pregunta">
-                                            <p data-idPregunta="<?php echo $pregunta['idPregunta']; ?>" id="pregunta" class="fw-light"><?php echo $pregunta['pregunta']; ?></p>
-                                            <div class="container" id="div-respuestas">
-                                                <!------------------------------------------------------Obtenemos todas respuestas de la pregunta------------------------------------------------------>
-                                                <?php include_once '../controladores/get_respuestas_preguntas.php'; ?>
-                                                <?php foreach ($respuestas as $respuesta) : ?>
-                                                    <?php foreach ($respuesta as $respuestaPregunta) : ?>
-                                                        <?php if ($pregunta['idPregunta'] == $respuestaPregunta['idPregunta']) : ?>
-                                                            <!--Para cada respuesta multiple obtenemos su registro en respuesta alumno-->
-                                                            <!--esto para saber si la respuesta actual es la seleccionada por el alumno.-->
-                                                            <?php include_once '../controladores/get_respuestas_alumno.php'; ?>
-                                                            <?php if ($respuestaPregunta['tipo'] == 'correcta') : ?>
-                                                                <?php if (verificarRespuesta($respuestaPregunta['idRespuestaMultiple'], $alumno['idU'])) : ?>
-                                                                    <!--Contamos las respuestas correctas del alumno-->
-                                                                    <?php $puntaje++; ?>
-                                                                    <strong style="color: rgb(0, 0, 155);" id="respuesta_alumno" data_puntaje="correcta">
-                                                                        <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
-                                                                    </strong>
+                    <!--Verificamos que el alumno aún no haya sido evaluado en el cuestionario-->
+                    <?php include_once '../controladores/verificarAlumnoEvaluado.php'; ?>
+                    <?php if (verificarAlumnoEvaludo($alumno['idU'], $idCuestionario)) : ?>
+                        <!--Definimos el contador de puntos obtenidos por el alumno-->
+                        <?php $puntaje = 0; ?>
+                        <div style="margin: 0.5rem;" class="accordion-item">
+                            <h2 class="accordion-header" id="heading<?php echo $alumno['idU']; ?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $alumno['idU']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $alumno['idU']; ?>">
+                                    <?php echo $alumno['alumno'] . ' ' . $alumno['paterno']; ?>
+                                    <strong style="margin-left: 2rem; color: rgb(41, 123, 171);"><span>Ver resultados</span></strong>
+                                </button>
+                            </h2>
+                            <div id="collapse<?php echo $alumno['idU']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $alumno['idU']; ?>">
+                                <div class="accordion-body">
+                                    <div id="preguntas" class="container">
+                                        <!------------------------------------------------------Obtenemos las preguntas del cuestionario------------------------------------------------------>
+                                        <?php include_once '../controladores/get_preguntas_cuestionario.php'; ?>
+                                        <?php foreach ($preguntas as $pregunta) : ?>
+                                            <div class="container" id="div-pregunta">
+                                                <p data-idPregunta="<?php echo $pregunta['idPregunta']; ?>" id="pregunta" class="fw-light"><?php echo $pregunta['pregunta']; ?></p>
+
+                                                <div class="container" id="div-respuestas">
+                                                    <!------------------------------------------------------Obtenemos todas respuestas de la pregunta------------------------------------------------------>
+                                                    <?php include_once '../controladores/get_respuestas_preguntas.php'; ?>
+                                                    <?php foreach ($respuestas as $respuesta) : ?>
+                                                        <?php foreach ($respuesta as $respuestaPregunta) : ?>
+                                                            <?php if ($pregunta['idPregunta'] == $respuestaPregunta['idPregunta']) : ?>
+                                                                <!--Para cada respuesta multiple obtenemos su registro en respuesta alumno-->
+                                                                <!--esto para saber si la respuesta actual es la seleccionada por el alumno.-->
+                                                                <?php include_once '../controladores/get_respuestas_alumno.php'; ?>
+                                                                <?php if ($tipoCuestionario == 'cerradas') : ?>
+                                                                    <?php if ($respuestaPregunta['tipo'] == 'correcta') : ?>
+                                                                        <?php if (verificarRespuesta($respuestaPregunta['idRespuestaMultiple'], $alumno['idU'])) : ?>
+                                                                            <!--Contamos las respuestas correctas del alumno-->
+                                                                            <?php $puntaje++; ?>
+                                                                            <strong style="color: rgb(0, 0, 155);" id="respuesta_alumno" data_puntaje="correcta">
+                                                                                <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
+                                                                            </strong>
+                                                                        <?php else : ?>
+                                                                            <strong style="color: rgb(0, 155, 0);" id="respuesta_sistema" data_puntaje="correcta">
+                                                                                <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
+                                                                            </strong>
+                                                                        <?php endif; ?>
+                                                                    <?php else : ?>
+                                                                        <?php if (verificarRespuesta($respuestaPregunta['idRespuestaMultiple'], $alumno['idU'])) : ?>
+                                                                            <strong style="color: rgb(155, 0, 0);" id="respuesta_alumno" data_puntaje="correcta">
+                                                                                <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
+                                                                            </strong>
+                                                                        <?php else : ?>
+                                                                            <strong id="respuesta_sistema" data_puntaje="correcta">
+                                                                                <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
+                                                                            </strong>
+                                                                        <?php endif; ?>
+                                                                    <?php endif; ?>
                                                                 <?php else : ?>
-                                                                    <strong style="color: rgb(0, 155, 0);" id="respuesta_sistema" data_puntaje="correcta">
-                                                                        <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
-                                                                    </strong>
-                                                                <?php endif; ?>
-                                                            <?php else : ?>
-                                                                <?php if (verificarRespuesta($respuestaPregunta['idRespuestaMultiple'], $alumno['idU'])) : ?>
-                                                                    <strong style="color: rgb(155, 0, 0);" id="respuesta_alumno" data_puntaje="correcta">
-                                                                        <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
-                                                                    </strong>
-                                                                <?php else : ?>
-                                                                    <strong id="respuesta_sistema" data_puntaje="correcta">
-                                                                        <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
-                                                                    </strong>
+                                                                    <?php if ($respuestaPregunta['contenido'] == getRespuestaAlumno($respuestaPregunta['idRespuestaMultiple'], $alumno['idU'])) : ?>
+                                                                        <!--Contamos las respuestas correctas del alumno-->
+                                                                        <?php $puntaje++; ?>
+                                                                        <strong style="color: rgb(0, 0, 155);" id="respuesta_alumno" data_puntaje="correcta">
+                                                                            <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
+                                                                        </strong>
+                                                                    <?php else : ?>
+                                                                        <strong style="color: rgb(0, 155, 0);" id="respuesta_alumno" data_puntaje="correcta">
+                                                                            <p> ↳ <?php echo $respuestaPregunta['contenido']; ?></p>
+                                                                        </strong>
+                                                                        <strong style="color: rgb(155, 0, 0);" id="respuesta_alumno" data_puntaje="correcta">
+                                                                            <p> ↳ <?php echo getRespuestaAlumno($respuestaPregunta['idRespuestaMultiple'], $alumno['idU']) ?></p>
+                                                                        </strong>
+                                                                    <?php endif; ?>
                                                                 <?php endif; ?>
                                                             <?php endif; ?>
-                                                        <?php endif; ?>
+                                                        <?php endforeach; ?>
                                                     <?php endforeach; ?>
-                                                <?php endforeach; ?>
+                                                </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                <div class="container">
-                                    <div class="form-floating">
-                                        <select id="select_etiqueta" name="etiqueta" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                            <option value="0" selected>Mostrar etiquetas</option>
-                                            <?php foreach ($etiquetas as $etiqueta) : ?>
-                                                <option id="option_etiqueta" data-idEtiqueta="<?php echo $etiqueta['idEtiqueta']; ?>" value="<?php echo $etiqueta['nombre']; ?>"><?php echo $etiqueta['nombre']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <label for="floatingSelect">Etiqueta emocional para el alumno</label>
-                                        <button data-idAlumo="<?php echo $alumno['idU']; ?>" style="margin: 0.8rem 0px;" id="asignarEtiqueta" type="button" class="btn btn-success">Asignar etiqueta</button>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <span id="span_puntaje-obtenido" style="font-weight: 600;">Puntaje obtenido: <i><strong><?php print $puntaje; ?></strong></i></span>
+
+                                    <!------Sección del puntaje, la asignación de etiqueta y la evaluación del cuestionario al alumno------>
+                                    <div class="container">
+                                        <div class="form-floating">
+                                            <select id="select_etiqueta" name="etiqueta" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                                <option value="0" selected>Mostrar etiquetas</option>
+                                                <?php foreach ($etiquetas as $etiqueta) : ?>
+                                                    <option id="option_etiqueta" data-idEtiqueta="<?php echo $etiqueta['idEtiqueta']; ?>" value="<?php echo $etiqueta['nombre']; ?>"><?php echo $etiqueta['nombre']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <label for="floatingSelect">Etiqueta emocional para el alumno</label>
+
+                                            <button data-idAlumo="<?php echo $alumno['idU']; ?>" style="margin: 0.8rem 0px;" id="asignarEtiqueta" type="button" class="btn btn-success">Asignar etiqueta</button>
+                                            <button data-puntaje="<?php print $puntaje; ?>" data-idA="<?php print $alumno['idU']; ?>" data-idC="<?php print $idCuestionario; ?>" type="button" class="btn btn-primary" id="evaluar">Evaluar</button>
+                                        </div>
+                                        <span id="span_puntaje-obtenido" style="font-weight: 600;">Puntaje obtenido: <i><strong><?php print $puntaje; ?></strong></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -199,6 +228,7 @@
 
     <script src="../src/js/salir.js"></script>
     <script src="../src/js/asignarEtiqueta.js"></script>
+    <script src="../src/js/evaluarCuestionario.js"></script>
 
 </body>
 
