@@ -1,0 +1,11 @@
+#titulo,
+#subtitulo {
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    color: #FFFFFF;
+}
+
+/*Diseño de los formularios para subir un material educativo*/
+#form-me div {
+    margin: 1rem 0px;
+}

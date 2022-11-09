@@ -15,7 +15,7 @@
 
 <!--Obtenemos las etiquetas creadas y el id máximo-->
 <?php include_once '../controladores/get_etiquetas.php'; ?>
-<?php $etiquetas = getEtiquetas(); ?>
+<?php $etiquetas = getEtiquetas($_SESSION['i']); ?>
 <?php $maxIdEtiqueta = getMaxId(); ?>
 
 <!DOCTYPE html>

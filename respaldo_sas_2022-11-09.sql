@@ -43,7 +43,7 @@ CREATE TABLE `asignacion` (
   KEY `idClase` (`idClase`),
   CONSTRAINT `asignacion_ibfk_1` FOREIGN KEY (`idCuestionario`) REFERENCES `cuestionario` (`idCuestionario`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `asignacion_ibfk_2` FOREIGN KEY (`idClase`) REFERENCES `clase` (`idClase`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `asignacion` (
 
 LOCK TABLES `asignacion` WRITE;
 /*!40000 ALTER TABLE `asignacion` DISABLE KEYS */;
-INSERT INTO `asignacion` VALUES (3,'2022-10-28','2022-11-27',1,1);
+INSERT INTO `asignacion` VALUES (3,'2022-10-28','2022-11-27',1,1),(4,'2022-11-05','2022-11-18',2,1);
 /*!40000 ALTER TABLE `asignacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,6 +110,35 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Table structure for table `creacionetiqueta`
+--
+
+DROP TABLE IF EXISTS `creacionetiqueta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `creacionetiqueta` (
+  `idCreacionE` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria para identificar el registro de la creación de una nueva etiqueta.',
+  `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar a la etiqueta creada.',
+  `idUsuario` int(11) NOT NULL COMMENT 'Llave foránea para identificar al profesor que creó la etiqueta.',
+  PRIMARY KEY (`idCreacionE`),
+  KEY `idEtiqueta` (`idEtiqueta`,`idUsuario`),
+  KEY `idUsuario` (`idUsuario`),
+  CONSTRAINT `creacionetiqueta_ibfk_1` FOREIGN KEY (`idEtiqueta`) REFERENCES `etiqueta` (`idEtiqueta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `creacionetiqueta_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `creacionetiqueta`
+--
+
+LOCK TABLES `creacionetiqueta` WRITE;
+/*!40000 ALTER TABLE `creacionetiqueta` DISABLE KEYS */;
+INSERT INTO `creacionetiqueta` VALUES (1,1000,2),(2,1001,2),(3,1002,2),(4,1003,2),(9,1006,2);
+/*!40000 ALTER TABLE `creacionetiqueta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cuestionario`
 --
 
@@ -154,7 +183,7 @@ CREATE TABLE `cuestionarioresuelto` (
   KEY `idUsuario` (`idUsuario`),
   CONSTRAINT `cuestionarioresuelto_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `cuestionarioresuelto_ibfk_2` FOREIGN KEY (`idCuestionario`) REFERENCES `cuestionario` (`idCuestionario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +192,7 @@ CREATE TABLE `cuestionarioresuelto` (
 
 LOCK TABLES `cuestionarioresuelto` WRITE;
 /*!40000 ALTER TABLE `cuestionarioresuelto` DISABLE KEYS */;
-INSERT INTO `cuestionarioresuelto` VALUES (9,1,3),(8,1,5);
+INSERT INTO `cuestionarioresuelto` VALUES (9,1,3),(8,1,5),(10,2,3),(11,2,4);
 /*!40000 ALTER TABLE `cuestionarioresuelto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +207,7 @@ CREATE TABLE `etiqueta` (
   `idEtiqueta` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria para identificar a la etiqueta de inteligencia emocional para los alumnos.',
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la etiqueta de inteligencia emocional.',
   PRIMARY KEY (`idEtiqueta`)
-) ENGINE=InnoDB AUTO_INCREMENT=1003 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1007 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,8 +216,41 @@ CREATE TABLE `etiqueta` (
 
 LOCK TABLES `etiqueta` WRITE;
 /*!40000 ALTER TABLE `etiqueta` DISABLE KEYS */;
-INSERT INTO `etiqueta` VALUES (1000,'Etiqueta1'),(1001,'Etiqueta2'),(1002,'Etiqueta3');
+INSERT INTO `etiqueta` VALUES (1000,'Etiqueta1'),(1001,'Etiqueta2'),(1002,'Etiqueta3'),(1003,'Etiqueta4'),(1005,'Etiqueta6'),(1006,'Etiqueta5');
 /*!40000 ALTER TABLE `etiqueta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `evaluacion`
+--
+
+DROP TABLE IF EXISTS `evaluacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `evaluacion` (
+  `idEvaluacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria para identificar la evaluación de un alumno en un cuestionario.',
+  `puntaje` int(11) NOT NULL COMMENT 'Puntaje obtenido por el alumno en el cuestionario.',
+  `idCuestionario` int(11) NOT NULL COMMENT 'Llave foránea para identificar al cuestionario evaluado.',
+  `idUsuario` int(11) NOT NULL COMMENT 'Llave foránea para identificar al alumno evaluado.',
+  `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar la etiqueta asignada por el profesor al alumno en el cuestionario evaluado.',
+  PRIMARY KEY (`idEvaluacion`),
+  KEY `idCuestionario` (`idCuestionario`,`idUsuario`,`idEtiqueta`),
+  KEY `idUsuario` (`idUsuario`),
+  KEY `idEtiqueta` (`idEtiqueta`),
+  CONSTRAINT `evaluacion_ibfk_1` FOREIGN KEY (`idCuestionario`) REFERENCES `cuestionario` (`idCuestionario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `evaluacion_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `evaluacion_ibfk_3` FOREIGN KEY (`idEtiqueta`) REFERENCES `etiqueta` (`idEtiqueta`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `evaluacion`
+--
+
+LOCK TABLES `evaluacion` WRITE;
+/*!40000 ALTER TABLE `evaluacion` DISABLE KEYS */;
+INSERT INTO `evaluacion` VALUES (1,2,2,3,1001),(2,2,1,3,1003);
+/*!40000 ALTER TABLE `evaluacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -222,6 +284,34 @@ INSERT INTO `inscripcion` VALUES (1,'activo',1,3),(2,'activo',2,3),(3,'pendiente
 UNLOCK TABLES;
 
 --
+-- Table structure for table `materialeducativo`
+--
+
+DROP TABLE IF EXISTS `materialeducativo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `materialeducativo` (
+  `idMaterialEducativo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria para identificar al material educativo subido por el profesor.',
+  `titulo` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre del archivo, o título dado por el profesor.',
+  `direccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Directorio del archivo en el servidor, o dirección URL del enlace.',
+  `idTopico` int(11) NOT NULL COMMENT 'Llave foránea para identificar al tópico al que pertenece el material educativo.',
+  `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar a la etiqueta con la que relaciona el material educativo.',
+  `tipo` enum('archivo','enlace') COLLATE utf8_spanish_ci NOT NULL COMMENT 'Tipo de material educativo, puede ser un archivo de cualquier extensión o un enlace a algún sitio web.',
+  PRIMARY KEY (`idMaterialEducativo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `materialeducativo`
+--
+
+LOCK TABLES `materialeducativo` WRITE;
+/*!40000 ALTER TABLE `materialeducativo` DISABLE KEYS */;
+INSERT INTO `materialeducativo` VALUES (1,'Tarea_Matias.docx','../material-educativo/Tarea_Matias.docx',1,1000,'archivo');
+/*!40000 ALTER TABLE `materialeducativo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `notificacion`
 --
 
@@ -238,7 +328,7 @@ CREATE TABLE `notificacion` (
   KEY `idUsuario` (`idUsuario`),
   CONSTRAINT `notificacion_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `notificacion_ibfk_2` FOREIGN KEY (`idAsignacion`) REFERENCES `asignacion` (`idAsignacion`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +337,7 @@ CREATE TABLE `notificacion` (
 
 LOCK TABLES `notificacion` WRITE;
 /*!40000 ALTER TABLE `notificacion` DISABLE KEYS */;
-INSERT INTO `notificacion` VALUES (5,'Tienes un nuevo cuestionario. Response Cuestionario1 cuanto antes.',3,3),(6,'Tienes un nuevo cuestionario. Response Cuestionario1 cuanto antes.',3,5),(7,'Tienes un nuevo cuestionario. Response Cuestionario1 cuanto antes.',3,4);
+INSERT INTO `notificacion` VALUES (5,'Tienes un nuevo cuestionario. Response Cuestionario1 cuanto antes.',3,3),(6,'Tienes un nuevo cuestionario. Response Cuestionario1 cuanto antes.',3,5),(7,'Tienes un nuevo cuestionario. Response Cuestionario1 cuanto antes.',3,4),(8,'Tienes un nuevo cuestionario. Response Cuestionario 2 cuanto antes.',4,3),(9,'Tienes un nuevo cuestionario. Response Cuestionario 2 cuanto antes.',4,5),(10,'Tienes un nuevo cuestionario. Response Cuestionario 2 cuanto antes.',4,4);
 /*!40000 ALTER TABLE `notificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +380,7 @@ CREATE TABLE `registroetiqueta` (
   `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar la etiqueta asignada al alumno.',
   `idUsuario` int(11) NOT NULL COMMENT 'Llave foránea para identificar al alumno al que se le asignó la etiqueta de inteligencia emocional.',
   PRIMARY KEY (`idRegistroEtiqueta`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,7 +389,7 @@ CREATE TABLE `registroetiqueta` (
 
 LOCK TABLES `registroetiqueta` WRITE;
 /*!40000 ALTER TABLE `registroetiqueta` DISABLE KEYS */;
-INSERT INTO `registroetiqueta` VALUES (1,1001,3),(2,1002,5);
+INSERT INTO `registroetiqueta` VALUES (2,1002,5),(3,1001,3),(4,1003,3);
 /*!40000 ALTER TABLE `registroetiqueta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +410,7 @@ CREATE TABLE `respuestaalumno` (
   KEY `idRespuestaMultiple` (`idRespuestaMultiple`),
   CONSTRAINT `respuestaalumno_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `respuestaalumno_ibfk_2` FOREIGN KEY (`idRespuestaMultiple`) REFERENCES `respuestamultiple` (`idRespuestaMultiple`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,7 +419,7 @@ CREATE TABLE `respuestaalumno` (
 
 LOCK TABLES `respuestaalumno` WRITE;
 /*!40000 ALTER TABLE `respuestaalumno` DISABLE KEYS */;
-INSERT INTO `respuestaalumno` VALUES (29,'Respuesta1Pregunta1Cuest1',1,5),(30,'Respuesta1Pregunta2Cuest1',3,5),(31,'Respuesta2Pregunta3Cuest1',6,5),(32,'Respuesta2Pregunta4Cuest1',8,5),(33,'Respuesta1Pregunta1Cuest1',1,3),(34,'Respuesta1Pregunta2Cuest1',3,3),(35,'Respuesta1Pregunta3Cuest1',5,3),(36,'Respuesta1Pregunta4Cuest1',7,3);
+INSERT INTO `respuestaalumno` VALUES (29,'Respuesta1Pregunta1Cuest1',1,5),(30,'Respuesta1Pregunta2Cuest1',3,5),(31,'Respuesta2Pregunta3Cuest1',6,5),(32,'Respuesta2Pregunta4Cuest1',8,5),(33,'Respuesta1Pregunta1Cuest1',1,3),(34,'Respuesta1Pregunta2Cuest1',3,3),(35,'Respuesta1Pregunta3Cuest1',5,3),(36,'Respuesta1Pregunta4Cuest1',7,3),(46,'respuestaAbierta1',9,3),(47,'respuestaAbierta2',10,3),(48,'Respuesta3',11,3),(49,'respuestaAbierta1',9,4),(50,'Respuesta2',10,4),(51,'Respuesta3',11,4);
 /*!40000 ALTER TABLE `respuestaalumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,7 +466,7 @@ CREATE TABLE `topico` (
   PRIMARY KEY (`idTopico`),
   KEY `idUnidadAprendizaje` (`idUnidadAprendizaje`),
   CONSTRAINT `topico_ibfk_1` FOREIGN KEY (`idUnidadAprendizaje`) REFERENCES `unidadaprendizaje` (`idUnidadAprendizaje`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +475,7 @@ CREATE TABLE `topico` (
 
 LOCK TABLES `topico` WRITE;
 /*!40000 ALTER TABLE `topico` DISABLE KEYS */;
-INSERT INTO `topico` VALUES (1,'Empty Project','Primer proyecto en Android Studio.',1),(2,'Java o Kotlin','Elección de lenguaje para trabajar en Android Studio.',1);
+INSERT INTO `topico` VALUES (1,'Empty Project','Primer proyecto en Android Studio.',1),(2,'Java o Kotlin','Elección de lenguaje para trabajar en Android Studio.',1),(3,'Tópico 1','Tópico 1 de la unidad de aprendizaje 2.',2);
 /*!40000 ALTER TABLE `topico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,7 +494,7 @@ CREATE TABLE `unidadaprendizaje` (
   PRIMARY KEY (`idUnidadAprendizaje`),
   KEY `idClase` (`idClase`),
   CONSTRAINT `unidadaprendizaje_ibfk_1` FOREIGN KEY (`idClase`) REFERENCES `clase` (`idClase`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -413,7 +503,7 @@ CREATE TABLE `unidadaprendizaje` (
 
 LOCK TABLES `unidadaprendizaje` WRITE;
 /*!40000 ALTER TABLE `unidadaprendizaje` DISABLE KEYS */;
-INSERT INTO `unidadaprendizaje` VALUES (1,'Android Studio','Fundamentos de Android Studio.',1);
+INSERT INTO `unidadaprendizaje` VALUES (1,'Android Studio','Fundamentos de Android Studio.',1),(2,'Unidad 2','Unidad de aprendizaje 2 de la clase Programación móvil.',1);
 /*!40000 ALTER TABLE `unidadaprendizaje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,7 +535,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador',NULL),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor',NULL),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno','perfil2.jpg'),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno','perfil.jpg'),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno',NULL);
+INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador',NULL),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor',NULL),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno','perfil2.jpg'),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno','perfil.jpg'),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno','cola.jpg');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -473,4 +563,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-03 22:12:12
+-- Dump completed on 2022-11-08 18:09:36

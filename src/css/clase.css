@@ -38,10 +38,6 @@
     font-size: 1.5rem;
 }
 
-#unidad-aprendizaje:hover {
-    cursor: pointer;
-}
-
 /*Diseño de los tópicos*/
 #container-topicos {
     margin: 0.5rem 0px;
@@ -79,6 +75,11 @@
 /* Diseño del botón de eliminar UA */
 #eliminarUAButton {
     margin-left: 50vw;
+}
+
+/* Diseño del título del Tópico y el botón de eliminarlo*/
+#aTopico {
+    margin-right: 1rem;
 }
 
 /*Diseño de los <p> de cuestionarios disponibles para asignar*/

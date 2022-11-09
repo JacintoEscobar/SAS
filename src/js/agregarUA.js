@@ -1,54 +1,64 @@
 /**
- * Envía una petición para insertar un nuevo registro de ua en la bd.
- * @param titulo Elemento input con el título de la ua como value
- * @param descripcion Elemento input con la descripcion de la ua como value
+ * Crea el body de la petición y agrega los datos del formulario de crear ua.
+ * @param {String} t
+ * @param {String} d
+ * @return {FormData}
  */
-const agregarUA = (titulo, descripcion) => {
-    const peticion = new XMLHttpRequest();
-
-    peticion.open('POST', 'http://localhost/sas/controladores/agregarUA.php', true);
-
-    peticion.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-    peticion.send(`t=${titulo.value}&d=${descripcion.value}`);
-
-    peticion.onreadystatechange = () => {
-        if (peticion.status === 200 && peticion.readyState === 4) {
-            alert(JSON.parse(peticion.response));
-
-            // Limpiamos los campos del formulario y ocultamos este último.
-            titulo.value = '';
-            descripcion.value = '';
-            buttonAddUA.click();
-
-            // Limpiamos los elementos html de las ua.
-            limpiarUA();
-
-            // Obtenemos de nuevo las ua y sus tópicos.
-            obtenerUA();
-        }
-    };
+const createBody = (t, d) => {
+  const body = new FormData();
+  body.append("t", t);
+  body.append("d", d);
+  return body;
 };
 
 /**
- * Verifica la integridad de los datos enviados por el formulario.
+ * Envía una petición para registrar una nueva ua en la bd.
+ * @param {HTMLElement} t
+ * @param {HTMLElement} d
  */
-const verificarDatos = () => {
-    // Obtenemos los campos del formulario.
-    const titulo = document.getElementById('input-titulo');
-    const descripcion = document.getElementById('input-descripcion');
+const agregarUA = async (t, d) => {
+  const body = createBody(t.value, d.value);
+  await fetch("http://localhost/sas/controladores/agregarUA.php", {
+    method: "POST",
+    body: body,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data);
 
-    // Verificamos la información del formulario.
-    titulo.value === '' || descripcion.value === '' ? alert('Llena los campos para continuar.') : agregarUA(titulo, descripcion);
+      // Limpiamos los campos del formulario.
+      t.value = "";
+      d.value = "";
+
+      // Limpiamos los elementos html de las ua.
+      limpiarUA();
+
+      // Obtenemos de nuevo las ua y sus tópicos.
+      obtenerUA();
+    })
+    .catch((error) => console.error(error.message));
 };
 
-// Asignamos la función que envía la petición.
-const inputAddUA = document.getElementById('input-addUA');
-inputAddUA.addEventListener('click', () => { verificarDatos() });
+/**
+ * Verifica que los datos del formulario de crear ua sean válidos.
+ */
+const verificarDatosUA = () => {
+  const tituloUA = document.getElementById("titulo-ua");
+  const descripcionUA = document.getElementById("descripcion-ua");
 
-// Configuramos la lógica para mostrar/ocultar el formulario de creación de UsA.
-const buttonAddUA = document.getElementById('agregar-unidad');
-buttonAddUA.addEventListener('click', () => {
-    const formAddUA = document.getElementById('section-addUA');
-    formAddUA.style.visibility === 'hidden' ? formAddUA.style.visibility = 'visible' : formAddUA.style.visibility = 'hidden'
-});
+  if (tituloUA.value.length == 0 || descripcionUA.value.length == 0) {
+    return alert("Llena el formulario para continuar.");
+  }
+
+  agregarUA(tituloUA, descripcionUA);
+};
+
+// Configuración del botón que envía la petición de creación.
+const buttonCrearUA = document.getElementById("crearUA");
+buttonCrearUA.addEventListener("click", () => verificarDatosUA());
+
+// Configuración del botón que muestra el formulario para crear una ua.
+const buttonAddUA = document.getElementById("agregar-unidad");
+buttonAddUA.addEventListener("click", () =>
+  document.getElementById("addUA").click()
+);

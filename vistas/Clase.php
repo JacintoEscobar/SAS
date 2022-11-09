@@ -76,25 +76,32 @@
         </div>
 
         <!--Sección del formulario para crear una ua.-->
-        <section id="section-addUA" style="visibility: hidden;">
+        <button id="addUA" style="visibility: hidden;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddUA"></button>
 
-            <!--Sección para el encabezado del formulario.-->
-            <header id="section-addUA__header">
-                <h2 id="section-addUA__header__titulo">Creación de unidad de aprendizaje</h2>
-                <p id="section-addUA__header__p">Llena el formulario para dar de alta la nueva unidad de aprendizaje.</p>
-            </header>
-
-            <!--Formulario para crear una ua.-->
-            <form id="section-addUA__form" action="">
-                <label for="titulo">Título:</label>
-                <input type="text" id="input-titulo">
-
-                <label for="descripcion">Descripcion:</label>
-                <input type="text" id="input-descripcion">
-
-                <button id="input-addUA" type="button">Agregar</button>
-            </form>
-        </section>
+        <div class="modal fade" id="modalAddUA" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Crea una nueva unidad de aprendizaje</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="titulo-ua" class="form-label">Título:</label>
+                            <input type="text" class="form-control" id="titulo-ua">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion-ua" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcion-ua" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="cancelarCrearUA" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="crearUA" type="button" class="btn btn-primary">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!--Sección para el formulario para crear un tópico.-->
         <!-- Modal -->
