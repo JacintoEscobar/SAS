@@ -26,6 +26,33 @@ const subirEnlace = () => {
   if (!verificarCampos(titulo.value, enlace.value)) {
     return alert("Llena los campos para continuar.");
   }
+
+  const body = new FormData();
+  body.append("t", titulo.value);
+  body.append("e", enlace.value);
+  body.append(
+    "idE",
+    document.getElementById("select-etiqueta").firstElementChild.value
+  );
+
+  fetch("http://localhost/sas/controladores/subirEnlace.php", {
+    method: "POST",
+    body: body,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.ERROR) {
+        return alert(errores[data.ERROR]);
+      }
+
+      if (data.ERROR_FATAL) {
+        return alert(data.ERROR_FATAL);
+      }
+
+      alert(data);
+      window.location.href = "http://localhost/sas/vistas/Topico.php";
+    })
+    .catch((error) => console.error(error.message));
 };
 
 /**
@@ -58,9 +85,7 @@ const subirArchivo = () => {
       }
 
       alert(data);
-      removeForm();
-      document.getElementById("select-me").firstElementChild.value = "";
-      document.getElementById("select-etiqueta").firstElementChild.value = "";
+      window.location.href = "http://localhost/sas/vistas/Topico.php";
     })
     .catch((error) => console.error(error.message));
 };

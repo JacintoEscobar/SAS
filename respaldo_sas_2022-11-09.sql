@@ -96,12 +96,18 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `gener_cod` BEFORE INSERT ON `clase` FOR EACH ROW SET new.codigo = concat(
-    new.idClase,
-    new.cuatrimestre,
-    new.grupo,
-    new.carrera,
-    LEFT(new.nombre, 3)
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `gener_cod` BEFORE INSERT ON `clase` FOR EACH ROW SET new.codigo = concat(
+
+    new.idClase,
+
+    new.cuatrimestre,
+
+    new.grupo,
+
+    new.carrera,
+
+    LEFT(new.nombre, 3)
+
 ) */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -298,7 +304,7 @@ CREATE TABLE `materialeducativo` (
   `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar a la etiqueta con la que relaciona el material educativo.',
   `tipo` enum('archivo','enlace') COLLATE utf8_spanish_ci NOT NULL COMMENT 'Tipo de material educativo, puede ser un archivo de cualquier extensión o un enlace a algún sitio web.',
   PRIMARY KEY (`idMaterialEducativo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,7 +313,7 @@ CREATE TABLE `materialeducativo` (
 
 LOCK TABLES `materialeducativo` WRITE;
 /*!40000 ALTER TABLE `materialeducativo` DISABLE KEYS */;
-INSERT INTO `materialeducativo` VALUES (1,'Tarea_Matias.docx','../material-educativo/Tarea_Matias.docx',1,1000,'archivo');
+INSERT INTO `materialeducativo` VALUES (1,'Enlace1','https://www.youtube.com/watch?v=kIEWJ1ljEro',1,1000,'enlace'),(2,'Material1.docx','../material-educativo/Material1.docx',1,1001,'archivo');
 /*!40000 ALTER TABLE `materialeducativo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -535,7 +541,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador',NULL),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor',NULL),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno','perfil2.jpg'),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno','perfil.jpg'),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno','cola.jpg');
+INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador','yoshi.png'),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor','luigi.png'),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno','birdo.png'),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno','perfil.jpg'),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno','cola.jpg');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -563,4 +569,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-08 18:09:36
+-- Dump completed on 2022-11-09 12:56:27

@@ -96,18 +96,53 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `gener_cod` BEFORE INSERT ON `clase` FOR EACH ROW SET new.codigo = concat(
-    new.idClase,
-    new.cuatrimestre,
-    new.grupo,
-    new.carrera,
-    LEFT(new.nombre, 3)
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `gener_cod` BEFORE INSERT ON `clase` FOR EACH ROW SET new.codigo = concat(
+
+    new.idClase,
+
+    new.cuatrimestre,
+
+    new.grupo,
+
+    new.carrera,
+
+    LEFT(new.nombre, 3)
+
 ) */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `creacionetiqueta`
+--
+
+DROP TABLE IF EXISTS `creacionetiqueta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `creacionetiqueta` (
+  `idCreacionE` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria para identificar el registro de la creación de una nueva etiqueta.',
+  `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar a la etiqueta creada.',
+  `idUsuario` int(11) NOT NULL COMMENT 'Llave foránea para identificar al profesor que creó la etiqueta.',
+  PRIMARY KEY (`idCreacionE`),
+  KEY `idEtiqueta` (`idEtiqueta`,`idUsuario`),
+  KEY `idUsuario` (`idUsuario`),
+  CONSTRAINT `creacionetiqueta_ibfk_1` FOREIGN KEY (`idEtiqueta`) REFERENCES `etiqueta` (`idEtiqueta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `creacionetiqueta_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `creacionetiqueta`
+--
+
+LOCK TABLES `creacionetiqueta` WRITE;
+/*!40000 ALTER TABLE `creacionetiqueta` DISABLE KEYS */;
+INSERT INTO `creacionetiqueta` VALUES (1,1000,2),(2,1001,2),(3,1002,2),(4,1003,2),(9,1006,2);
+/*!40000 ALTER TABLE `creacionetiqueta` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `cuestionario`
@@ -178,7 +213,7 @@ CREATE TABLE `etiqueta` (
   `idEtiqueta` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria para identificar a la etiqueta de inteligencia emocional para los alumnos.',
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la etiqueta de inteligencia emocional.',
   PRIMARY KEY (`idEtiqueta`)
-) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1007 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +222,7 @@ CREATE TABLE `etiqueta` (
 
 LOCK TABLES `etiqueta` WRITE;
 /*!40000 ALTER TABLE `etiqueta` DISABLE KEYS */;
-INSERT INTO `etiqueta` VALUES (1000,'Etiqueta1'),(1001,'Etiqueta2'),(1002,'Etiqueta3'),(1003,'Etiqueta4');
+INSERT INTO `etiqueta` VALUES (1000,'Etiqueta1'),(1001,'Etiqueta2'),(1002,'Etiqueta3'),(1003,'Etiqueta4'),(1005,'Etiqueta6'),(1006,'Etiqueta5');
 /*!40000 ALTER TABLE `etiqueta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,6 +287,34 @@ LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
 INSERT INTO `inscripcion` VALUES (1,'activo',1,3),(2,'activo',2,3),(3,'pendiente',3,3),(4,'activo',1,5),(5,'activo',1,4),(6,'activo',2,4);
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `materialeducativo`
+--
+
+DROP TABLE IF EXISTS `materialeducativo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `materialeducativo` (
+  `idMaterialEducativo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria para identificar al material educativo subido por el profesor.',
+  `titulo` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre del archivo, o título dado por el profesor.',
+  `direccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Directorio del archivo en el servidor, o dirección URL del enlace.',
+  `idTopico` int(11) NOT NULL COMMENT 'Llave foránea para identificar al tópico al que pertenece el material educativo.',
+  `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar a la etiqueta con la que relaciona el material educativo.',
+  `tipo` enum('archivo','enlace') COLLATE utf8_spanish_ci NOT NULL COMMENT 'Tipo de material educativo, puede ser un archivo de cualquier extensión o un enlace a algún sitio web.',
+  PRIMARY KEY (`idMaterialEducativo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `materialeducativo`
+--
+
+LOCK TABLES `materialeducativo` WRITE;
+/*!40000 ALTER TABLE `materialeducativo` DISABLE KEYS */;
+INSERT INTO `materialeducativo` VALUES (1,'Enlace1','https://www.youtube.com/watch?v=kIEWJ1ljEro',1,1000,'enlace'),(2,'Material1.docx','../material-educativo/Material1.docx',1,1001,'archivo');
+/*!40000 ALTER TABLE `materialeducativo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -409,7 +472,7 @@ CREATE TABLE `topico` (
   PRIMARY KEY (`idTopico`),
   KEY `idUnidadAprendizaje` (`idUnidadAprendizaje`),
   CONSTRAINT `topico_ibfk_1` FOREIGN KEY (`idUnidadAprendizaje`) REFERENCES `unidadaprendizaje` (`idUnidadAprendizaje`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -418,7 +481,7 @@ CREATE TABLE `topico` (
 
 LOCK TABLES `topico` WRITE;
 /*!40000 ALTER TABLE `topico` DISABLE KEYS */;
-INSERT INTO `topico` VALUES (1,'Empty Project','Primer proyecto en Android Studio.',1),(2,'Java o Kotlin','Elección de lenguaje para trabajar en Android Studio.',1);
+INSERT INTO `topico` VALUES (1,'Empty Project','Primer proyecto en Android Studio.',1),(2,'Java o Kotlin','Elección de lenguaje para trabajar en Android Studio.',1),(3,'Tópico 1','Tópico 1 de la unidad de aprendizaje 2.',2);
 /*!40000 ALTER TABLE `topico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,7 +500,7 @@ CREATE TABLE `unidadaprendizaje` (
   PRIMARY KEY (`idUnidadAprendizaje`),
   KEY `idClase` (`idClase`),
   CONSTRAINT `unidadaprendizaje_ibfk_1` FOREIGN KEY (`idClase`) REFERENCES `clase` (`idClase`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -446,7 +509,7 @@ CREATE TABLE `unidadaprendizaje` (
 
 LOCK TABLES `unidadaprendizaje` WRITE;
 /*!40000 ALTER TABLE `unidadaprendizaje` DISABLE KEYS */;
-INSERT INTO `unidadaprendizaje` VALUES (1,'Android Studio','Fundamentos de Android Studio.',1);
+INSERT INTO `unidadaprendizaje` VALUES (1,'Android Studio','Fundamentos de Android Studio.',1),(2,'Unidad 2','Unidad de aprendizaje 2 de la clase Programación móvil.',1);
 /*!40000 ALTER TABLE `unidadaprendizaje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -478,7 +541,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador',NULL),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor',NULL),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno','perfil2.jpg'),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno','perfil.jpg'),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno','cola.jpg');
+INSERT INTO `usuario` VALUES (1,'EQJO190657','Jacinto','Escobar','Quezada','eqjo190657@upemor.edu.mx','jacinto','e1efc4c0b611956e6ae5bdb4629eda10','administrador','yoshi.png'),(2,'MCLO190493','Laura Itzel','Martínez','Chávez','mclo190493@upemor.edu.mx','laura','d2f0c294711426f440af6c188232e774','profesor','luigi.png'),(3,'DRZO190292','Zuleidi','De la Cruz','Román','drzo190292@upemor.edu.mx','zuleidi','b179a9ec0777eae19382c14319872e1b','alumno','birdo.png'),(4,'EQCO190657','Chinto','Escobar','Quezada','jacesc10@gmail.com','chinto','e1efc4c0b611956e6ae5bdb4629eda10','alumno','perfil.jpg'),(5,'BGB0190657','Benito','Bodoque','Gonzalez','jacesc22@gmail.com','benito','928732a2341b46bcdb770c7c5143dfe1','alumno','cola.jpg');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -506,4 +569,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-07 15:53:04
+-- Dump completed on 2022-11-09 12:56:27

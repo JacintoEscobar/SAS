@@ -33,4 +33,19 @@ class MaterialEducativo extends BD
             throw $th;
         }
     }
+
+    public function eliminar(string $idME)
+    {
+        try {
+            $this->conectar();
+            $consulta = $this->conexion->prepare('DELETE FROM materialeducativo WHERE idMaterialEducativo = ?');
+            $consulta->bind_param('i', $idME);
+            $consulta->execute();
+            $eliminacion_correcta = $consulta->affected_rows > 0;
+            $this->conexion->close();
+            return $eliminacion_correcta;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }

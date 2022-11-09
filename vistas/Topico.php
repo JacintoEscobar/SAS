@@ -27,6 +27,11 @@
 
     <link rel="stylesheet" href="../src/css/topico.css">
 
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
     <style>
         body {
             background-image: url('../src/img/fondo_profesor.png');
@@ -54,6 +59,38 @@
 
             <div style="margin: 1rem 0px;" class="container">
                 <button id="nuevo" type="button" class="btn btn-success">Nuevo</button>
+            </div>
+
+            <!-------------------------Sección donde se muestran los materiales educativos creados para este tópico------------------------->
+            <?php include_once '../controladores/getMaterialEducativo.php'; ?>
+            <?php $materialEducativo = getMaterialEducativo($_SESSION['idT']); ?>
+            <div style="margin-top: 1rem;" class="container">
+                <?php if (!is_null($materialEducativo)) : ?>
+                    <div class="row">
+                        <?php foreach ($materialEducativo as $material) : ?>
+                            <div class="col-sm-6">
+                                <div style="margin: 1rem;" class="card">
+                                    <div class="card-body">
+                                        <?php if ($material->tipo == 'archivo') : ?>
+                                            <?php $_SESSION['dir'] = $material->direccion; ?>
+                                        <?php endif; ?>
+                                        <h5 id="material" data-tipo="<?php print $material->tipo; ?>" class="card-title"><?php print $material->titulo; ?></h5>
+                                        <p class="card-text">
+                                            <strong>Tipo: </strong> <span><?php print $material->tipo; ?></span> <br>
+                                            <?php include_once '../controladores/getEtiquetaME.php'; ?>
+                                            <?php $etiqueta = getEtiquetaME($material->idEtiqueta); ?>
+                                            <strong>Etiqueta asignada: </strong> <span><?php print $etiqueta; ?></span> <br>
+                                            <?php if ($material->tipo == 'enlace') : ?>
+                                                <strong>Dirección: </strong> <span id="direccion"><?php print $material->direccion; ?></span> <br>
+                                            <?php endif; ?>
+                                        </p>
+                                        <button id="eliminarME" data-idME="<?php print $material->idMaterialEducativo; ?>" type="button" class="btn btn-danger">Elminar material</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!--------------------------------------------------------Modal para subir un archivo-------------------------------------------------------->
@@ -110,6 +147,8 @@
 
     <script src="../src/js/selectMaterialEducativo.js"></script>
     <script src="../src/js/subirMaterialEducativo.js"></script>
+    <script src="../src/js/eliminarME.js"></script>
+    <script src="../src/js/abrirMaterial.js"></script>
     <script src="../src/js/salir.js"></script>
 </body>
 
