@@ -48,4 +48,23 @@ class MaterialEducativo extends BD
             throw $th;
         }
     }
+
+    public static function getMaterial(string $ti = '', string $d = '', string $idT = '', string $idE = '', $t = '')
+    {
+        try {
+            $con = new mysqli('localhost', 'root', '', 'sas');
+            $consulta = $con->prepare(
+                'SELECT idMaterialEducativo
+                 FROM materialEducativo
+                 WHERE titulo = ? AND direccion = ? AND idTopico = ? AND idEtiqueta = ? AND tipo = ?'
+            );
+            $consulta->bind_param('ssiis', $ti, $d, $idT, $idE, $t);
+            $consulta->execute();
+            $id = $consulta->get_result()->fetch_column(0);
+            $con->close();
+            return $id;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }

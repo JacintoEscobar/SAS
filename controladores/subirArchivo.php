@@ -30,6 +30,24 @@ include_once '../modelos/MaterialEducativo.php';
 $materialEducativo = new MaterialEducativo($_FILES['meFile']['name'], $dir_archivo, $_SESSION['idT'], htmlspecialchars($_POST['idE'], ENT_QUOTES, 'UTF-8'), 'archivo');
 try {
     if ($materialEducativo->insertar()) {
+
+        // Preparamos la distribución del material educativo.
+        // 1. Obtenemos el id del material educativo.
+        $idMaEd = MaterialEducativo::getMaterial($_FILES['meFile']['name'], $dir_archivo, $_SESSION['idT'], htmlspecialchars($_POST['idE'], ENT_QUOTES, 'UTF-8'), 'archivo');
+
+        // 1. Obtenemos a los alumnos inscritos en la clase y cuya etiqueta sea igual a la del material educativo.
+        include_once './getAlumnosInscritos.php';
+        $alumnos = getAlumnosInscritos(htmlspecialchars($_POST['idE'], ENT_QUOTES, 'UTF-8'), $idMaEd, $_SESSION['idC']);
+
+        // 2. Registramos en la bd la distribución material-alumno.
+        include_once './distribuirMaterial.php';
+        foreach ($alumnos as $alumno) {
+            if (!distribuirMaterial($idMaEd, $alumno->idU)) {
+                echo json_encode(['ERROR' => 'ERROR_REGISTRO']);
+                die();
+            }
+        }
+
         echo json_encode('Material educativo subido de exitosamente.');
         die();
     }

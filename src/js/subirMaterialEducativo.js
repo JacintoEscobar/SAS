@@ -51,8 +51,8 @@ const subirEnlace = () => {
 
       alert(data);
       window.location.href = "http://localhost/sas/vistas/Topico.php";
-    })
-    .catch((error) => console.error(error.message));
+    })/* 
+    .catch((error) => console.error(error.message)) */;
 };
 
 /**

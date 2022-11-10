@@ -19,11 +19,29 @@ include_once '../modelos/MaterialEducativo.php';
 $materialEducativo = new MaterialEducativo($t, $e, $_SESSION['idT'], $idE, 'enlace');
 try {
     if ($materialEducativo->insertar()) {
-        echo json_encode('Material educativo subido de exitosamente.');
+
+        // Preparamos la distribución del material educativo.
+        // 1. Obtenemos el id del material educativo.
+        $idMaEd = MaterialEducativo::getMaterial($t, $e, $_SESSION['idT'], $idE, 'enlace');
+
+        // 1. Obtenemos a los alumnos inscritos en la clase y cuya etiqueta sea igual a la del material educativo.
+        include_once './getAlumnosInscritos.php';
+        $alumnos = getAlumnosInscritos($idE, $idMaEd, $_SESSION['idC']);
+
+        // 2. Registramos en la bd la distribución material-alumno.
+        include_once './distribuirMaterial.php';
+        foreach ($alumnos as $alumno) {
+            if (!distribuirMaterial($idMaEd, $alumno->idU)) {
+                echo json_encode(['ERROR' => 'ERROR_REGISTRO']);
+                die();
+            }
+        }
+
+        echo json_encode('Material educativo subido y distribuido exitosamente.');
         die();
     }
 } catch (\Throwable $th) {
-    echo json_encode(['ERROR_FATAL' => $th->getMessage()]);
+    echo json_encode(['ERROR_FATAL' => "Arcvhio:{$th->getFile()}\nLínea:{$th->getLine()}\nMensaje:{$th->getMessage()}"]);
     die();
 }
 

@@ -42,6 +42,9 @@
             <div id="descripcion" class="col">Cuestionarios disponibles.</div>
         </div>
 
+        <!--Seccion del boton que redirige a la pagina de material educativo de la clase-->
+        <a style="margin-top: 0.5rem;" class="btn btn-info" href="./MaterialEducativo.php?idc=<?php print $_GET['idC']; ?>&nom=<?php print $_GET['nom']; ?>" role="button">Ver material educativo</a>
+
         <!--Sección de los cuestionarios disponibles-->
         <div id="div-cuestionarios-disponibles" class="row">
             <?php $num_cuestionarios = sizeof($cuestionarios); ?>
