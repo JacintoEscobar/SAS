@@ -305,7 +305,7 @@ CREATE TABLE `material_alumno` (
   KEY `idUsuario` (`idUsuario`),
   CONSTRAINT `material_alumno_ibfk_1` FOREIGN KEY (`idMaterialEducativo`) REFERENCES `materialeducativo` (`idMaterialEducativo`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `material_alumno_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +314,7 @@ CREATE TABLE `material_alumno` (
 
 LOCK TABLES `material_alumno` WRITE;
 /*!40000 ALTER TABLE `material_alumno` DISABLE KEYS */;
-INSERT INTO `material_alumno` VALUES (1,1,3),(2,2,4),(3,2,5);
+INSERT INTO `material_alumno` VALUES (1,1,3),(2,2,4),(3,2,5),(4,3,3);
 /*!40000 ALTER TABLE `material_alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +333,7 @@ CREATE TABLE `materialeducativo` (
   `idEtiqueta` int(11) NOT NULL COMMENT 'Llave foránea para identificar a la etiqueta con la que relaciona el material educativo.',
   `tipo` enum('archivo','enlace') COLLATE utf8_spanish_ci NOT NULL COMMENT 'Tipo de material educativo, puede ser un archivo de cualquier extensión o un enlace a algún sitio web.',
   PRIMARY KEY (`idMaterialEducativo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +342,7 @@ CREATE TABLE `materialeducativo` (
 
 LOCK TABLES `materialeducativo` WRITE;
 /*!40000 ALTER TABLE `materialeducativo` DISABLE KEYS */;
-INSERT INTO `materialeducativo` VALUES (1,'Arcvhio1.docx','../material-educativo/Arcvhio1.docx',1,1000,'archivo'),(2,'Enlace 1','Enlace de material educativo 1.',1,1001,'enlace');
+INSERT INTO `materialeducativo` VALUES (1,'Archivo1.docx','../material-educativo/Arcvhio1.docx',1,1000,'archivo'),(2,'Enlace 1','Enlace de material educativo 1.',1,1001,'enlace'),(3,'Enlace 2','https://www.youtube.com/watch?v=kIEWJ1ljEro',1,1000,'enlace');
 /*!40000 ALTER TABLE `materialeducativo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -598,4 +598,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-09 18:17:58
+-- Dump completed on 2022-11-10 13:33:43
