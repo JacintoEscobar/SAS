@@ -45,7 +45,7 @@
                 </div>
             </div>
         </a>
-        <a href="./PerfilesPsicologicos.php">
+        <a href="./ClasesPerfilesPsicologicos.php">
             <div class="card" style="width: 8rem;">
                 <img src="../src/img/homeProfesor/psicologico-icon.png" class="card-img-top" alt="clases">
                 <div class="card-body">

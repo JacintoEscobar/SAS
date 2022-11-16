@@ -35,7 +35,7 @@
                     <a class="nav-link" href="./Cuestionarios.php">Cuestionarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./PerfilesPsicologicos.php">Perfiles psicológicos</a>
+                    <a class="nav-link" href="./ClasesPerfilesPsicologicos.php">Perfiles psicológicos</a>
                 </li>
 
                 <!--Herramientas para los usuarios de tipo estudiante-->
