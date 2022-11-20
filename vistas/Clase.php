@@ -54,6 +54,9 @@
 
             <!--Botón para mostrar el formulario de crear unidad de aprendizaje.-->
             <button id="agregar-unidad" type="button" class="btn btn-warning">Agregar unidad de aprendizaje</button>
+
+            <!--Botón para ir a la sección de gráficos*-->
+            <button id="reporteGraficos" type="button" class="btn btn-success" onclick="location.href=`http://localhost/sas/vistas/reportesGraficos.php?idC=<?php echo $_SESSION['idC'];?>&titC=<?php echo $_SESSION['titC'];?>`">Ver reportes gráficos</button>
         </div>
 
         <!-- Modal que permite asignar un cuestionario -->

@@ -1,0 +1,38 @@
+/*Diseño general de los container del título y de las unidades de aprendizaje*/
+#container-titulo{
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+}
+
+#container-grafico {
+    background-color: #fff;
+    margin-top: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.6rem;
+    border-radius: 10px;
+}
+
+.chart-box{
+    width: 600px;
+    margin:0 auto;
+}
+
+/*Diseño del título*/
+#container-titulo #h1-titulo {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 3.5em;
+    text-align: center;
+    color: rgba(239, 6, 5, 0.8);
+}
+
+#container-titulo #h5-subtitulo {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+}
